@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'games.apps.GamesConfig',
     'instances.apps.InstancesConfig',
     'players.apps.PlayersConfig',
+    'app.apps.AppConfig',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -60,7 +61,7 @@ ROOT_URLCONF = 'connect.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': ['app/templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

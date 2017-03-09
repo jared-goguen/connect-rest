@@ -1,0 +1,30 @@
+<html>
+<head>
+<script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+
+<script>
+
+$(function() {
+	$('#signup').submit(function(a, b, c) {
+		console.log(a, b, c);
+	});
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+<form id="signup">
+  <input type="text" name="username">
+  <input type="text" name="password">
+  <input type="submit" value="Submit">
+</form> 
+
+</body>
+</html>
