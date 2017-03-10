@@ -3,12 +3,10 @@ import re
 from django.conf.urls import url, include
 
 from .routers import RedirectAPIRootRouter
-from .views import UserViewSet, GroupViewSet
+from .views import UserViewSet, GroupViewSet, IndexView
 from games.views import GameViewSet
 from instances.views import InstanceViewSet
 from players.views import PlayerViewSet
-
-from app.views import IndexView
 
 
 # Custom router so that '^$' can still be used as the home page.

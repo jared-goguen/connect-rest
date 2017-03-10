@@ -1,6 +1,12 @@
 from django.contrib.auth.models import User, Group
+from django.views.generic import TemplateView
+
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
+
+
+class IndexView(TemplateView):
+    template_name = 'index.html'
 
 
 class UserViewSet(viewsets.ModelViewSet):
