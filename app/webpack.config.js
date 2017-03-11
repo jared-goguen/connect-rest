@@ -21,5 +21,9 @@
      stats: {
          colors: true
      },
-     devtool: 'source-map'
+     devtool: 'source-map',
+     node: {
+        dns: 'mock',
+        net: 'mock'
+     }
  };

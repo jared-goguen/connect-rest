@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
-import fetch from 'fetch';
+import 'whatwg-fetch';
 
 class App extends React.Component {
 	constructor(props) {
@@ -12,18 +12,21 @@ class App extends React.Component {
 	}
 
 	componentDidMount() {
-		fetch('api/games.json')
-		.then(function(response) {
-			this.props.games = response.data;
-			console.log(this.props.games)
-		})
+		fetch('/api/games.json')
+			.then(function(response) {
+				return response.json();
+			}).then(function(json) {
+				console.log(json)
+			}).catch(function(ex) {
+				console.log('api failed', ex);
+			});
 	}
 
 	render() {
 		return (
 			<div>
 				<p>
-					${this.props.games}
+					hi!
 				</p>
 			</div>
 		);
