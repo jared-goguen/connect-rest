@@ -11,23 +11,30 @@ class App extends React.Component {
 		};
 	}
 
-	componentDidMount() {
+	componentWillMount() {
 		fetch('/api/games.json')
-			.then(function(response) {
-				return response.json();
-			}).then(function(json) {
-				console.log(json)
-			}).catch(function(ex) {
-				console.log('api failed', ex);
-			});
+			.then(response => response.json())
+			.then(json => {
+				this.setState({games: json});
+			}).catch(ex => console.log(ex));
 	}
 
 	render() {
+		console.log(this.state);
 		return (
 			<div>
-				<p>
-					hi!
-				</p>
+				<h1>Games</h1>
+				<ul>
+					{this.state.games.map((game, index) => 
+						<li key={index}><span>{game.url}</span>
+							<ul>
+								{game.instances.map((instance, index) =>
+									<li key={index}><span>{instance}</span></li>
+								)}
+							</ul>
+						</li>
+					)}
+				</ul>
 			</div>
 		);
 	}
