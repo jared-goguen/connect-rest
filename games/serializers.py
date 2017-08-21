@@ -4,6 +4,6 @@ from .models import Game
 
 class GameSerializer(serializers.HyperlinkedModelSerializer):
 
-	class Meta:
-		model = Game
-		fields = ('url', 'player', 'instances')
+    class Meta:
+        model = Game
+        fields = ('url', 'player', 'instances')

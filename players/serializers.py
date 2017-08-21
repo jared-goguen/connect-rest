@@ -4,6 +4,6 @@ from .models import Player
 
 class PlayerSerializer(serializers.HyperlinkedModelSerializer):
 
-	class Meta:
-		model = Player
-		fields = ('url', 'user', 'games')
+    class Meta:
+        model = Player
+        fields = ('url', 'user', 'games')

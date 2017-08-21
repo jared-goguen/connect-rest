@@ -4,6 +4,6 @@ from .models import Instance
 
 class InstanceSerializer(serializers.HyperlinkedModelSerializer):
 
-	class Meta:
-		model = Instance
-		fields = ('url', 'name', 'games')
+    class Meta:
+        model = Instance
+        fields = ('url', 'name', 'games')
