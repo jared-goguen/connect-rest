@@ -1,0 +1,36 @@
+.cell {
+	width: 90px;
+	height: 90px;
+	padding: 5px;
+	background-color: #222222;
+	display: inline-block;
+}
+
+.row {
+	height: 100px;
+}
+
+.circle {
+    height: 100%;
+    width: 100%;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+}
+
+.playable:hover {
+	background-color: #d87a70;
+}
+
+.color0 {
+    background-color: #ffffff;
+}
+
+.color1 {
+    background-color: #d83422;
+}
+
+.color2 {
+    background-color: #dbd039;
+}
+
