@@ -135,7 +135,6 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    join(DJANGO_ROOT, 'static'),
     join(DJANGO_ROOT, 'app/build'),
     join(DJANGO_ROOT, 'app/css'),
 )
