@@ -180,7 +180,7 @@ class BoardContainer extends React.Component {
                        rows={this.props.rows} 
                        cols={this.props.cols} 
                        partialClick={this.partialClick} />
-               <button onClick={this.reset}>Reset</button>
+                <button onClick={this.reset}>Reset</button>
             </div>   
         );
     }
