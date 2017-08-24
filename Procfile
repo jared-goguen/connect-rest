@@ -1,1 +1,1 @@
-web: python runserver.py ${PORT}
+web: gunicorn connect.wsgi --log-file -
