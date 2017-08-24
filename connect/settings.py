@@ -131,3 +131,5 @@ STATICFILES_DIRS = [
     join(SITE_ROOT, 'app/build'),
     join(SITE_ROOT, 'app/css'),
 ]
+
+print STATICFILES_DIRS
