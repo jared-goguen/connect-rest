@@ -128,6 +128,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 STATICFILES_DIRS = [
-    join(SITE_ROOT, 'app/build/'),
-    join(SITE_ROOT, 'app/css/')
+    join(SITE_ROOT, 'app'),
 ]
