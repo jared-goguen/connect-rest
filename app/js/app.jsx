@@ -90,12 +90,14 @@ class BoardContainer extends React.Component {
             horizontal.push(this.state.board[row][j].owner);
         }
         var maxH = utility.streak(horizontal, owner);
+        console.log(horizontal);
 
         var vertical = [];
         for (var i=Math.max(0, row-3); i <= Math.min(this.props.rows-1, row+3); i++) {
             vertical.push(this.state.board[i][col].owner);
         }
         var maxV = utility.streak(vertical, owner);
+        console.log(vertical);
 
         var diagonalF = [];
         var fMin = Math.max(-3, -row, -col);
@@ -104,6 +106,7 @@ class BoardContainer extends React.Component {
             diagonalF.push(this.state.board[row+f][col+f].owner);
         }
         var maxDF = utility.streak(diagonalF, owner);
+        console.log(diagonalF);
 
         var diagonalB = [];
         var bMin = Math.max(-3, -this.props.rows+row+1, -col);
@@ -112,12 +115,14 @@ class BoardContainer extends React.Component {
             diagonalB.push(this.state.board[row-b][col+b].owner);
         }
         var maxDB = utility.streak(diagonalB, owner);
+        console.log(diagonalB);
 
         var maxStreak = Math.max(maxH, maxV, maxDF, maxDB);
         if (maxStreak >= 4) {
             return {
                 done: true,
-                winner: owner
+                winner: owner,
+                statis: false
             }
         }
 
@@ -125,7 +130,8 @@ class BoardContainer extends React.Component {
             for (var col=0; col < this.props.cols; col++) {
                 if (this.state.board[row][col].playable) {
                     return {
-                        done: false
+                        done: false,
+                        statis: false
                     }
                 }
             }
@@ -133,6 +139,7 @@ class BoardContainer extends React.Component {
 
         return {
             done: true,
+            statis: false
         }
 
     }
@@ -152,7 +159,8 @@ class BoardContainer extends React.Component {
             board: [],
             turn: 1,
             done: false,
-            winner: null
+            winner: null,
+            statis: false
         };
 
         for (var row=0; row < this.props.rows; row++) {

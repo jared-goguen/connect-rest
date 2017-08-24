@@ -9435,37 +9435,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (immutable) */ __webpack_exports__["join"] = join;
 /* harmony export (immutable) */ __webpack_exports__["streak"] = streak;
 function join(array, delimiter) {
-	if (delimiter === undefined) {
-		delimiter = ' ';
-	}
+    if (delimiter === undefined) {
+        delimiter = ' ';
+    }
 
-	if (array.length === 0) {
-		return ''
-	}
+    if (array.length === 0) {
+        return ''
+    }
 
-	var string = array[0];
-	
-	for (let i=0; i < array.length; i++) {
-		string += delimiter + array[i];
-	}
+    var string = array[0];
+    
+    for (let i=0; i < array.length; i++) {
+        string += delimiter + array[i];
+    }
 
-	return string;
+    return string;
 }
 
 function streak(array, value) {
-	var maxCount = 0;
-	var count = 0;
+    var maxCount = 0;
+    var count = 0;
 
-	for (let i=0; i < array.length; i++) {
-		if (array[i] === value) {
-			count += 1;
-		} else {
-			count = 0;
-			maxCount = Math.max(count, maxCount);
-		}
-	}
+    for (let i=0; i < array.length; i++) {
+        if (array[i] === value) {
+            count += 1;
+        } else {
+            maxCount = Math.max(count, maxCount);
+            count = 0;
+        }
+    }
 
-	return Math.max(count, maxCount);
+    return Math.max(count, maxCount);
 }
 
 
@@ -22325,12 +22325,14 @@ var BoardContainer = function (_React$Component2) {
                 horizontal.push(this.state.board[row][j].owner);
             }
             var maxH = utility.streak(horizontal, owner);
+            console.log(horizontal);
 
             var vertical = [];
             for (var i = Math.max(0, row - 3); i <= Math.min(this.props.rows - 1, row + 3); i++) {
                 vertical.push(this.state.board[i][col].owner);
             }
             var maxV = utility.streak(vertical, owner);
+            console.log(vertical);
 
             var diagonalF = [];
             var fMin = Math.max(-3, -row, -col);
@@ -22339,6 +22341,7 @@ var BoardContainer = function (_React$Component2) {
                 diagonalF.push(this.state.board[row + f][col + f].owner);
             }
             var maxDF = utility.streak(diagonalF, owner);
+            console.log(diagonalF);
 
             var diagonalB = [];
             var bMin = Math.max(-3, -this.props.rows + row + 1, -col);
@@ -22347,12 +22350,14 @@ var BoardContainer = function (_React$Component2) {
                 diagonalB.push(this.state.board[row - b][col + b].owner);
             }
             var maxDB = utility.streak(diagonalB, owner);
+            console.log(diagonalB);
 
             var maxStreak = Math.max(maxH, maxV, maxDF, maxDB);
             if (maxStreak >= 4) {
                 return {
                     done: true,
-                    winner: owner
+                    winner: owner,
+                    statis: false
                 };
             }
 
@@ -22360,14 +22365,16 @@ var BoardContainer = function (_React$Component2) {
                 for (var col = 0; col < this.props.cols; col++) {
                     if (this.state.board[row][col].playable) {
                         return {
-                            done: false
+                            done: false,
+                            statis: false
                         };
                     }
                 }
             }
 
             return {
-                done: true
+                done: true,
+                statis: false
             };
         }
     }, {
@@ -22390,7 +22397,8 @@ var BoardContainer = function (_React$Component2) {
                 board: [],
                 turn: 1,
                 done: false,
-                winner: null
+                winner: null,
+                statis: false
             };
 
             for (var row = 0; row < this.props.rows; row++) {
