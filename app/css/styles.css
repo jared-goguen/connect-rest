@@ -1,13 +1,17 @@
+.app {
+
+}
+
 .cell {
-	width: 90px;
-	height: 90px;
-	padding: 5px;
-	background-color: #222222;
-	display: inline-block;
+    width: 90px;
+    height: 90px;
+    padding: 5px;
+    background-color: #222222;
+    display: inline-block;
 }
 
 .row {
-	height: 100px;
+    height: 100px;
 }
 
 .circle {
@@ -18,8 +22,13 @@
     -webkit-border-radius:50%;
 }
 
+.playable {
+    background-color: #c6ffdb;
+
+}
+
 .playable:hover {
-	background-color: #d87a70;
+    background-color: #6af79e
 }
 
 .color0 {
@@ -34,3 +43,7 @@
     background-color: #dbd039;
 }
 
+.auth-button {
+    margin: 5px;
+    float: left;
+}

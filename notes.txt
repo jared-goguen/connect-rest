@@ -1,0 +1,6 @@
+Menu
+	Play Computer
+	Play Humans
+	---
+	Login/Logout
+	Register?

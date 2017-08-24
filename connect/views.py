@@ -4,6 +4,9 @@ from django.views.generic import TemplateView
 from rest_framework import viewsets
 from .serializers import UserSerializer, GroupSerializer
 
+from rest_framework.decorators import api_view
+from django.http import JsonResponse
+
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -23,3 +26,10 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+
+@api_view(['POST'])
+def login(request):                                                                                                                         
+    credentials = request.data
+    print credentials
+    return JsonResponse({}) 
