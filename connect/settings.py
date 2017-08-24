@@ -126,15 +126,14 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
-DJANGO_ROOT = dirname(abspath(__file__))
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = join(DJANGO_ROOT, 'staticfiles')
+STATIC_ROOT = join(SITE_ROOT, 'static')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    join(DJANGO_ROOT, '../app/build'),
-    join(DJANGO_ROOT, '../app/css'),
+    join(SITE_ROOT, 'app/build'),
+    join(SITE_ROOT, 'app/css'),
 )
