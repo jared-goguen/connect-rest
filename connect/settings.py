@@ -16,8 +16,6 @@ from os.path import abspath, basename, dirname, join, normpath
 DJANGO_ROOT = dirname(abspath(__file__))
 SITE_ROOT = dirname(DJANGO_ROOT)
 
-print SITE_ROOT
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
@@ -130,5 +128,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = 'static/'
 STATICFILES_DIRS = [
-    join(SITE_ROOT, '/app/build/', '/app/css/'),
+    join(SITE_ROOT, 'app/build/'),
+    join(SITE_ROOT, 'app/css/')
 ]
