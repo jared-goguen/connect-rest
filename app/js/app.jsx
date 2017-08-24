@@ -15,6 +15,7 @@ class App extends React.Component {
     }
 }
 
+
 class BoardContainer extends React.Component {
     /* 
     props
@@ -28,26 +29,12 @@ class BoardContainer extends React.Component {
     */
     constructor(props) {
         super(props);
-        this.state = { 
-            board: [],
-            turn: 1,
-            done: false,
-            winner: null
-        }
-        for (var row=0; row < this.props.rows; row++) {
-            var row_array = [];
-            for (var col=0; col < this.props.cols; col++) {
-                row_array.push({
-                    owner: 0,
-                    playable: row === this.props.rows - 1 ? true : false
-                });
-            }
-            this.state.board.push(row_array);
-        }
+        this.state = this.initialState()
         this.partialClick = this.partialClick.bind(this);
         this.move = this.move.bind(this);
         this.checkDone = this.checkDone.bind(this);
         this.doneTrigger = this.doneTrigger.bind(this);
+        this.reset = this.reset.bind(this);
     }
 
     partialClick(row, col) {
@@ -127,7 +114,6 @@ class BoardContainer extends React.Component {
         var maxDB = utility.streak(diagonalB, owner);
 
         var maxStreak = Math.max(maxH, maxV, maxDF, maxDB);
-        console.log(maxStreak);
         if (maxStreak >= 4) {
             return {
                 done: true,
@@ -161,6 +147,32 @@ class BoardContainer extends React.Component {
         setTimeout(function() {alert(message);}, 100);
     }
 
+    initialState() {
+        var state = { 
+            board: [],
+            turn: 1,
+            done: false,
+            winner: null
+        };
+
+        for (var row=0; row < this.props.rows; row++) {
+            var row_array = [];
+            for (var col=0; col < this.props.cols; col++) {
+                row_array.push({
+                    owner: 0,
+                    playable: row === this.props.rows - 1 ? true : false
+                });
+            }
+            state.board.push(row_array);
+        }
+
+        return state;
+    }
+
+    reset() {
+        this.setState(this.initialState());
+    }
+
     render() {
         return (
             <div className='board-container'>
@@ -168,6 +180,7 @@ class BoardContainer extends React.Component {
                        rows={this.props.rows} 
                        cols={this.props.cols} 
                        partialClick={this.partialClick} />
+               <button onClick={this.reset}>Reset</button>
             </div>   
         );
     }

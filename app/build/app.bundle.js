@@ -22256,26 +22256,12 @@ var BoardContainer = function (_React$Component2) {
 
         var _this2 = _possibleConstructorReturn(this, (BoardContainer.__proto__ || Object.getPrototypeOf(BoardContainer)).call(this, props));
 
-        _this2.state = {
-            board: [],
-            turn: 1,
-            done: false,
-            winner: null
-        };
-        for (var row = 0; row < _this2.props.rows; row++) {
-            var row_array = [];
-            for (var col = 0; col < _this2.props.cols; col++) {
-                row_array.push({
-                    owner: 0,
-                    playable: row === _this2.props.rows - 1 ? true : false
-                });
-            }
-            _this2.state.board.push(row_array);
-        }
+        _this2.state = _this2.initialState();
         _this2.partialClick = _this2.partialClick.bind(_this2);
         _this2.move = _this2.move.bind(_this2);
         _this2.checkDone = _this2.checkDone.bind(_this2);
         _this2.doneTrigger = _this2.doneTrigger.bind(_this2);
+        _this2.reset = _this2.reset.bind(_this2);
         return _this2;
     }
 
@@ -22363,7 +22349,6 @@ var BoardContainer = function (_React$Component2) {
             var maxDB = utility.streak(diagonalB, owner);
 
             var maxStreak = Math.max(maxH, maxV, maxDF, maxDB);
-            console.log(maxStreak);
             if (maxStreak >= 4) {
                 return {
                     done: true,
@@ -22399,6 +22384,34 @@ var BoardContainer = function (_React$Component2) {
             }, 100);
         }
     }, {
+        key: 'initialState',
+        value: function initialState() {
+            var state = {
+                board: [],
+                turn: 1,
+                done: false,
+                winner: null
+            };
+
+            for (var row = 0; row < this.props.rows; row++) {
+                var row_array = [];
+                for (var col = 0; col < this.props.cols; col++) {
+                    row_array.push({
+                        owner: 0,
+                        playable: row === this.props.rows - 1 ? true : false
+                    });
+                }
+                state.board.push(row_array);
+            }
+
+            return state;
+        }
+    }, {
+        key: 'reset',
+        value: function reset() {
+            this.setState(this.initialState());
+        }
+    }, {
         key: 'render',
         value: function render() {
             return _react2.default.createElement(
@@ -22407,7 +22420,12 @@ var BoardContainer = function (_React$Component2) {
                 _react2.default.createElement(Board, { board: this.state.board,
                     rows: this.props.rows,
                     cols: this.props.cols,
-                    partialClick: this.partialClick })
+                    partialClick: this.partialClick }),
+                _react2.default.createElement(
+                    'button',
+                    { onClick: this.reset },
+                    'Reset'
+                )
             );
         }
     }]);
