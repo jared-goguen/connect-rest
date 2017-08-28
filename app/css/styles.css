@@ -11,7 +11,8 @@
 }
 
 .row {
-    height: 100px;
+    height: 90px;
+    margin: 0px !important;
 }
 
 .circle {
@@ -24,7 +25,6 @@
 
 .playable {
     background-color: #c6ffdb;
-
 }
 
 .playable:hover {
@@ -41,9 +41,4 @@
 
 .color2 {
     background-color: #dbd039;
-}
-
-.auth-button {
-    margin: 5px;
-    float: left;
 }

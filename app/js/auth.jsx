@@ -1,4 +1,4 @@
-import axios from './axios-default.jsx';
+import axios from './axios-default';
 
 module.exports = {
     login: function(username, password) {
@@ -39,6 +39,21 @@ module.exports = {
                 success: false,
                 message: 'Invalid credentials'
             }
-        });
+        });   
     }, 
+
+    register: function(username, password, email) {
+        axios.post('/api/users/', {
+            username: username,
+            password: password,
+            email: email
+        }).then(response => {
+            return auth.login(this.state.username, this.state.password);
+        }).catch(error => {
+            return {
+                success: false,
+                message: 'Unable to register'
+            }
+        });
+    }
 }

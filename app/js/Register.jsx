@@ -1,14 +1,10 @@
 import React from 'react';
-import axios from 'axios';
 
-import { HintTextField } from './Generics.jsx'
-import RaisedButton from 'material-ui/RaisedButton';
-
-import auth from './auth.jsx'
+import auth from './auth'
 
 
 class Register extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             username: '',
@@ -21,12 +17,8 @@ class Register extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        axios.post('/api/users/', 
-            this.state
-        ).then(response => {
-            var login_response = auth.login(this.state.username, this.state.password);
-            
-        });
+        var response = auth.register(this.state.username, this.state.password, this.state.email);
+        console.log(response);
     }
 
     handleInputChange(event) {
@@ -42,29 +34,24 @@ class Register extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <HintTextField
+                <input
                     name='username'
                     onChange={this.handleInputChange}
                 />
                 <br/>
-                <HintTextField
+                <input
                     name='email'
                     type='email'
                     onChange={this.handleInputChange}
                 />
                 <br/>
-                <HintTextField
+                <input
                     name='password'
                     type = 'password'
                     onChange={this.handleInputChange}
                 />
                 <br/>
-                <RaisedButton 
-                    label='Register' 
-                    primary={true}
-                    type='submit'
-                    className='auth-button' 
-                />
+                <button type='submit'>register</button>
             </form>
         );
     }

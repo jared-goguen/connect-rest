@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM  from 'react-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import BoardContainer from './Board.jsx'
+import BoardContainer from './Board';
 
 class App extends React.Component {
     constructor(props) {

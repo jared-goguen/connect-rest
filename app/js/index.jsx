@@ -1,28 +1,23 @@
+import 'bootstrap/dist/css/bootstrap.css';
+
 import React from 'react';
 import ReactDOM  from 'react-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
-import App from './app.jsx'
-import LoginContainer from './LoginContainer.jsx'
-import auth from './auth.jsx'
-
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import ConnectNav from './ConnectNav';
+import App from './App';
+import LoginContainer from './LoginContainer';
 
 ReactDOM.render(
-    <MuiThemeProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+        <div>
+            <ConnectNav />
             <Switch>
-                <Route exact path="/" render={() => (
-                    !auth.loggedIn() ? (
-                        <Redirect to="/login/"/>
-                    ) : (
-                        <App/>
-                    )
-                )}/>
+                <Route exact path='/' component={App} />
+                <Route path='/computer' component={App} />
                 <Route path='/login/' component={LoginContainer} />
             </Switch>
-        </BrowserRouter>
-    </MuiThemeProvider>,
-    document.getElementById('app')    
+        </div>
+    </BrowserRouter>,
+    document.getElementById('app')
 );
-

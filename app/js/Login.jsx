@@ -1,16 +1,11 @@
 import React from 'react';
-import axios from './axios-default.jsx';
 
-import { HintTextField } from './Generics.jsx'
-import RaisedButton from 'material-ui/RaisedButton';
-
-import auth from './auth.jsx'
+import auth from './auth'
 
 
 class Login extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
-        console.log(this.props);
         this.state = {
             username: '',
             password: ''
@@ -19,7 +14,7 @@ class Login extends React.Component {
         this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleSubmit(event){
+    handleSubmit(event) {
         event.preventDefault();
         var response = auth.login(this.state.username, this.state.password);
         console.log(response);
@@ -38,23 +33,18 @@ class Login extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <HintTextField
+                <input
                     name='username'
                     onChange={this.handleInputChange}
                 />
                 <br/>
-                <HintTextField
+                <input
                     name='password'
                     type='password'
                     onChange={this.handleInputChange}
                 />
                 <br/>
-                <RaisedButton 
-                    label='Login' 
-                    primary={true} 
-                    type='submit'
-                    className='auth-button'
-                />
+                <button type='submit'>login</button>
             </form>
         );
     }
