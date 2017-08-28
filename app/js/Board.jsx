@@ -35,14 +35,11 @@ class BoardContainer extends React.Component {
                     return
                 }
 
-                axios.post('/api/ai/get_move', {
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(this.state),
-                }).then(response => {
-                    var ai_move = response;
+                axios.post('/api/ai/get_move', 
+                    this.state
+                ).then(response => {
+                    console.log(response)
+                    var ai_move = response.data;
                     this.state.statis = false;
                     this.move(ai_move.row, ai_move.col);
                     if (this.state.done) {

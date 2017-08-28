@@ -1,18 +1,16 @@
 import React from 'react';
-import axios from 'axios';
-import { getCookie } from './utility';
-import DjangoCSRFToken from 'django-react-csrftoken'
+import axios from './axios-default.jsx';
 
 import { HintTextField } from './Generics.jsx'
 import RaisedButton from 'material-ui/RaisedButton';
 
-axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN';
-axios.defaults.xsrfCookieName = 'csrftoken';
+import auth from './auth.jsx'
 
 
 class Login extends React.Component {
     constructor(props){
         super(props);
+        console.log(this.props);
         this.state = {
             username: '',
             password: ''
@@ -23,10 +21,8 @@ class Login extends React.Component {
 
     handleSubmit(event){
         event.preventDefault();
-        axios.post('/api/login', this.state
-        ).then(response => {
-            console.log(response);
-        });
+        var response = auth.login(this.state.username, this.state.password);
+        console.log(response);
     }
 
     handleInputChange(event) {
@@ -42,7 +38,6 @@ class Login extends React.Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                {/*<DjangoCSRFToken/>*/}
                 <HintTextField
                     name='username'
                     onChange={this.handleInputChange}

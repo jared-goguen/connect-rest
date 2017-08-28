@@ -4,6 +4,8 @@ import axios from 'axios';
 import { HintTextField } from './Generics.jsx'
 import RaisedButton from 'material-ui/RaisedButton';
 
+import auth from './auth.jsx'
+
 
 class Register extends React.Component {
     constructor(props){
@@ -13,51 +15,57 @@ class Register extends React.Component {
             email: '',
             password: '',
         }
-        this.handleClick = this.handleClick.bind(this);
-        this.partialOnChange = this.partialOnChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
     }
 
-    handleClick(event) {
-        axios.post('/api/users/', {
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(this.state)
-        })
+    handleSubmit(event) {
+        event.preventDefault();
+        axios.post('/api/users/', 
+            this.state
+        ).then(response => {
+            var login_response = auth.login(this.state.username, this.state.password);
+            
+        });
     }
 
-    partialOnChange(attribute) {
-        return (event, value) => this.setState({attribute: value});
+    handleInputChange(event) {
+        const target = event.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+        const name = target.name;
+
+        this.setState({
+            [name]: value
+        });
     }
 
     render() {
         return (
-            <div>
+            <form onSubmit={this.handleSubmit}>
                 <HintTextField
-                    hintTitle='username'
-                    onChange={this.partialOnChange('username')}
+                    name='username'
+                    onChange={this.handleInputChange}
                 />
                 <br/>
                 <HintTextField
-                    hintTitle='email'
+                    name='email'
                     type='email'
-                    onChange={this.partialOnChange('email')}
+                    onChange={this.handleInputChange}
                 />
                 <br/>
                 <HintTextField
-                    hintTitle='password'
+                    name='password'
                     type = 'password'
-                    onChange={this.partialOnChange('password')}
+                    onChange={this.handleInputChange}
                 />
                 <br/>
                 <RaisedButton 
                     label='Register' 
-                    primary={true} 
+                    primary={true}
+                    type='submit'
                     className='auth-button' 
-                    onClick={this.handleClick}
                 />
-            </div>
+            </form>
         );
     }
 }
