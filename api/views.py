@@ -7,7 +7,6 @@ from .serializers import UserSerializer
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (permissions.IsAuthenticated,)
 
     def retrieve(self, request, pk=None):
         if pk == 'i':

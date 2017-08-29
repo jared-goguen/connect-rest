@@ -9,25 +9,25 @@ import { LinkContainer } from 'react-router-bootstrap';
 class ConnectNav extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isOpen: false
-        };
-        this.toggle = this.toggle.bind(this);
-    }
-
-    toggle() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
     }
 
     render() {
-        var links = ['online', 'computer'];
-        if (auth.loggedIn()) {
-            links.push('profile');
-            links.push('logout');
+        var Link = (i, link) => (
+            <LinkContainer key={i} to={'/' + link + '/'}>
+                <NavItem eventKey={i}>{link}</NavItem>
+            </LinkContainer>
+        );
+
+        var links = [Link(0, 'online'), Link(1, 'computer')];
+        if (this.props.loggedIn) {
+            links.push(Link(2, 'profile'));
+            links.push(
+                <NavItem key={3} eventKey={3} onClick={(event) => {
+                    auth.logout(this.props.callback);
+                }}>logout</NavItem>
+            );
         } else {
-            links.push('login');
+            links.push(Link(2, 'login'));
         }
 
         return (
@@ -40,13 +40,7 @@ class ConnectNav extends React.Component {
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav>
-                    {links.map((link, i) => {
-                        return (
-                            <LinkContainer to={'/' + link + '/'}>
-                                <NavItem eventKey={i}>{link}</NavItem>
-                            </LinkContainer>
-                        );
-                    })}
+                    {links}
                 </Nav>
             </Navbar>
         );

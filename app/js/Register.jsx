@@ -1,58 +1,96 @@
-import React from 'react';
+import '../css/Login.css';
 
+import React from 'react';
 import auth from './auth'
+
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
+
 
 
 class Register extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             username: '',
             email: '',
             password: '',
-        }
+            verify: ''
+        };
+
+        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    validateForm() {
+        return this.state.username.length > 0
+            && this.state.password.length > 0
+            && (this.state.password == this.state.verify);
+    }
+
+    handleChange(event) {
+        this.setState({
+            [event.target.id]: event.target.value
+        });
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        var response = auth.register(this.state.username, this.state.password, this.state.email);
-        console.log(response);
-    }
-
-    handleInputChange(event) {
-        const target = event.target;
-        const value = target.type === 'checkbox' ? target.checked : target.value;
-        const name = target.name;
-
-        this.setState({
-            [name]: value
+        auth.register(this.state.username, this.state.password, this.state.email, (response) => {
+            this.props.callback();
+            if (response.success) {
+                this.props.history.goBack();
+            }
         });
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
-                <input
-                    name='username'
-                    onChange={this.handleInputChange}
-                />
-                <br/>
-                <input
-                    name='email'
-                    type='email'
-                    onChange={this.handleInputChange}
-                />
-                <br/>
-                <input
-                    name='password'
-                    type = 'password'
-                    onChange={this.handleInputChange}
-                />
-                <br/>
-                <button type='submit'>register</button>
-            </form>
+            <div className="Login">
+                <form onSubmit={this.handleSubmit}>
+                    <FormGroup controlId="username" bsSize="large">
+                        <ControlLabel>username</ControlLabel>
+                        <FormControl
+                            autoFocus
+                            type="username"
+                            value={this.state.username}
+                            onChange={this.handleChange} />
+                    </FormGroup>
+                    <FormGroup controlId="email" bsSize="large">
+                        <ControlLabel>email</ControlLabel>
+                        <FormControl
+                            autoFocus
+                            type="email"
+                            value={this.state.email}
+                            onChange={this.handleChange} />
+                    </FormGroup>
+                    <FormGroup controlId="password" bsSize="large">
+                        <ControlLabel>password</ControlLabel>
+                        <FormControl
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            type="password" />
+                    </FormGroup>
+                    <FormGroup controlId="verify" bsSize="large">
+                        <ControlLabel>verify password</ControlLabel>
+                        <FormControl
+                            value={this.state.verify}
+                            onChange={this.handleChange}
+                            type="password" />
+                    </FormGroup>
+                    <Button
+                        bsSize="large"
+                        disabled={ !this.validateForm() }
+                        type="submit">
+                        register
+                    </Button>
+                    <Button 
+                        bsSize="large" 
+                        onClick={this.props.altCallback}>
+                        {this.props.altText}
+                    </Button>
+                </form>
+            </div>
         );
     }
 }

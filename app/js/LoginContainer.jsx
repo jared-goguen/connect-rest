@@ -1,7 +1,11 @@
+import '../css/Login.css';
+
 import React from 'react';
 
 import Login from './Login';
 import Register from './Register';
+import { Button } from 'react-bootstrap';
+
 
 class LoginContainer extends React.Component {
     /*
@@ -23,15 +27,13 @@ class LoginContainer extends React.Component {
     }
 
     render() {
-        var component = this.state.isLogin ? <Login/> : <Register/>;
         var alt = (this.state.isLogin ? 'register' : 'login') + ' instead';
-
-        return (
-            <div>
-                {component}
-                <button onClick={this.handleClick}>{alt}</button>
-            </div>
+        var component = this.state.isLogin ? (
+            <Login altCallback={this.handleClick} altText={alt} {...this.props} /> 
+        ) : (
+            <Register altCallback={this.handleClick} altText={alt} {...this.props} /> 
         );
+        return component
     }
 }
 

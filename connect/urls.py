@@ -3,7 +3,7 @@ import re
 from django.conf.urls import url, include
 
 from .routers import RedirectAPIRootRouter
-from .views import IndexView, login
+from .views import IndexView
 from games.views import GameViewSet
 from players.views import PlayerViewSet
 from ai.views import get_move
@@ -24,7 +24,6 @@ router.register(r'api/players', PlayerViewSet)
 urlpatterns = [
     url(r'^', include(router.urls)),
     url(r'^api/ai/get_move$', get_move),
-    url(r'^api/login$', login),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api/obtain-auth-token/$', obtain_auth_token),
     url(r'^.*', IndexView.as_view(), name='index')
