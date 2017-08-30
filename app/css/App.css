@@ -8,6 +8,13 @@ body {
     width: 100vw; 
 }
 
+.generic-button {
+    color: #ccc;
+    font-size: 18px;
+    border-radius: 10px; 
+    background-color: #e7e7e7;
+}
+
 .header-nightsky {
     flex: 1;
     color: white;

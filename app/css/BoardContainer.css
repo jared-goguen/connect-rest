@@ -35,7 +35,8 @@
     background-color: #c6ffdb;
 }
 
-.playable:hover {
+.playable:hover, 
+.playable:focus {
     background-color: #6af79e;
     opacity: 0.75;
 }

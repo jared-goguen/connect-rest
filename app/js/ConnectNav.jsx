@@ -20,7 +20,7 @@ class ConnectNav extends React.Component {
             </LinkContainer>
         );
 
-        var links = [Link(0, 'humans'), Link(1, 'computer')];
+        var links = [Link(0, 'games'), Link(1, 'computer')];
         if (this.props.loggedIn) {
             links.push(Link(2, 'profile'));
             links.push(
