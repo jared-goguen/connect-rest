@@ -4,11 +4,11 @@ var webpack = require('webpack');
 module.exports = {
   entry: [
     'babel-polyfill',
-    './js/index.jsx'
+    './js/App.jsx'
   ],
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'index.bundle.js'
+    filename: 'App.bundle.js'
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -16,7 +16,7 @@ module.exports = {
   module: {
     loaders: [
       {
-        test: /.jsx?$/,  // Match both .js and .jsx
+        test: /\.jsx?$/,  // Match both .js and .jsx
         loader: 'babel-loader',
         exclude: /node_modules/,
         query: {
@@ -25,6 +25,9 @@ module.exports = {
       }, {
         test: /\.css$/,
         loader: 'style-loader!css-loader'
+      }, {
+        test: /\.(jpg|png|svg)$/,
+        loader: 'url-loader',
       }
     ]
   }

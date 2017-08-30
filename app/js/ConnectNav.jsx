@@ -1,3 +1,5 @@
+import '../css/ConnectNav.css';
+
 import React from 'react';
 
 import auth from './auth'
@@ -18,7 +20,7 @@ class ConnectNav extends React.Component {
             </LinkContainer>
         );
 
-        var links = [Link(0, 'online'), Link(1, 'computer')];
+        var links = [Link(0, 'humans'), Link(1, 'computer')];
         if (this.props.loggedIn) {
             links.push(Link(2, 'profile'));
             links.push(
@@ -31,18 +33,20 @@ class ConnectNav extends React.Component {
         }
 
         return (
-            <Navbar>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <LinkContainer to='/'>
-                            <a>connect</a>
-                        </LinkContainer>
-                    </Navbar.Brand>
-                </Navbar.Header>
-                <Nav>
-                    {links}
-                </Nav>
-            </Navbar>
+            <div>
+                <Navbar>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <LinkContainer to='/'>
+                                <a>connect</a>
+                            </LinkContainer>
+                        </Navbar.Brand>
+                    </Navbar.Header>
+                    <Nav>
+                        {links}
+                    </Nav>
+                </Navbar>
+            </div>
         );
     }
 }

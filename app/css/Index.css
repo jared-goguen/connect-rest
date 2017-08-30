@@ -1,0 +1,10 @@
+h2 {
+	padding: 25px;
+	position: relative;
+	display: block;
+}
+
+button {
+	color: #222222;
+	padding: 25px;
+}

@@ -1,10 +1,15 @@
+import '../css/App.css';
+
 import React from 'react';
+import ReactDOM  from 'react-dom';
+
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import auth from './auth'
 
 import ConnectNav from './ConnectNav';
-import LoginContainer from './LoginContainer';
+import Index from './Index';
 import BoardContainer from './BoardContainer';
+import LoginContainer from './LoginContainer';
 
 
 class App extends React.Component {
@@ -35,10 +40,11 @@ class App extends React.Component {
 
         return (
             <BrowserRouter>
-                <div>
+                <div className='header-nightsky'>
                     <ConnectNav loggedIn={this.state.loggedIn} callback={this.updateLogin} />
                     <Switch>
-                        <Route path='/computer' component={DefaultBoardContainer} />
+                        <Route exact path='/' component={Index} />
+                        <Route path='/computer/' component={DefaultBoardContainer} />
                         <Route path='/login/' component={BoundLoginContainer} />
                     </Switch>
                 </div>
@@ -47,4 +53,4 @@ class App extends React.Component {
     }
 }
 
-export default App;
+ReactDOM.render(<App />, document.getElementById('app'));
