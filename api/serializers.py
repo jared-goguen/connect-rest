@@ -1,11 +1,12 @@
 from rest_framework import serializers
 
 from django.contrib.auth.models import User
+from players.models import Player
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ('username', 'email', 'password')
+        fields = ('username', 'email', 'password', 'player')
 
     password = serializers.CharField(write_only=True)
 
