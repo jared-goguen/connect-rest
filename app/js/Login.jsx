@@ -40,32 +40,34 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="Login">
+            <div className='Login'>
                 <form onSubmit={this.handleSubmit}>
-                    <FormGroup controlId="username" bsSize="large">
+                    <FormGroup controlId='username' bsSize='large'>
                         <ControlLabel>username</ControlLabel>
                         <FormControl
                             autoFocus
-                            type="username"
+                            type='username'
                             value={this.state.username}
                             onChange={this.handleChange} />
                     </FormGroup>
-                    <FormGroup controlId="password" bsSize="large">
+                    <FormGroup controlId='password' bsSize='large'>
                         <ControlLabel>password</ControlLabel>
                         <FormControl
                             value={this.state.password}
                             onChange={this.handleChange}
-                            type="password" />
+                            type='password' />
                     </FormGroup>
                     <Button
-                        bsSize="large"
+                        bsSize='large'
+                        className='mainButton'
                         disabled={ !this.validateForm() }
-                        type="submit">
+                        type='submit'>
                         login
                     </Button>
                     <br/>
                     <Button 
-                        bsSize="large" 
+                        bsSize='large' 
+                        className='altButton'
                         onClick={this.props.altCallback}>
                         {this.props.altText}
                     </Button>

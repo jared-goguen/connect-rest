@@ -29871,6 +29871,7 @@ var Login = function (_React$Component) {
                         _reactBootstrap.Button,
                         {
                             bsSize: 'large',
+                            className: 'mainButton',
                             disabled: !this.validateForm(),
                             type: 'submit' },
                         'login'
@@ -29880,6 +29881,7 @@ var Login = function (_React$Component) {
                         _reactBootstrap.Button,
                         {
                             bsSize: 'large',
+                            className: 'altButton',
                             onClick: this.props.altCallback },
                         this.props.altText
                     )
@@ -30108,6 +30110,7 @@ var Register = function (_React$Component) {
                         _reactBootstrap.Button,
                         {
                             bsSize: 'large',
+                            className: 'mainButton',
                             disabled: !this.validateForm(),
                             type: 'submit' },
                         'register'
@@ -30117,6 +30120,7 @@ var Register = function (_React$Component) {
                         _reactBootstrap.Button,
                         {
                             bsSize: 'large',
+                            className: 'altButton',
                             onClick: this.props.altCallback },
                         this.props.altText
                     )
@@ -31222,7 +31226,7 @@ exports = module.exports = __webpack_require__(93)(undefined);
 
 
 // module
-exports.push([module.i, ".Login {\r\n    padding: 60px 0;\r\n}\r\n\r\n.Login form {\r\n    margin: 0 auto;\r\n    max-width: 320px;\r\n}\r\n\r\n.Login button {\r\n    display: block;\r\n    width: 100%;\r\n    margin-top: 10px;\r\n}", ""]);
+exports.push([module.i, ".Login {\r\n    padding: 60px 0;\r\n}\r\n\r\n.Login form {\r\n    margin: 0 auto;\r\n    max-width: 320px;\r\n}\r\n\r\n.Login button {\r\n    display: block;\r\n    width: 100%;\r\n    margin-top: 10px;\r\n}\r\n\r\n.mainButton {\r\n    color: #258dda;\r\n}\r\n\r\n.mainButton:hover,\r\n.mainButton:focus {\r\n    color: #258dda;\r\n}\r\n\r\n.altButton {\r\n    color: #b8c3cc;\r\n    background-color: #565454;\r\n    border-color: #da8d25;\r\n}\r\n\r\n.altButton:hover,\r\n.altButton:focus {\r\n    color: #ba7d15;\r\n    background-color: #A6A4A4;\r\n}", ""]);
 
 // exports
 
