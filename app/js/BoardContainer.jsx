@@ -19,15 +19,10 @@ class BoardContainer extends React.Component {
     */
     constructor(props) {
         super(props);
-        this.state = this.initialState()
-        this.partialClick = this.partialClick.bind(this);
-        this.move = this.move.bind(this);
-        this.checkDone = this.checkDone.bind(this);
-        this.doneTrigger = this.doneTrigger.bind(this);
-        this.reset = this.reset.bind(this);
+        this.state = this.initialState();
     }
 
-    partialClick(row, col) {
+    partialClick = (row, col) => {
         return (e) => {
             if (!this.state.done && !this.state.statis) {
                 this.state.statis = true;
@@ -52,7 +47,7 @@ class BoardContainer extends React.Component {
         }
     }
 
-    move(row, col) {
+    move = (row, col) => {
         this.state.board[row][col].owner = this.state.turn;
         this.state.board[row][col].playable = false;
         if (row > 0) {
@@ -66,7 +61,7 @@ class BoardContainer extends React.Component {
     }
 
     // last move must have caused win
-    checkDone(row, col) {
+    checkDone = (row, col) => {
         var owner = this.state.board[row][col].owner;
 
         var horizontal = [];
@@ -124,7 +119,7 @@ class BoardContainer extends React.Component {
 
     }
 
-    doneTrigger() {
+    doneTrigger = () => {
         var message;
         if (this.state.winner === null) {
             message = 'The game resulted in a tie.'
@@ -157,7 +152,7 @@ class BoardContainer extends React.Component {
         return state;
     }
 
-    reset() {
+    reset = () => {
         this.setState(this.initialState());
     }
 

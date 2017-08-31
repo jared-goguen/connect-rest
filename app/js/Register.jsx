@@ -10,16 +10,13 @@ import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 class Register extends React.Component {
     constructor(props) {
         super(props);
-
+        
         this.state = {
             username: '',
             email: '',
             password: '',
             verify: ''
         };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     validateForm() {
@@ -28,13 +25,13 @@ class Register extends React.Component {
             && (this.state.password == this.state.verify);
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
         auth.register(this.state.username, this.state.password, this.state.email, (response) => {
             this.props.callback();
@@ -84,6 +81,7 @@ class Register extends React.Component {
                         type="submit">
                         register
                     </Button>
+                    <br/>
                     <Button 
                         bsSize="large" 
                         onClick={this.props.altCallback}>

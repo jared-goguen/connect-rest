@@ -15,9 +15,6 @@ class Login extends React.Component {
             username: '',
             password: '',
         };
-
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     validateForm() {
@@ -25,13 +22,13 @@ class Login extends React.Component {
             && this.state.password.length > 0;
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value
         });
     }
 
-    handleSubmit(event) {
+    handleSubmit = (event) => {
         event.preventDefault();
         auth.login(this.state.username, this.state.password, (response) => {
             this.props.callback();
@@ -66,6 +63,7 @@ class Login extends React.Component {
                         type="submit">
                         login
                     </Button>
+                    <br/>
                     <Button 
                         bsSize="large" 
                         onClick={this.props.altCallback}>

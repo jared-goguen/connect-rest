@@ -23346,19 +23346,17 @@ var App = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
+        _this.updateLogin = function () {
+            _this.setState({ loggedIn: _auth2.default.loggedIn() });
+        };
+
         _this.state = {
             loggedIn: _auth2.default.loggedIn()
         };
-        _this.updateLogin = _this.updateLogin.bind(_this);
         return _this;
     }
 
     _createClass(App, [{
-        key: 'updateLogin',
-        value: function updateLogin() {
-            this.setState({ loggedIn: _auth2.default.loggedIn() });
-        }
-    }, {
         key: 'render',
         value: function render() {
             var _this2 = this;
@@ -29145,87 +29143,69 @@ var BoardContainer = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (BoardContainer.__proto__ || Object.getPrototypeOf(BoardContainer)).call(this, props));
 
-        _this.state = _this.initialState();
-        _this.partialClick = _this.partialClick.bind(_this);
-        _this.move = _this.move.bind(_this);
-        _this.checkDone = _this.checkDone.bind(_this);
-        _this.doneTrigger = _this.doneTrigger.bind(_this);
-        _this.reset = _this.reset.bind(_this);
-        return _this;
-    }
-
-    _createClass(BoardContainer, [{
-        key: 'partialClick',
-        value: function partialClick(row, col) {
-            var _this2 = this;
-
+        _this.partialClick = function (row, col) {
             return function (e) {
-                if (!_this2.state.done && !_this2.state.statis) {
-                    _this2.state.statis = true;
-                    _this2.move(row, col);
-                    if (_this2.state.done) {
-                        _this2.doneTrigger();
+                if (!_this.state.done && !_this.state.statis) {
+                    _this.state.statis = true;
+                    _this.move(row, col);
+                    if (_this.state.done) {
+                        _this.doneTrigger();
                         return;
                     }
 
-                    _axios2.default.post('/api/ai/get_move', _this2.state).then(function (response) {
+                    _axios2.default.post('/api/ai/get_move', _this.state).then(function (response) {
                         console.log(response);
                         var ai_move = response.data;
-                        _this2.state.statis = false;
-                        _this2.move(ai_move.row, ai_move.col);
-                        if (_this2.state.done) {
-                            _this2.doneTrigger();
+                        _this.state.statis = false;
+                        _this.move(ai_move.row, ai_move.col);
+                        if (_this.state.done) {
+                            _this.doneTrigger();
                         }
                     });
                 }
             };
-        }
-    }, {
-        key: 'move',
-        value: function move(row, col) {
-            this.state.board[row][col].owner = this.state.turn;
-            this.state.board[row][col].playable = false;
+        };
+
+        _this.move = function (row, col) {
+            _this.state.board[row][col].owner = _this.state.turn;
+            _this.state.board[row][col].playable = false;
             if (row > 0) {
-                this.state.board[row - 1][col].playable = true;
+                _this.state.board[row - 1][col].playable = true;
             }
-            this.state.turn = this.state.turn % 2 + 1;
+            _this.state.turn = _this.state.turn % 2 + 1;
 
-            Object.assign(this.state, this.checkDone(row, col));
-            this.setState(this.state);
-        }
+            Object.assign(_this.state, _this.checkDone(row, col));
+            _this.setState(_this.state);
+        };
 
-        // last move must have caused win
-
-    }, {
-        key: 'checkDone',
-        value: function checkDone(row, col) {
-            var owner = this.state.board[row][col].owner;
+        _this.checkDone = function (row, col) {
+            var owner = _this.state.board[row][col].owner;
 
             var horizontal = [];
-            for (var j = Math.max(0, col - 3); j <= Math.min(this.props.cols - 1, col + 3); j++) {
-                horizontal.push(this.state.board[row][j].owner);
+            for (var j = Math.max(0, col - 3); j <= Math.min(_this.props.cols - 1, col + 3); j++) {
+                horizontal.push(_this.state.board[row][j].owner);
             }
             var maxH = utility.streak(horizontal, owner);
 
             var vertical = [];
-            for (var i = Math.max(0, row - 3); i <= Math.min(this.props.rows - 1, row + 3); i++) {
-                vertical.push(this.state.board[i][col].owner);
+            for (var i = Math.max(0, row - 3); i <= Math.min(_this.props.rows - 1, row + 3); i++) {
+                vertical.push(_this.state.board[i][col].owner);
             }
             var maxV = utility.streak(vertical, owner);
 
             var diagonalF = [];
             var fMin = Math.max(-3, -row, -col);
-            var fMax = Math.min(3, this.props.rows - row - 1, this.props.cols - col - 1);
+            var fMax = Math.min(3, _this.props.rows - row - 1, _this.props.cols - col - 1);
             for (var f = fMin; f <= fMax; f++) {
-                diagonalF.push(this.state.board[row + f][col + f].owner);
+                diagonalF.push(_this.state.board[row + f][col + f].owner);
             }
             var maxDF = utility.streak(diagonalF, owner);
 
             var diagonalB = [];
-            var bMin = Math.max(-3, -this.props.rows + row + 1, -col);
-            var bMax = Math.min(3, row, this.props.cols - col - 1);
+            var bMin = Math.max(-3, -_this.props.rows + row + 1, -col);
+            var bMax = Math.min(3, row, _this.props.cols - col - 1);
             for (var b = bMin; b <= bMax; b++) {
-                diagonalB.push(this.state.board[row - b][col + b].owner);
+                diagonalB.push(_this.state.board[row - b][col + b].owner);
             }
             var maxDB = utility.streak(diagonalB, owner);
 
@@ -29238,9 +29218,9 @@ var BoardContainer = function (_React$Component) {
                 };
             }
 
-            for (var row = 0; row < this.props.rows; row++) {
-                for (var col = 0; col < this.props.cols; col++) {
-                    if (this.state.board[row][col].playable) {
+            for (var row = 0; row < _this.props.rows; row++) {
+                for (var col = 0; col < _this.props.cols; col++) {
+                    if (_this.state.board[row][col].playable) {
                         return {
                             done: false,
                             statis: false
@@ -29253,21 +29233,32 @@ var BoardContainer = function (_React$Component) {
                 done: true,
                 statis: false
             };
-        }
-    }, {
-        key: 'doneTrigger',
-        value: function doneTrigger() {
+        };
+
+        _this.doneTrigger = function () {
             var message;
-            if (this.state.winner === null) {
+            if (_this.state.winner === null) {
                 message = 'The game resulted in a tie.';
             } else {
-                message = 'Player ' + String(this.state.winner) + ' won!';
+                message = 'Player ' + String(_this.state.winner) + ' won!';
             }
             setTimeout(function () {
                 alert(message);
             }, 100);
-        }
-    }, {
+        };
+
+        _this.reset = function () {
+            _this.setState(_this.initialState());
+        };
+
+        _this.state = _this.initialState();
+        return _this;
+    }
+
+    // last move must have caused win
+
+
+    _createClass(BoardContainer, [{
         key: 'initialState',
         value: function initialState() {
             var state = {
@@ -29290,11 +29281,6 @@ var BoardContainer = function (_React$Component) {
             }
 
             return state;
-        }
-    }, {
-        key: 'reset',
-        value: function reset() {
-            this.setState(this.initialState());
         }
     }, {
         key: 'render',
@@ -29644,7 +29630,7 @@ var GamesCreate = function (_React$Component) {
                 ),
                 _react2.default.createElement(
                     _reactRouterDom.Link,
-                    { to: '' },
+                    { to: '/games/' },
                     'back home'
                 )
             );
@@ -29819,13 +29805,24 @@ var Login = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
 
+        _this.handleChange = function (event) {
+            _this.setState(_defineProperty({}, event.target.id, event.target.value));
+        };
+
+        _this.handleSubmit = function (event) {
+            event.preventDefault();
+            _auth2.default.login(_this.state.username, _this.state.password, function (response) {
+                _this.props.callback();
+                if (response.success) {
+                    _this.props.history.goBack();
+                }
+            });
+        };
+
         _this.state = {
             username: '',
             password: ''
         };
-
-        _this.handleChange = _this.handleChange.bind(_this);
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
@@ -29833,24 +29830,6 @@ var Login = function (_React$Component) {
         key: 'validateForm',
         value: function validateForm() {
             return this.state.username.length > 0 && this.state.password.length > 0;
-        }
-    }, {
-        key: 'handleChange',
-        value: function handleChange(event) {
-            this.setState(_defineProperty({}, event.target.id, event.target.value));
-        }
-    }, {
-        key: 'handleSubmit',
-        value: function handleSubmit(event) {
-            var _this2 = this;
-
-            event.preventDefault();
-            _auth2.default.login(this.state.username, this.state.password, function (response) {
-                _this2.props.callback();
-                if (response.success) {
-                    _this2.props.history.goBack();
-                }
-            });
         }
     }, {
         key: 'render',
@@ -29896,6 +29875,7 @@ var Login = function (_React$Component) {
                             type: 'submit' },
                         'login'
                     ),
+                    _react2.default.createElement('br', null),
                     _react2.default.createElement(
                         _reactBootstrap.Button,
                         {
@@ -29966,19 +29946,17 @@ var LoginContainer = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (LoginContainer.__proto__ || Object.getPrototypeOf(LoginContainer)).call(this, props));
 
+        _this.handleClick = function (event) {
+            _this.setState({ isLogin: !_this.state.isLogin });
+        };
+
         _this.state = {
             isLogin: !(_this.props.initialState === 'register')
         };
-        _this.handleClick = _this.handleClick.bind(_this);
         return _this;
     }
 
     _createClass(LoginContainer, [{
-        key: 'handleClick',
-        value: function handleClick(event) {
-            this.setState({ isLogin: !this.state.isLogin });
-        }
-    }, {
         key: 'render',
         value: function render() {
             var alt = (this.state.isLogin ? 'register' : 'login') + ' instead';
@@ -30035,15 +30013,26 @@ var Register = function (_React$Component) {
 
         var _this = _possibleConstructorReturn(this, (Register.__proto__ || Object.getPrototypeOf(Register)).call(this, props));
 
+        _this.handleChange = function (event) {
+            _this.setState(_defineProperty({}, event.target.id, event.target.value));
+        };
+
+        _this.handleSubmit = function (event) {
+            event.preventDefault();
+            _auth2.default.register(_this.state.username, _this.state.password, _this.state.email, function (response) {
+                _this.props.callback();
+                if (response.success) {
+                    _this.props.history.goBack();
+                }
+            });
+        };
+
         _this.state = {
             username: '',
             email: '',
             password: '',
             verify: ''
         };
-
-        _this.handleChange = _this.handleChange.bind(_this);
-        _this.handleSubmit = _this.handleSubmit.bind(_this);
         return _this;
     }
 
@@ -30051,24 +30040,6 @@ var Register = function (_React$Component) {
         key: 'validateForm',
         value: function validateForm() {
             return this.state.username.length > 0 && this.state.password.length > 0 && this.state.password == this.state.verify;
-        }
-    }, {
-        key: 'handleChange',
-        value: function handleChange(event) {
-            this.setState(_defineProperty({}, event.target.id, event.target.value));
-        }
-    }, {
-        key: 'handleSubmit',
-        value: function handleSubmit(event) {
-            var _this2 = this;
-
-            event.preventDefault();
-            _auth2.default.register(this.state.username, this.state.password, this.state.email, function (response) {
-                _this2.props.callback();
-                if (response.success) {
-                    _this2.props.history.goBack();
-                }
-            });
         }
     }, {
         key: 'render',
@@ -30141,6 +30112,7 @@ var Register = function (_React$Component) {
                             type: 'submit' },
                         'register'
                     ),
+                    _react2.default.createElement('br', null),
                     _react2.default.createElement(
                         _reactBootstrap.Button,
                         {

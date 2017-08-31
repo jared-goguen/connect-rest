@@ -16,13 +16,13 @@ class LoginContainer extends React.Component {
     */
     constructor(props) {
         super(props);
+
         this.state = {
             isLogin: !(this.props.initialState === 'register')
         }
-        this.handleClick = this.handleClick.bind(this);
     }
 
-    handleClick(event) {
+    handleClick = (event) => {
         this.setState({isLogin: !this.state.isLogin});
     }
 

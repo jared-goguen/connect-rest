@@ -16,13 +16,13 @@ import Games from './Games';
 class App extends React.Component {
     constructor(props) {
         super(props);
+        
         this.state = {
             loggedIn: auth.loggedIn()
         }
-        this.updateLogin = this.updateLogin.bind(this);
     }
 
-    updateLogin() {
+    updateLogin = () => {
         this.setState({loggedIn: auth.loggedIn()});
     }
 
