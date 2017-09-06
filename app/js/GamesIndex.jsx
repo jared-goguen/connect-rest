@@ -1,6 +1,9 @@
+import '../css/Games.css';
+
 import React from 'react';
 
 import { Link } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 class GamesIndex extends React.Component {
     constructor(props) {
@@ -9,9 +12,11 @@ class GamesIndex extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className='Games'>
                 <Link to='/games/create/'>
-                    <div className='generic-button'>create game</div>
+                    <Button bsSize='large'>
+                        create game
+                    </Button>
                 </Link>
             </div>
         );

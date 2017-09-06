@@ -1,0 +1,7 @@
+.Games button {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 10px;
+    color: #258dda;
+}

@@ -9,35 +9,39 @@ from django.contrib.postgres.fields import JSONField
 
 from players.models import Player
 
-from itertools import cycle
 from random import shuffle
 
 
 def default_board(rows=6, cols=7):
     return [[-1] * cols] * rows
 
+def default_history():
+    return []
+
 def default_order():
     return []
+
 
 class Game(models.Model):
     class Meta:
         ordering = ('created',)
 
     created = models.DateTimeField(auto_now_add=True)
-    rows = models.IntegerField(default=6)
-    cols = models.IntegerField(default=7)
-    board = JSONField(default=default_board)
-    turn = models.IntegerField(default=-1)
-    players = models.ManyToManyField(Player, related_name='games', blank=True)
-    started = models.BooleanField(default=False)
-    done = models.BooleanField(default=False)
     title = models.TextField(max_length=30)
-    total_players = models.IntegerField(default=2)
-    order = JSONField(default=default_order)
-    next_player = models.ForeignKey(Player, related_name='next_player', blank=True, null=True)
-    winner = models.ForeignKey(Player, related_name='winner', blank=True, null=True)
-    connect = models.IntegerField(default=4)
+    players = models.ManyToManyField(Player, related_name='games', blank=True)
+    board = JSONField(default=default_board)
+    history = JSONField(default=default_history)
+    turn = models.IntegerField(default=-1)
+    winner = models.ForeignKey(Player, related_name='winner', null=True)
+    done = models.BooleanField(default=False)
     full = models.BooleanField(default=False)
+    started = models.BooleanField(default=False)
+    max_players = models.IntegerField(default=2)
+    order = JSONField(default=default_order)
+    next_player = models.ForeignKey(Player, related_name='next_player', null=True)
+    connect = models.IntegerField(default=4)
+    owner = models.ForeignKey(Player, related_name='owner')
+
 
     @property
     def status(self):
@@ -47,33 +51,25 @@ class Game(models.Model):
             return 'In progress'
         return 'Waiting for players'
 
-    # BAD METHOD
+
     def add_player(self, user):
-        if user in self.players.all():
-            return messages.ERROR, 'You are already in Game #{}'.format(self.id)
+        player = user.player
+
+        if player in self.players.all():
+            return (messages.ERROR, 'You are already in Game #{}'.format(self.id))
 
         elif not self.full:
-            self.players.add(user)
-            self.order.append(user.pk)
+            self.players.add(player)
 
-            if len(self.players.all()) == self.total_players:
+            if len(self.players.all()) == self.max_players:
                 self.full = True
                 self.start_game()
 
             self.save()
-            return messages.SUCCESS, 'You have successfully joined Game #{}'.format(self.id)
+            return (messages.SUCCESS, 'You have successfully joined Game #{}'.format(self.id))
         
         else:
-            return messages.ERROR, 'Game is full'
-
-    # BAD METHOD
-    @classmethod
-    def create_game(cls, user, **kwargs):
-        game = cls(**kwargs)
-        game.save()
-        game.add_player(user)
-        game.save()
-        return game
+            return (messages.ERROR, 'Game is full')
 
     def start_game(self):
         self.started = True
@@ -83,25 +79,18 @@ class Game(models.Model):
 
     # does not save on it's own...
     def advance_turn(self):
-        self.turn = (self.turn + 1) % self.total_players
+        self.turn = (self.turn + 1) % self.max_players
         pk = self.order[self.turn]
         self.next_player = self.players.get(pk=pk)
 
-    # BAD METHOD
     def is_turn(self, user):
-        if self.next_player is not None:
-            return user.pk == self.next_player.pk
-        return False
+        return user.player is self.next_player
 
-    # BAD METHOD
     def in_game(self, user):
-        return user.pk in self.order
+        return user.player in self.players
 
-    # BAD METHOD
     def can_join(self, user):
-        if not self.full:
-            return user.is_authenticated() and not self.in_game(user)
-        return False
+        return user.is_authenticated() and not self.full and not self.in_game(user)
 
     def check_valid_position(self, row, col):
         if row < 0 or row >= self.rows:
@@ -123,7 +112,6 @@ class Game(models.Model):
                     break
         return positions
 
-    # BAD METHOD
     def make_move(self, user, row, col):
         if not self.is_turn(user):
             return messages.ERROR, 'It is not your turn...'

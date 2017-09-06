@@ -5,7 +5,7 @@ module.exports = {
         if (this.loggedIn()) {
             callback({
                 success: true,
-                message: 'Already logged in'
+                message: 'already logged in'
             });
         }
         this.getToken(username, password, callback);
@@ -33,12 +33,12 @@ module.exports = {
             axios.defaults.headers.common['Authorization'] = 'Token ' + localStorage.token; 
             callback({
                 success: true,
-                message: 'Login successful'
+                message: 'login successful'
             });
         }).catch(error => {
             callback({
                 success: false,
-                message: 'Invalid credentials'
+                message: 'invalid credentials'
             });
         });   
     }, 
@@ -54,7 +54,7 @@ module.exports = {
         }).catch(error => {
             callback({
                 success: false,
-                message: 'Unable to register'
+                message: 'unable to register'
             });
         });
     }

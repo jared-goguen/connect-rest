@@ -1,4 +1,4 @@
-import '../css/Login.css';
+import '../css/Forms.css';
 
 import React from 'react';
 import auth from './auth'
@@ -19,7 +19,7 @@ class Register extends React.Component {
         };
     }
 
-    validateForm() {
+    validateForm = () => {
         return this.state.username.length > 0
             && this.state.password.length > 0
             && (this.state.password == this.state.verify);
@@ -43,7 +43,7 @@ class Register extends React.Component {
 
     render() {
         return (
-            <div className='Login'>
+            <div className='Bsaic'>
                 <form onSubmit={this.handleSubmit}>
                     <FormGroup controlId='username' bsSize='large'>
                         <ControlLabel>username</ControlLabel>

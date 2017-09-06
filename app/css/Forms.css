@@ -1,13 +1,13 @@
-.Login {
+.Basic {
     padding: 60px 0;
 }
 
-.Login form {
+.Basic form {
     margin: 0 auto;
     max-width: 320px;
 }
 
-.Login button {
+.Basic button {
     display: block;
     width: 100%;
     margin-top: 10px;

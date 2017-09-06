@@ -1,29 +1,18 @@
-import '../css/Games.css';
+import axios from './axios-default';
 
-import React from 'react';
-
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import auth from './auth'
-
-import GamesIndex from './GamesIndex';
-import GamesCreate from './GamesCreate';
-
-class Games extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-
-        return (
-            <BrowserRouter>
-                <Switch>
-                    <Route exact path='/games/' component={GamesIndex} />
-                    <Route path='/games/create/' component={GamesCreate} />
-                </Switch>
-            </BrowserRouter>
-        );
+module.exports = {
+    create: function(state, callback) {
+        axios.post('/api/games/', state).then(response => {
+            console.log(response);
+            callback({
+                success: true,
+                message: 'game created'
+            })
+        }).catch(error => {
+            callback({
+                success: false,
+                message: 'unable to create game'
+            });
+        });
     }
 }
-
-export default Games;
