@@ -1,0 +1,9 @@
+.Board {
+    height: 100%;
+    width: 100%;
+}
+
+.Row {
+    height: 16.6667%;
+    margin: 0px !important;
+}

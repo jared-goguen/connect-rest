@@ -1,10 +1,10 @@
 import '../css/Forms.css';
 
 import React from 'react';
-import auth from './auth'
 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
+import auth from '../api/auth'
 
 
 class Register extends React.Component {
@@ -43,7 +43,7 @@ class Register extends React.Component {
 
     render() {
         return (
-            <div className='Bsaic'>
+            <div className='Basic'>
                 <form onSubmit={this.handleSubmit}>
                     <FormGroup controlId='username' bsSize='large'>
                         <ControlLabel>username</ControlLabel>

@@ -4,7 +4,7 @@ import React from 'react';
 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
-import games from './games'
+import games from '../api/games'
 
 
 class GamesCreate extends React.Component {

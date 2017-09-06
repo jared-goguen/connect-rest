@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Login from './Login';
-import Register from './Register';
 import { Button } from 'react-bootstrap';
+import Login from '../components/Login';
+import Register from '../components/Register';
 
 
 class LoginContainer extends React.Component {

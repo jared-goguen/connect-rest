@@ -1,11 +1,10 @@
 import '../css/Forms.css';
 
 import React from 'react';
-import auth from './auth'
 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
-
+import auth from '../api/auth'
 
 class Login extends React.Component {
     constructor(props) {

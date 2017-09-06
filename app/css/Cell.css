@@ -1,0 +1,38 @@
+.Cell {
+    width: 14.2857%;
+    height: 100%;
+    display: inline-block;
+    padding: 0.5%;
+}
+
+.Circle {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    opacity: 0.5;
+
+}
+
+.Playable {
+    background-color: #c6ffdb;
+}
+
+.Playable:hover, 
+.Playable:focus {
+    background-color: #6af79e;
+    opacity: 0.75;
+}
+
+.color0 {
+    background-color: #ffffff;
+}
+
+.color1 {
+    background-color: #d83422;
+    opacity: 0.9;
+}
+
+.color2 {
+    background-color: #dbd039;
+    opacity: 0.9;
+}

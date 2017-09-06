@@ -3,10 +3,12 @@ import '../css/Games.css';
 import React from 'react';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import auth from './auth'
+import GamesIndex from '../components/GamesIndex';
+import GamesCreate from '../components/GamesCreate';
 
-import GamesIndex from './GamesIndex';
-import GamesCreate from './GamesCreate';
+import auth from '../api/auth'
+
+
 
 class GamesRouter extends React.Component {
     constructor(props) {

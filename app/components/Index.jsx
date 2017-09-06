@@ -2,8 +2,6 @@ import '../css/Index.css';
 
 import React from 'react';
 
-import axios from './axios-default';
-
 class Index extends React.Component {
     constructor(props) {
         super(props);

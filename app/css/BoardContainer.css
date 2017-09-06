@@ -1,56 +1,7 @@
-.board-container {
+.BoradContainer {
     width: 630px;
     height: 540px;
     display: block;
     margin-right: auto;
     margin-left: auto;
-}
-
-.board {
-    height: 100%;
-    width: 100%;
-}
-
-.cell {
-    width: 14.2857%;
-    height: 100%;
-    display: inline-block;
-    padding: 0.5%;
-}
-
-.row {
-    height: 16.6667%;
-    margin: 0px !important;
-}
-
-.circle {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-    opacity: 0.5;
-
-}
-
-.playable {
-    background-color: #c6ffdb;
-}
-
-.playable:hover, 
-.playable:focus {
-    background-color: #6af79e;
-    opacity: 0.75;
-}
-
-.color0 {
-    background-color: #ffffff;
-}
-
-.color1 {
-    background-color: #d83422;
-    opacity: 0.9;
-}
-
-.color2 {
-    background-color: #dbd039;
-    opacity: 0.9;
 }

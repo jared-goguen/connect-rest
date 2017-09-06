@@ -1,9 +1,12 @@
 import '../css/BoardContainer.css';
 
 import React from 'react';
-import axios from 'axios';
 
-import * as utility from './utility';
+import Board from '../components/Board';
+import { Button } from 'react-bootstrap';
+
+import ai from '../api/ai';
+import utility from '../js/utility';
 
 
 class BoardContainer extends React.Component {
@@ -32,10 +35,7 @@ class BoardContainer extends React.Component {
                     return
                 }
 
-                axios.post('/api/ai/get_move', 
-                    this.state
-                ).then(response => {
-                    console.log(response)
+                ai.getMove(this.state, (response) => {
                     var ai_move = response.data;
                     this.state.statis = false;
                     this.move(ai_move.row, ai_move.col);
@@ -158,81 +158,15 @@ class BoardContainer extends React.Component {
 
     render() {
         return (
-            <div className='board-container'>
+            <div className='BoardContainer'>
                 <Board board={this.state.board} 
                        rows={this.props.rows} 
                        cols={this.props.cols} 
                        partialClick={this.partialClick} />
-                <button onClick={this.reset}>Reset</button>
+                <Button onClick={this.reset}>Reset</Button>
             </div>   
         );
     }
 }
-
-class Board extends React.Component {
-    /* 
-    props
-        board: 2D array of {owner: int, playable: bool}
-        rows: int
-        cols: int
-        partialClick: function(row, col) -> function(e) bound to BoardContainer
-    */
-
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        var rows = [];
-        var cell_options = {};
-        cell_options.partialClick = this.props.partialClick;
-        for (var row=0; row < this.props.rows; row++) {
-            var cells = [];
-            cell_options.row = row;
-            for (var col=0; col < this.props.cols; col++) {
-                cell_options.key = cell_options.col = col;
-                cell_options.owner = this.props.board[row][col].owner;
-                cell_options.playable = this.props.board[row][col].playable;
-                cells.push(<Cell {...cell_options} />)
-            }
-            rows.push(<div key={row} className='row'>{cells}</div>);
-        }
-        return <div className='board'>{rows}</div>;
-    }
-
-}
-
-class Cell extends React.Component {
-    /*
-    props
-        owner: int
-        playable: bool
-        partialClick: function(row, col) -> function(e) bound to BoardContainer
-    */
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        var circle_classes = ['circle'];
-        var circle_options = {};
-        
-        if (this.props.playable) {
-            circle_classes.push('playable');
-            circle_options.onClick = this.props.partialClick(this.props.row, this.props.col);
-        } else {
-            circle_classes.push('color' + String(this.props.owner));
-        }
-
-        circle_options.className = utility.join(circle_classes);
-
-        return (
-            <div className='cell'>
-                <div {...circle_options} />
-            </div>
-        );
-    }
-}
-
 
 export default BoardContainer;

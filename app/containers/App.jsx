@@ -4,14 +4,13 @@ import React from 'react';
 import ReactDOM  from 'react-dom';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import auth from './auth'
-
 import ConnectNav from './ConnectNav';
-import Index from './Index';
+import Index from '../components/Index';
 import BoardContainer from './BoardContainer';
 import LoginContainer from './LoginContainer';
 import GamesRouter from './GamesRouter';
 
+import auth from '../api/auth';
 
 class App extends React.Component {
     constructor(props) {

@@ -2,10 +2,10 @@ import '../css/ConnectNav.css';
 
 import React from 'react';
 
-import auth from './auth'
-
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+
+import auth from '../api/auth'
 
 
 class ConnectNav extends React.Component {

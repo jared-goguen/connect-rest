@@ -4,7 +4,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: [
     'babel-polyfill',
-    './js/App.jsx'
+    './containers/App.jsx'
   ],
   output: {
     path: path.resolve(__dirname, 'build'),
