@@ -7,3 +7,11 @@
     height: 16.6667%;
     margin: 0px !important;
 }
+
+button {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 10px;
+    color: #258dda;
+}

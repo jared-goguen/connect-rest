@@ -29183,7 +29183,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 module.exports = {
 	getMove: function getMove(state, callback) {
-		_axiosDefault2.default.post('/api/ai/get_move', this.state).then(callback).catch(callback);
+		_axiosDefault2.default.post('/api/ai/get_move', state).then(callback).catch(callback);
 	}
 };
 
@@ -29223,6 +29223,10 @@ module.exports = {
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -29293,12 +29297,18 @@ var Board = function (_React$Component) {
     return Board;
 }(_react2.default.Component);
 
+exports.default = Board;
+
 /***/ }),
 /* 556 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -29360,6 +29370,8 @@ var Cell = function (_React$Component) {
 
     return Cell;
 }(_react2.default.Component);
+
+exports.default = Cell;
 
 /***/ }),
 /* 557 */
@@ -31343,7 +31355,7 @@ exports = module.exports = __webpack_require__(67)(undefined);
 
 
 // module
-exports.push([module.i, ".Board {\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\n.Row {\r\n    height: 16.6667%;\r\n    margin: 0px !important;\r\n}", ""]);
+exports.push([module.i, ".Board {\r\n    height: 100%;\r\n    width: 100%;\r\n}\r\n\r\n.Row {\r\n    height: 16.6667%;\r\n    margin: 0px !important;\r\n}\r\n\r\nbutton {\r\n    display: block;\r\n    width: 100%;\r\n    max-width: 200px;\r\n    margin: 10px;\r\n    color: #258dda;\r\n}", ""]);
 
 // exports
 
@@ -31357,7 +31369,7 @@ exports = module.exports = __webpack_require__(67)(undefined);
 
 
 // module
-exports.push([module.i, ".BoradContainer {\r\n    width: 630px;\r\n    height: 540px;\r\n    display: block;\r\n    margin-right: auto;\r\n    margin-left: auto;\r\n}", ""]);
+exports.push([module.i, ".BoardContainer {\r\n    width: 630px;\r\n    height: 540px;\r\n    display: block;\r\n    margin-right: auto;\r\n    margin-left: auto;\r\n}", ""]);
 
 // exports
 
