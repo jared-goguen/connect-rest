@@ -28,7 +28,7 @@ class BoardContainer extends React.Component {
     partialClick = (row, col) => {
         return (e) => {
             if (!this.state.done && !this.state.statis) {
-                this.state.statis = true;
+                this.setState({statis: true});
                 this.move(row, col);
                 if (this.state.done) {
                     this.doneTrigger();
@@ -37,26 +37,32 @@ class BoardContainer extends React.Component {
 
                 ai.getMove(this.state, (response) => {
                     var ai_move = response.data;
-                    this.state.statis = false;
                     this.move(ai_move.row, ai_move.col);
                     if (this.state.done) {
                         this.doneTrigger();
                     }
+                    this.setState({statis: false});
                 });
             }
         }
     }
 
     move = (row, col) => {
-        this.state.board[row][col].owner = this.state.turn;
-        this.state.board[row][col].playable = false;
+        var board = JSON.parse(JSON.stringify(this.state.board));
+        board[row][col].owner = this.state.turn;
+        board[row][col].playable = false;
         if (row > 0) {
-            this.state.board[row - 1][col].playable = true;
+            board[row - 1][col].playable = true;
         }
-        this.state.turn = (this.state.turn % 2) + 1;
+        var turn = (this.state.turn % 2) + 1;
 
-        Object.assign(this.state, this.checkDone(row, col));
-        this.setState(this.state);
+        var state = {
+            board: board,
+            turn: turn
+        };
+
+        Object.assign(state, this.checkDone(row, col));
+        this.setState(state);
 
     }
 
@@ -96,26 +102,19 @@ class BoardContainer extends React.Component {
         if (maxStreak >= 4) {
             return {
                 done: true,
-                winner: owner,
-                statis: false
+                winner: owner
             }
         }
 
         for (var row=0; row < this.props.rows; row++) {
             for (var col=0; col < this.props.cols; col++) {
                 if (this.state.board[row][col].playable) {
-                    return {
-                        done: false,
-                        statis: false
-                    }
+                    return {done: false}
                 }
             }
         }
 
-        return {
-            done: true,
-            statis: false
-        }
+        return {done: true}
 
     }
 
@@ -164,7 +163,7 @@ class BoardContainer extends React.Component {
                        cols={this.props.cols} 
                        partialClick={this.partialClick} />
                 <Button onClick={this.reset}>Reset</Button>
-            </div>   
+            </div>
         );
     }
 }
