@@ -29953,7 +29953,7 @@ var BoardContainer = function (_React$Component) {
         _this.partialClick = function (row, col) {
             return function (e) {
                 if (!_this.state.done && !_this.state.statis) {
-                    _this.state.statis = true;
+                    _this.setState({ statis: true });
                     _this.move(row, col);
                     if (_this.state.done) {
                         _this.doneTrigger();
@@ -29962,26 +29962,32 @@ var BoardContainer = function (_React$Component) {
 
                     _ai2.default.getMove(_this.state, function (response) {
                         var ai_move = response.data;
-                        _this.state.statis = false;
                         _this.move(ai_move.row, ai_move.col);
                         if (_this.state.done) {
                             _this.doneTrigger();
                         }
+                        _this.setState({ statis: false });
                     });
                 }
             };
         };
 
         _this.move = function (row, col) {
-            _this.state.board[row][col].owner = _this.state.turn;
-            _this.state.board[row][col].playable = false;
+            var board = JSON.parse(JSON.stringify(_this.state.board));
+            board[row][col].owner = _this.state.turn;
+            board[row][col].playable = false;
             if (row > 0) {
-                _this.state.board[row - 1][col].playable = true;
+                board[row - 1][col].playable = true;
             }
-            _this.state.turn = _this.state.turn % 2 + 1;
+            var turn = _this.state.turn % 2 + 1;
 
-            Object.assign(_this.state, _this.checkDone(row, col));
-            _this.setState(_this.state);
+            var state = {
+                board: board,
+                turn: turn
+            };
+
+            Object.assign(state, _this.checkDone(row, col));
+            _this.setState(state);
         };
 
         _this.checkDone = function (row, col) {
@@ -30019,26 +30025,19 @@ var BoardContainer = function (_React$Component) {
             if (maxStreak >= 4) {
                 return {
                     done: true,
-                    winner: owner,
-                    statis: false
+                    winner: owner
                 };
             }
 
             for (var row = 0; row < _this.props.rows; row++) {
                 for (var col = 0; col < _this.props.cols; col++) {
                     if (_this.state.board[row][col].playable) {
-                        return {
-                            done: false,
-                            statis: false
-                        };
+                        return { done: false };
                     }
                 }
             }
 
-            return {
-                done: true,
-                statis: false
-            };
+            return { done: true };
         };
 
         _this.doneTrigger = function () {
