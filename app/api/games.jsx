@@ -14,5 +14,21 @@ module.exports = {
                 message: 'unable to create game'
             });
         });
+    },
+
+    retrieveList: function(state, callback) {
+        axios.get('/api/games/', state).then(response => {
+            callback(response);
+        }).catch(error => {
+            callback(error);
+        })
+    },
+
+    retrieveGame: function(id, callback) {
+        axios.get('/api/games/' + id + '/').then(response => {
+            callback(response);
+        }).catch(error => {
+            callback(error);
+        })
     }
 }

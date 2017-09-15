@@ -4,6 +4,7 @@ import React from 'react';
 
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
+import GamesContainer from '../containers/GamesContainer';
 
 class GamesIndex extends React.Component {
     constructor(props) {
@@ -18,6 +19,7 @@ class GamesIndex extends React.Component {
                         create game
                     </Button>
                 </Link>
+                <GamesContainer />
             </div>
         );
     }
