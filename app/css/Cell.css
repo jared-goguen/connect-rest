@@ -14,25 +14,25 @@
 }
 
 .Playable {
-    background-color: #c6ffdb;
+    background-color: #f4a1c8;
 }
 
 .Playable:hover, 
 .Playable:focus {
-    background-color: #6af79e;
-    opacity: 0.75;
+    background-color: #f44195;
+    opacity: 0.6;
 }
 
-.color0 {
+.color-1 {
     background-color: #ffffff;
 }
 
-.color1 {
-    background-color: #d83422;
+.color0 {
+    background-color: #f44265;
     opacity: 0.9;
 }
 
-.color2 {
-    background-color: #dbd039;
+.color1 {
+    background-color: #41f4c7;
     opacity: 0.9;
 }

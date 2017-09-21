@@ -18,7 +18,8 @@ body {
 .header-nightsky {
     flex: 1;
     color: white;
-    background: url('../images/nightsky.jpg') no-repeat;
+    /* background: url('../images/nightsky.jpg') no-repeat; */
+    background: #222222;
     background-size: cover;
     background-position: bottom;
     padding-bottom: 100px;

@@ -13,7 +13,7 @@ class GameThumb extends React.Component {
     render() {
         return (
             <div>
-                <LinkContainer to={'/games/' + this.props.id + '/'} api={this.props.url}>
+                <LinkContainer to={'/games/' + this.props.id + '/'}>
                     <a>{this.props.title}</a>
                 </LinkContainer>
             </div>

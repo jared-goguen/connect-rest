@@ -1,6 +1,7 @@
 import '../css/Games.css';
 
 import React from 'react';
+import BoardContainer from './BoardContainer';
 
 import games from '../api/games';
 
@@ -13,15 +14,21 @@ class GameDetail extends React.Component {
         );
     }
 
-
-
     render() {
     	console.log(this.state);
-        return (
-            <div className='GameDetail'>
-                <p>heres a game!</p>
-            </div>
-        );
+        if (this.state === null) {
+            return (
+                <div>
+                    <p>Loading...</p>
+                </div>
+            );
+        } else {
+            return (
+                <div className='GameDetail'>
+                    <BoardContainer board={this.state.board} />
+                </div>
+            );
+        }
     }
 }
 

@@ -6,7 +6,7 @@ import ReactDOM  from 'react-dom';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import ConnectNav from './ConnectNav';
 import Index from '../components/Index';
-import BoardContainer from './BoardContainer';
+import AIBoardContainer from './AIBoardContainer';
 import LoginContainer from './LoginContainer';
 import GamesRouter from './GamesRouter';
 
@@ -26,9 +26,9 @@ class App extends React.Component {
     }
 
     render() {
-        var DefaultBoardContainer = (props) => {
+        var DefaultAIBoardContainer = (props) => {
             return (
-                <BoardContainer rows={6} cols={7} {...props} />
+                <AIBoardContainer rows={6} cols={7} {...props} />
             );
         }
 
@@ -45,7 +45,7 @@ class App extends React.Component {
                     <Switch>
                         <Route exact path='/' component={Index} />
                         <Route path='/games/' component={GamesRouter} />
-                        <Route path='/computer/' component={DefaultBoardContainer} />
+                        <Route path='/computer/' component={DefaultAIBoardContainer} />
                         <Route path='/login/' component={BoundLoginContainer} />
                     </Switch>
                 </div>
