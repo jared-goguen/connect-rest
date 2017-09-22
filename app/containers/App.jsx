@@ -12,6 +12,12 @@ import GamesRouter from './GamesRouter';
 
 import auth from '../api/auth';
 
+import { Provider } from 'react-redux'
+import { createStore } from 'redux'
+import connectApp from '../reducers'
+
+var store = createStore(connectApp);
+
 class App extends React.Component {
     constructor(props) {
         super(props);
@@ -39,17 +45,19 @@ class App extends React.Component {
         }
 
         return (
-            <BrowserRouter>
-                <div className='header-nightsky'>
-                    <ConnectNav loggedIn={this.state.loggedIn} callback={this.updateLogin} />
-                    <Switch>
-                        <Route exact path='/' component={Index} />
-                        <Route path='/games/' component={GamesRouter} />
-                        <Route path='/computer/' component={DefaultAIBoardContainer} />
-                        <Route path='/login/' component={BoundLoginContainer} />
-                    </Switch>
-                </div>
-            </BrowserRouter>
+            <Provider store={store} >
+                <BrowserRouter>
+                    <div className='header-nightsky'>
+                        <ConnectNav loggedIn={this.state.loggedIn} callback={this.updateLogin} />
+                        <Switch>
+                            <Route exact path='/' component={Index} />
+                            <Route path='/games/' component={GamesRouter} />
+                            <Route path='/computer/' component={DefaultAIBoardContainer} />
+                            <Route path='/login/' component={BoundLoginContainer} />
+                        </Switch>
+                    </div>
+                </BrowserRouter>
+            </Provider>
         );
     }
 }

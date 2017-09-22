@@ -1,6 +1,11 @@
-Menu
-	Play Computer
-	Play Humans
-	---
-	Login/Logout
-	Register?
+get redux working for login/navbar
+ - http://redux.js.org/docs/basics/ExampleTodoList.html
+
+add in modal messages
+update api to return consistent modal results
+review containers/components
+figure out how to do a partial query for game list
+add in some decent css for all of the new game stuff
+add in prop types to everything
+review ECMA6 and update var types, etc...
+
