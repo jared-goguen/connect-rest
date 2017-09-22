@@ -8,6 +8,7 @@ from games.views import GameViewSet
 from players.views import PlayerViewSet
 from ai.views import get_move
 from api.views import UserViewSet
+from games.views import join_game
 
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -23,7 +24,8 @@ router.register(r'api/players', PlayerViewSet)
 # Include login URLs for the browsable API.
 urlpatterns = [
     url(r'^', include(router.urls)),
-    url(r'^api/ai/get_move$', get_move),
+    url(r'^api/ai/get_move/$', get_move),
+    url(r'^api/games/join/([0-9]+)/$', join_game),
     url(r'^api-auth/', include('rest_framework.urls')),
     url(r'^api/obtain-auth-token/$', obtain_auth_token),
     url(r'^.*', IndexView.as_view(), name='index')

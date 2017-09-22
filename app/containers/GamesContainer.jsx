@@ -13,7 +13,6 @@ class GamesContainer extends React.Component {
             games: []
         };
         this.getGames();
-        console.log(this.state);
     }
 
     getGames = () => {

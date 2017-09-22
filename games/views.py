@@ -7,7 +7,9 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from players.serializers import PlayerSerializer
+from django.http import JsonResponse
 
+from rest_framework.decorators import api_view
 
 class GameViewSet(viewsets.ModelViewSet):
     queryset = Game.objects.all()
@@ -19,3 +21,11 @@ class GameViewSet(viewsets.ModelViewSet):
         request.data['owner'] = serialized_player.data['url']
         request.data['players'] = [serialized_player.data['url']]
         return super(GameViewSet, self).create(request, *args, **kwargs)
+
+
+@api_view(['POST'])
+def join_game(request, id):
+    player = request.user.player
+    game = Game.objects.get(pk=id)
+    message_type, message = game.add_player(player)
+    return JsonResponse({'success': message_type, 'message': message})

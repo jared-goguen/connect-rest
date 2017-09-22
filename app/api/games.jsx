@@ -30,5 +30,13 @@ module.exports = {
         }).catch(error => {
             callback(error);
         })
+    },
+
+    joinGame: function(id, callback) {
+        axios.post('/api/games/join/' + id + '/').then(response => {
+            callback(response);
+        }).catch(error => {
+            callback(error);
+        })
     }
 }

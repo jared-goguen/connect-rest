@@ -52,8 +52,7 @@ class Game(models.Model):
         return 'Waiting for players'
 
 
-    def add_player(self, user):
-        player = user.player
+    def add_player(self, player):
 
         if player in self.players.all():
             return (messages.ERROR, 'You are already in Game #{}'.format(self.id))
@@ -82,15 +81,6 @@ class Game(models.Model):
         self.turn = (self.turn + 1) % self.max_players
         pk = self.order[self.turn]
         self.next_player = self.players.get(pk=pk)
-
-    def is_turn(self, user):
-        return user.player is self.next_player
-
-    def in_game(self, user):
-        return user.player in self.players
-
-    def can_join(self, user):
-        return user.is_authenticated() and not self.full and not self.in_game(user)
 
     def check_valid_position(self, row, col):
         if row < 0 or row >= self.rows:
