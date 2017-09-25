@@ -30602,9 +30602,9 @@ var _react2 = _interopRequireDefault(_react);
 
 var _reactBootstrap = __webpack_require__(60);
 
-var _actions = __webpack_require__(569);
-
 var _reactRedux = __webpack_require__(349);
+
+var _actions = __webpack_require__(569);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -30634,10 +30634,8 @@ var logout_button = function logout_button(_ref2) {
         'logout'
     );
 };
-login_button = (0, _reactRedux.connect)()(login_button);
-logout_button = (0, _reactRedux.connect)()(logout_button);
-
-console.log(logout_button);
+var LoginButton = (0, _reactRedux.connect)()(login_button);
+var LogoutButton = (0, _reactRedux.connect)()(logout_button);
 
 var Index = function (_React$Component) {
     _inherits(Index, _React$Component);
@@ -30659,8 +30657,8 @@ var Index = function (_React$Component) {
                     null,
                     'A place for humans to play with other humans (or a mediocre AI).'
                 ),
-                _react2.default.createElement('login_button', null),
-                _react2.default.createElement('logout_button', null)
+                _react2.default.createElement(LoginButton, null),
+                _react2.default.createElement(LogoutButton, null)
             );
         }
     }]);
