@@ -5,7 +5,7 @@ import React from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 import auth from '../api/auth'
-
+import { connect } from 'react-redux';
 
 class Register extends React.Component {
     constructor(props) {
@@ -33,12 +33,7 @@ class Register extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        auth.register(this.state.username, this.state.password, this.state.email, (response) => {
-            this.props.callback();
-            if (response.success) {
-                this.props.history.goBack();
-            }
-        });
+        auth.register(this.state, this.props.dispatch);
     }
 
     render() {
@@ -95,4 +90,4 @@ class Register extends React.Component {
     }
 }
 
-export default Register;
+export default connect()(Register);

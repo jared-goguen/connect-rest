@@ -37,4 +37,4 @@ class GameSerializer(serializers.HyperlinkedModelSerializer):
 
     def is_player_turn(self, obj):
         player = self.context['request'].user.player
-        return player.pk == obj.next_player.pk
+        return obj.started and player.pk == obj.next_player.pk

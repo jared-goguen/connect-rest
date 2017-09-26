@@ -27,9 +27,9 @@ class LoginContainer extends React.Component {
     render() {
         var alt = (this.state.isLogin ? 'register' : 'login') + ' instead';
         var component = this.state.isLogin ? (
-            <Login altCallback={this.handleClick} altText={alt} {...this.props} /> 
+            <Login altCallback={this.handleClick} altText={alt} /> 
         ) : (
-            <Register altCallback={this.handleClick} altText={alt} {...this.props} /> 
+            <Register altCallback={this.handleClick} altText={alt} /> 
         );
         return component
     }

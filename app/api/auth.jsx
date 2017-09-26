@@ -1,61 +1,45 @@
 import axios from './axios-default';
 
+import * as actions from '../actions';
+
 module.exports = {
-    login: function(username, password, callback) {
+    login: function(data, dispatch) {
         if (this.loggedIn()) {
-            callback({
-                success: true,
-                message: 'already logged in'
-            });
+            dispatch(actions.ADD_MODAL(true, 'already logged in'));
         }
-        this.getToken(username, password, callback);
+        this.getToken(data, dispatch);
     },        
     
-    logout: function(callback) {
+    logout: function(dispatch) {
         delete localStorage.token
         delete axios.defaults.headers.common['Authorization'];
-        callback();
+        dispatch(actions.LOGOUT());
+        dispatch(actions.ADD_MODAL(true, 'successfully logged out'));
     },
 
     loggedIn: function() {
         return !!localStorage.token
     },
 
-    getToken: function(username, password, callback) {
+    getToken: function(data, dispatch) {
         // https://github.com/mzabriskie/axios/issues/382
         delete axios.defaults.headers.common['Authorization'];
 
-        axios.post('/api/obtain-auth-token/', {
-            username: username,
-            password: password
-        }).then(result => {
-            localStorage.token = result.data.token;
-            axios.defaults.headers.common['Authorization'] = 'Token ' + localStorage.token; 
-            callback({
-                success: true,
-                message: 'login successful'
-            });
+        axios.post('/api/obtain-auth-token/', data).then(response => {
+            localStorage.token = response.data.token;
+            axios.defaults.headers.common['Authorization'] = 'Token ' + localStorage.token;
+            dispatch(actions.LOGIN());
+            dispatch(actions.ADD_MODAL(true, 'successfully logged in'));
         }).catch(error => {
-            callback({
-                success: false,
-                message: 'invalid credentials'
-            });
-        });   
+            dispatch(actions.ADD_MODAL(false, 'invalid credentials'));
+        });
     }, 
 
-    register: function(username, password, email, callback) {
-        axios.post('/api/users/', {
-            username: username,
-            password: password,
-            email: email
-        }).then(response => {
-            console.log(response);
-            this.login(username, password, callback);
+    register: function(data, dispatch) {
+        axios.post('/api/users/', data).then(response => {
+            this.login(data, dispatch);
         }).catch(error => {
-            callback({
-                success: false,
-                message: 'unable to register'
-            });
+            dispatch(actions.ADD_MODAL(false, 'unable to register'));
         });
     }
 };

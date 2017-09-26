@@ -8,6 +8,7 @@ import ConnectNav from './ConnectNav';
 import Index from '../components/Index';
 import AIBoardContainer from './AIBoardContainer';
 import LoginContainer from './LoginContainer';
+import ModalContainer from './ModalContainer';
 import GamesRouter from './GamesRouter';
 
 import auth from '../api/auth';
@@ -21,26 +22,12 @@ var store = createStore(connectApp);
 class App extends React.Component {
     constructor(props) {
         super(props);
-        
-        this.state = {
-            loggedIn: auth.loggedIn()
-        }
-    }
-
-    updateLogin = () => {
-        this.setState({loggedIn: auth.loggedIn()});
     }
 
     render() {
         var DefaultAIBoardContainer = (props) => {
             return (
-                <AIBoardContainer rows={6} cols={7} {...props} />
-            );
-        }
-
-        var BoundLoginContainer = (props) => {
-            return (
-                <LoginContainer callback={this.updateLogin} {...props} />
+                <AIBoardContainer rows={6} cols={7} />
             );
         }
 
@@ -48,12 +35,13 @@ class App extends React.Component {
             <Provider store={store} >
                 <BrowserRouter>
                     <div className='header-nightsky'>
-                        <ConnectNav loggedIn={this.state.loggedIn} callback={this.updateLogin} />
+                        <ConnectNav />
+                        <ModalContainer />
                         <Switch>
                             <Route exact path='/' component={Index} />
                             <Route path='/games/' component={GamesRouter} />
                             <Route path='/computer/' component={DefaultAIBoardContainer} />
-                            <Route path='/login/' component={BoundLoginContainer} />
+                            <Route path='/login/' component={LoginContainer} />
                         </Switch>
                     </div>
                 </BrowserRouter>

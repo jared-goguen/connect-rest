@@ -5,6 +5,7 @@ import React from 'react';
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
 import auth from '../api/auth'
+import { connect } from 'react-redux';
 
 class Login extends React.Component {
     constructor(props) {
@@ -29,12 +30,7 @@ class Login extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        auth.login(this.state.username, this.state.password, (response) => {
-            this.props.callback();
-            if (response.success) {
-                this.props.history.goBack();
-            }
-        });
+        auth.login(this.state, this.props.dispatch);
     }
 
     render() {
@@ -76,4 +72,4 @@ class Login extends React.Component {
     }
 }
 
-export default Login;
+export default connect()(Login);

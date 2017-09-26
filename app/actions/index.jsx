@@ -1,11 +1,19 @@
-export const login = () => {
-  return {
-    type: 'LOGIN',
-  }
+export const LOGIN = () => {
+    return {
+        type: 'LOGIN'
+    }
 }
 
-export const logout = () => {
-  return {
-    type: 'LOGOUT',
-  }
+export const LOGOUT = () => {
+    return {
+        type: 'LOGOUT'
+    }
+}
+
+export const ADD_MODAL = (success, text) => {
+    return {
+        type: 'ADD_MODAL',
+        success,
+        text
+    }
 }
