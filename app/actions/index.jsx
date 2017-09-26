@@ -17,3 +17,9 @@ export const ADD_MODAL = (success, text) => {
         text
     }
 }
+
+export const CLEAR_MODALS = () => {
+    return {
+        type: 'CLEAR_MODALS',
+    }
+}

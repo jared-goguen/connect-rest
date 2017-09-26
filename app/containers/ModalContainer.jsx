@@ -2,6 +2,8 @@ import '../css/Modal.css';
 
 import React from 'react';
 
+import ModalSpan from '../components/ModalSpan';
+
 import { connect } from 'react-redux';
 
 var mapStateToProps = (state) => {
@@ -20,7 +22,7 @@ class ModalContainer extends React.Component {
         return (
             <ul>
                 {this.props.messages.map((message, index) => 
-                    <li key={index}>{message.text}</li>
+                    <li key={index}><ModalSpan {...message} /></li>
                 )}
             </ul>
         );

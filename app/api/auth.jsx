@@ -4,6 +4,7 @@ import * as actions from '../actions';
 
 module.exports = {
     login: function(data, dispatch) {
+        dispatch(actions.CLEAR_MODALS())
         if (this.loggedIn()) {
             dispatch(actions.ADD_MODAL(true, 'already logged in'));
         }
@@ -11,6 +12,7 @@ module.exports = {
     },        
     
     logout: function(dispatch) {
+        dispatch(actions.CLEAR_MODALS())
         delete localStorage.token
         delete axios.defaults.headers.common['Authorization'];
         dispatch(actions.LOGOUT());
@@ -36,6 +38,7 @@ module.exports = {
     }, 
 
     register: function(data, dispatch) {
+        dispatch(actions.CLEAR_MODALS())
         axios.post('/api/users/', data).then(response => {
             this.login(data, dispatch);
         }).catch(error => {

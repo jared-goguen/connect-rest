@@ -10,14 +10,33 @@ import AIBoardContainer from './AIBoardContainer';
 import LoginContainer from './LoginContainer';
 import ModalContainer from './ModalContainer';
 import GamesRouter from './GamesRouter';
+import RouteChange from './RouteChange';
 
-import auth from '../api/auth';
-
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
-import connectApp from '../reducers'
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import connectApp from '../reducers';
+import * as actions from '../actions';
 
 var store = createStore(connectApp);
+
+var DefaultAIBoardContainer = (props) => {
+    return (
+        <AIBoardContainer rows={6} cols={7} />
+    );
+}
+
+var routeActions = [
+    (location, history) => {store.dispatch(actions.CLEAR_MODALS())}
+];
+
+var routes = (
+    <Switch>
+        <Route exact path='/' component={Index} />
+        <Route path='/games/' component={GamesRouter} />
+        <Route path='/computer/' component={DefaultAIBoardContainer} />
+        <Route path='/login/' component={LoginContainer} />
+    </Switch>
+);
 
 class App extends React.Component {
     constructor(props) {
@@ -25,24 +44,14 @@ class App extends React.Component {
     }
 
     render() {
-        var DefaultAIBoardContainer = (props) => {
-            return (
-                <AIBoardContainer rows={6} cols={7} />
-            );
-        }
-
         return (
             <Provider store={store} >
                 <BrowserRouter>
                     <div className='header-nightsky'>
                         <ConnectNav />
                         <ModalContainer />
-                        <Switch>
-                            <Route exact path='/' component={Index} />
-                            <Route path='/games/' component={GamesRouter} />
-                            <Route path='/computer/' component={DefaultAIBoardContainer} />
-                            <Route path='/login/' component={LoginContainer} />
-                        </Switch>
+                        <RouteChange actions={routeActions} />
+                        {routes}
                     </div>
                 </BrowserRouter>
             </Provider>
