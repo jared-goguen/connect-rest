@@ -21,23 +21,26 @@ class ConnectNav extends React.Component {
     }
 
     render() {
-        console.log(this.props)
-        var Link = (i, link) => (
-            <LinkContainer key={i} to={'/' + link + '/'}>
-                <NavItem eventKey={i}>{link}</NavItem>
+        var Link = (i, link, text) => (
+            <LinkContainer exact to={link}>
+                <NavItem>{text}</NavItem>
             </LinkContainer>
         );
 
-        var links = [Link(0, 'games'), Link(1, 'computer')];
+        var links = [
+            Link(0, '/', 'home'),
+            Link(1, '/games/', 'games'), 
+            Link(2, '/computer/', 'computer')
+        ];
         if (this.props.login) {
-            links.push(Link(2, 'profile'));
+            links.push(Link(3, '/profile/', 'profile'));
             links.push(
-                <NavItem key={3} eventKey={3} onClick={(event) => {
+                <NavItem key={4} onClick={(event) => {
                     auth.logout(this.props.dispatch);
                 }}>logout</NavItem>
             );
         } else {
-            links.push(Link(2, 'login'));
+            links.push(Link(3, '/login/', 'login'));
         }
 
         return (
@@ -45,9 +48,7 @@ class ConnectNav extends React.Component {
                 <Navbar>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <LinkContainer to='/'>
-                                <a>connect</a>
-                            </LinkContainer>
+                            connect
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav>

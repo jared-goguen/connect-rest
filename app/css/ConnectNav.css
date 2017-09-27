@@ -2,8 +2,23 @@
     float: right;
 }
 
-@media screen and (max-width: 767px) {
-    .navbar-nav {
-        float: left;
-    }
+.navbar-nav > li > a {
+    color: #ffffff !important;
+}
+
+.navbar {
+    border-radius: 0px;
+    background-color: inherit;
+    border: 0px;
+    font-size: 18px;
+}
+
+.navbar-brand {
+    font-size: 26px;
+    color: #ffffff !important;
+}
+
+.navbar-nav > .active > a {
+    background-color: #222222 !important;
+    color: #ff00ce !important;
 }

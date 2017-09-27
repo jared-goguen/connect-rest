@@ -2,7 +2,7 @@ import '../css/Cell.css';
 
 import React from 'react';
 
-import utility from '../js/utility'
+import utility from '../js/utility';
 
 
 class Cell extends React.Component {

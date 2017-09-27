@@ -23,3 +23,17 @@ export const CLEAR_MODALS = () => {
         type: 'CLEAR_MODALS',
     }
 }
+
+export const REMOVE_MODAL = (message) => {
+    return {
+        type: 'REMOVE_MODAL',
+        ...message
+    }
+}
+
+export const SET_ACTIVE = (active) => {
+    return {
+        type: 'SET_ACTIVE',
+        active
+    }
+}

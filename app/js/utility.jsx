@@ -35,5 +35,10 @@ module.exports = {
 
     toTitleCase: function(string) {
         return string.replace(/\b\w+/g, s => s.charAt(0).toUpperCase() + s.substr(1).toLowerCase());
+    },
+
+    basePath: function(string) {
+        var m = string.match('/?([^/]*)/?.*');
+        return m.length > 1 ? m[1] : ''
     }
 };

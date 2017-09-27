@@ -1,0 +1,11 @@
+.close {
+	top: -10px !important;
+	width: 50px;
+}
+
+.alert {
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+}

@@ -6,6 +6,8 @@ import ModalSpan from '../components/ModalSpan';
 
 import { connect } from 'react-redux';
 
+import * as actions from '../actions';
+
 var mapStateToProps = (state) => {
     return {
         messages: state.modal
@@ -17,14 +19,17 @@ class ModalContainer extends React.Component {
         super(props);
     }
 
+    partialCallback = (message) => {
+        return () => this.props.dispatch(actions.REMOVE_MODAL(message));
+    }
+
     render() {
-        console.log(this.props);
         return (
-            <ul>
+            <div>
                 {this.props.messages.map((message, index) => 
-                    <li key={index}><ModalSpan {...message} /></li>
+                    <ModalSpan key={index} callback={this.partialCallback(message)}  {...message}/>
                 )}
-            </ul>
+            </div>
         );
     }
 }
