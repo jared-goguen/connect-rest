@@ -39,6 +39,7 @@ module.exports = {
 
     basePath: function(string) {
         var m = string.match('/?([^/]*)/?.*');
-        return m.length > 1 ? m[1] : ''
+        var base = m.length > 1 ? m[1] : '';
+        return base ? base : 'home'
     }
 };

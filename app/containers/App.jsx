@@ -28,8 +28,8 @@ var DefaultAIBoardContainer = (props) => {
 }
 
 var routeActions = [
-    (location, history) => {store.dispatch(actions.SET_ACTIVE(utility.basePath(location.pathname)))},
     (location, history) => {store.dispatch(actions.CLEAR_MODALS())},
+    (location, history) => {store.dispatch(actions.SET_ACTIVE(utility.basePath(location.pathname)))},
 ];
 
 var routes = (

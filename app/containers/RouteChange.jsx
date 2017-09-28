@@ -11,6 +11,8 @@ class RouteChange extends React.Component {
     componentDidUpdate (prevProps) {
         let { location: { pathname } } = this.props
 
+        console.log('routing to:', location)
+
         if (prevProps.location.pathname === pathname) return
         this.routeChanged()
     }

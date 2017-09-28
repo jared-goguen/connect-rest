@@ -3,7 +3,7 @@ const navbar = (state={}, action) => {
         case 'SET_ACTIVE':
             return {...state, active: action.active}
         default:
-            return {...state, active: ''}
+            return state
     }
 }
 
