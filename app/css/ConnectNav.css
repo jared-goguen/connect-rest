@@ -6,6 +6,10 @@
     color: #ffffff !important;
 }
 
+.navInactive > a:hover {
+    color: #ffaae2 !important;
+}
+
 .navbar-nav {
     float: right;
 }

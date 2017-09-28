@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM  from 'react-dom';
 
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-import ConnectNav from './ConnectNav';
+
 import Index from '../components/Index';
 import AIBoardContainer from './AIBoardContainer';
 import LoginContainer from './LoginContainer';
@@ -19,48 +19,43 @@ import * as actions from '../actions';
 
 import utility from '../js/utility';
 
-var store = createStore(connectApp);
 
-var DefaultAIBoardContainer = (props) => {
-    return (
-        <AIBoardContainer rows={6} cols={7} />
-    );
-}
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import NavDrawerContainer from './NavDrawerContainer';
 
-var routeActions = [
+
+
+
+
+const store = createStore(connectApp);
+
+const routeActions = [
     (location, history) => {store.dispatch(actions.CLEAR_MODALS())},
     (location, history) => {store.dispatch(actions.SET_ACTIVE(utility.basePath(location.pathname)))},
 ];
 
-var routes = (
+const routes = (
     <Switch>
         <Route exact path='/' component={Index} />
         <Route path='/games/' component={GamesRouter} />
-        <Route path='/computer/' component={DefaultAIBoardContainer} />
+        <Route path='/computer/' component={AIBoardContainer} />
         <Route path='/login/' component={LoginContainer} />
     </Switch>
 );
 
-
-class App extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <Provider store={store} >
-                <BrowserRouter>
-                    <div className='App'>
-                        <ConnectNav />
-                        <ModalContainer />
-                        <RouteChange actions={routeActions} />
-                        {routes}
-                    </div>
-                </BrowserRouter>
-            </Provider>
-        );
-    }
-}
+const App = () => (
+    <MuiThemeProvider>
+        <Provider store={store} >
+            <BrowserRouter>
+                <div className='App'>
+                    <NavDrawerContainer />
+                    <ModalContainer />
+                    <RouteChange actions={routeActions} />
+                    {routes}
+                </div>
+            </BrowserRouter>
+        </Provider>
+    </MuiThemeProvider>
+);
 
 ReactDOM.render(<App />, document.getElementById('app'));

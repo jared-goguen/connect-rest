@@ -171,4 +171,9 @@ class AIBoardContainer extends React.Component {
     }
 }
 
+AIBoardContainer.defaultProps = {
+    rows: 6,
+    cols: 7
+};
+
 export default AIBoardContainer;

@@ -32,9 +32,9 @@ class GameSerializer(serializers.HyperlinkedModelSerializer):
         )
 
     def is_in_game(self, obj):
-        player = self.context['request'].user.player
-        return player in obj.players.get_queryset()
+        user = self.context['request'].user
+        return not user.is_anonymous() and user.player in obj.players.get_queryset()
 
     def is_player_turn(self, obj):
-        player = self.context['request'].user.player
-        return obj.started and player.pk == obj.next_player.pk
+        user = self.context['request'].user
+        return not user.is_anonymous() and obj.started and user.player.pk == obj.next_player.pk

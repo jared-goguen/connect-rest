@@ -1,7 +1,21 @@
-.Games button {
-    display: block;
-    width: 100%;
-    max-width: 200px;
-    margin: 10px;
+.GameThumb > button {
+    display: inline;
+    width: 100px;
+    margin: 5px;
     color: #258dda;
+    float: right;
+}
+
+.GameThumb > p {
+	display: inline;
+	color: #000000;
+}
+
+.GameThumb {
+	position: relative;
+	padding: 10px;
+	left: 10px;
+	right: 10px;
+	border-radius: 5px;
+	background: #ffffff;
 }

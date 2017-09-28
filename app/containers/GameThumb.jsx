@@ -2,8 +2,8 @@ import '../css/Games.css';
 
 import React from 'react';
 
-import { LinkContainer } from 'react-router-bootstrap';
 import { Button } from 'react-bootstrap';
+import { withRouter } from 'react-router';
 
 import games from '../api/games';
 
@@ -21,10 +21,9 @@ class GameThumb extends React.Component {
 
     render() {
         return (
-            <div>
-                <LinkContainer to={'/games/' + this.props.id + '/'}>
-                    <a>{this.props.title}</a>
-                </LinkContainer>
+            <div className='GameThumb'>
+                <p>{this.props.title}</p>
+                <Button onClick={() => this.props.history.push('/games/' + this.props.id + '/')}>view game</Button>
                 <Button onClick={this.joinGame}>join game</Button>
             </div>
         );

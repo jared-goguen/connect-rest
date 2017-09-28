@@ -22,12 +22,9 @@ class GamesContainer extends React.Component {
     render() {
         return (
             <div className='GamesContainer'>
-                <p>Games:</p>
-                <ul>
-                    {this.state.games.map((game, index) => 
-                        <li key={index}><GameThumb {...game} /></li>
-                    )}
-                </ul>
+                {this.state.games.map((game, index) => 
+                    <GameThumb key={index} {...game} />
+                )}
             </div>
         );
     }
