@@ -37,3 +37,9 @@ export const SET_ACTIVE = (active) => {
         active
     }
 }
+
+export const TOGGLE_OPEN = () => {
+    return {
+        type: 'TOGGLE_OPEN'
+    }
+}

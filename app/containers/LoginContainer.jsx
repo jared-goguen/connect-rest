@@ -1,38 +1,76 @@
+import '../css/Forms.css';
+
 import React from 'react';
 
-import { Button } from 'react-bootstrap';
-import Login from '../components/Login';
-import Register from '../components/Register';
+import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 
+import auth from '../api/auth'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
-class LoginContainer extends React.Component {
-    /*
-    props
-        initialLoginState: string{'login', 'register'}
-    state
-        isLogin: bool
-    */
+class Login extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            isLogin: !(this.props.initialState === 'register')
-        }
+            username: '',
+            password: '',
+        };
     }
 
-    handleClick = (event) => {
-        this.setState({isLogin: !this.state.isLogin});
+    validateForm = () => {
+        return this.state.username.length > 0
+            && this.state.password.length > 0;
+    }
+
+    handleChange = (event) => {
+        this.setState({
+            [event.target.id]: event.target.value
+        });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        auth.login(this.state, this.props.dispatch, this,props.history);
     }
 
     render() {
-        var alt = (this.state.isLogin ? 'register' : 'login') + ' instead';
-        var component = this.state.isLogin ? (
-            <Login altCallback={this.handleClick} altText={alt} /> 
-        ) : (
-            <Register altCallback={this.handleClick} altText={alt} /> 
+        return (
+            <div className='Basic'>
+                <form onSubmit={this.handleSubmit}>
+                    <FormGroup controlId='username' bsSize='large'>
+                        <ControlLabel>username</ControlLabel>
+                        <FormControl
+                            autoFocus
+                            type='username'
+                            value={this.state.username}
+                            onChange={this.handleChange} />
+                    </FormGroup>
+                    <FormGroup controlId='password' bsSize='large'>
+                        <ControlLabel>password</ControlLabel>
+                        <FormControl
+                            value={this.state.password}
+                            onChange={this.handleChange}
+                            type='password' />
+                    </FormGroup>
+                    <Button
+                        bsSize='large'
+                        className='mainButton'
+                        disabled={ !this.validateForm() }
+                        type='submit'>
+                        login
+                    </Button>
+                    <br/>
+                    <Button 
+                        bsSize='large' 
+                        className='altButton'
+                        onClick={this.props.altCallback}>
+                        {this.props.altText}
+                    </Button>
+                </form>
+            </div>
         );
-        return component
     }
 }
 
-export default LoginContainer;
+export default connect()(withRouter(Login));
