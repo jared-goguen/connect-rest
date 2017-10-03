@@ -1,12 +1,10 @@
 import React from 'react';
-
-import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
-
 import auth from '../api/auth'
+import Login from '../components/Login'
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-class Login extends React.Component {
+class LoginContainer extends React.Component {
     constructor(props) {
         super(props);
 
@@ -33,42 +31,8 @@ class Login extends React.Component {
     }
 
     render() {
-        return (
-            <div className='Basic'>
-                <form onSubmit={this.handleSubmit}>
-                    <FormGroup controlId='username' bsSize='large'>
-                        <ControlLabel>username</ControlLabel>
-                        <FormControl
-                            autoFocus
-                            type='username'
-                            value={this.state.username}
-                            onChange={this.handleChange} />
-                    </FormGroup>
-                    <FormGroup controlId='password' bsSize='large'>
-                        <ControlLabel>password</ControlLabel>
-                        <FormControl
-                            value={this.state.password}
-                            onChange={this.handleChange}
-                            type='password' />
-                    </FormGroup>
-                    <Button
-                        bsSize='large'
-                        className='mainButton'
-                        disabled={ !this.validateForm() }
-                        type='submit'>
-                        login
-                    </Button>
-                    <br/>
-                    <Button 
-                        bsSize='large' 
-                        className='altButton'
-                        onClick={this.props.altCallback}>
-                        {this.props.altText}
-                    </Button>
-                </form>
-            </div>
-        );
+        return <Login submit={this.handleSubmit} change={this.handleChange} />;
     }
 }
 
-export default connect()(withRouter(Login));
+export default connect()(withRouter(LoginContainer));

@@ -1,34 +1,31 @@
 import React from 'react';
-import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
-import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
-
-
-const titleStyle = {
-    paddingLeft: '10px'
-};
+import { Menu } from 'semantic-ui-react'
 
 export default class NavBar extends React.Component {
     constructor(props) {
         super(props);
     }
 
-    mapItem = (partial) => (item, index) => (
-        <FlatButton key={index} onClick={item.click} label={item.name} {...partial} />
+    mapItem = (item, index) => (
+        <Menu.Item 
+            key={index} 
+            name={item.name} 
+            onClick={item.click} 
+            active={item.active}
+        >
+            {item.name}
+        </Menu.Item>
     );
 
     render() {
 
         return (
-            <Toolbar>
-                <ToolbarGroup firstChild={true}>
-                    <ToolbarTitle text="connect" style={titleStyle} />
-                    {this.props.navItems.map(this.mapItem({primary: true}))}
-                </ToolbarGroup>
-                <ToolbarGroup>
-                    {this.props.loginItems.map(this.mapItem({secondary: true}))}
-                </ToolbarGroup>
-            </Toolbar>
+            <Menu pointing secondary size='large'>
+                {this.props.navItems.map(this.mapItem)}
+                <Menu.Menu position='right'>
+                    {this.props.loginItems.map(this.mapItem)}
+                </Menu.Menu>
+            </Menu>
         );
     }
 }
