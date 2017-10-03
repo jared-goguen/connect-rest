@@ -1,9 +1,7 @@
-import '../css/App.css';
-
 import React from 'react';
 
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import NavDrawerContainer from './NavDrawerContainer';
+import NavBarContainer from './NavBarContainer';
 import Index from '../components/Index';
 import AIBoardContainer from './AIBoardContainer';
 import RegisterContainer from './RegisterContainer';
@@ -15,21 +13,12 @@ import RouteChange from './RouteChange';
 
 import { connect } from 'react-redux';
 
-import constants from '../js/constants';
-
 const appStyle = {
-    position: 'absolute',
+    width: '100vw',
     height: '100vh',
-    left: 0,
-    right: 0,
-    transition: 'left 0.75s'
 };
 
-const mapStateToProps = (state) => {
-    return {
-        open: state.navbar.open
-    };
-};
+const mapStateToProps = (state) => Object();
 
 class AppContainer extends React.Component {
     constructor(props) {
@@ -37,12 +26,10 @@ class AppContainer extends React.Component {
     }
 
     render() {
-        let style = {...appStyle, left: this.props.open ? constants.navWidth : 0};
-
         return (
             <BrowserRouter>              
-                <div style={style}>
-                    <NavDrawerContainer />
+                <div style={appStyle}>
+                    <NavBarContainer />
                     <ModalContainer />
                     <RouteChange actions={this.props.routeActions} />
                     <Switch>

@@ -1,8 +1,6 @@
-import '../css/Modal.css';
-
 import React from 'react';
 
-import ModalSpan from '../components/ModalSpan';
+import Modal from '../components/Modal';
 
 import { connect } from 'react-redux';
 
@@ -27,7 +25,7 @@ class ModalContainer extends React.Component {
         return (
             <div>
                 {this.props.messages.map((message, index) => 
-                    <ModalSpan key={index} callback={this.partialCallback(message)}  {...message}/>
+                    <Modal key={index} callback={this.partialCallback(message)}  {...message}/>
                 )}
             </div>
         );

@@ -1,5 +1,3 @@
-import '../css/Forms.css';
-
 import React from 'react';
 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';

@@ -1,5 +1,3 @@
-import '../css/Forms.css';
-
 import React from 'react';
 
 import { Button, FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
@@ -31,7 +29,7 @@ class Login extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        auth.login(this.state, this.props.dispatch, this,props.history);
+        auth.login(this.state, this.props.dispatch, this.props.history);
     }
 
     render() {

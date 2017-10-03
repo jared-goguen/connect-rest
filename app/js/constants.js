@@ -1,3 +1,1 @@
-export default {
-	navWidth: 150,
-};
+export default {};

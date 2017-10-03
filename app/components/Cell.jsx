@@ -1,5 +1,3 @@
-import '../css/Cell.css';
-
 import React from 'react';
 
 import utility from '../js/utility';

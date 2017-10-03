@@ -1,11 +1,9 @@
-import '../css/Modal.css';
-
 import React from 'react';
 
 import { Alert } from 'react-bootstrap';
 
 
-class ModalSpan extends React.Component {
+class Modal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -34,4 +32,4 @@ class ModalSpan extends React.Component {
 
 }
 
-export default ModalSpan;
+export default Modal;

@@ -1,7 +1,3 @@
-get redux working for login/navbar
- - http://redux.js.org/docs/basics/ExampleTodoList.html
-
-add in modal messages
 update api to return consistent modal results
 review containers/components
 figure out how to do a partial query for game list

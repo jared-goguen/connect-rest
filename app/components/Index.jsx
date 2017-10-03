@@ -1,5 +1,3 @@
-import '../css/Index.css';
-
 import React from 'react';
 
 class Index extends React.Component {

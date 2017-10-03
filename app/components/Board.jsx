@@ -1,5 +1,3 @@
-import '../css/Board.css';
-
 import React from 'react';
 
 import Cell from './Cell';

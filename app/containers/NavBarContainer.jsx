@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import NavDrawer from '../components/NavDrawer';
+import NavBar from '../components/NavBar';
 import * as actions from '../actions';
 
 const mapStateToProps = (state) => {
@@ -12,7 +12,7 @@ const mapStateToProps = (state) => {
     };
 }
 
-class NavDrawerContainer extends React.Component {
+class NavBarContainer extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -57,7 +57,7 @@ class NavDrawerContainer extends React.Component {
         loginItems = this.addActive(loginItems);
         loginItems = this.addClick(loginItems);
 
-        return <NavDrawer 
+        return <NavBar 
             open={this.props.open} 
             handleToggle={this.handleToggle}
             navItems={navItems} 
@@ -66,4 +66,4 @@ class NavDrawerContainer extends React.Component {
     }
 }
 
-export default connect(mapStateToProps)(withRouter(NavDrawerContainer));
+export default connect(mapStateToProps)(withRouter(NavBarContainer));

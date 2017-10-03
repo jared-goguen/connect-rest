@@ -1,5 +1,3 @@
-import '../css/Games.css';
-
 import React from 'react';
 import BoardContainer from './BoardContainer';
 
