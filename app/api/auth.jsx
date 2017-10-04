@@ -10,7 +10,7 @@ module.exports = {
     login: function(data, dispatch, history) {
         dispatch(actions.CLEAR_MODALS())
         if (this.loggedIn()) {
-            dispatch(actions.ADD_MODAL(true, 'already logged in'));
+            dispatch(actions.ADD_MODAL('warning', 'already logged in'));
         }
         
         // https://github.com/mzabriskie/axios/issues/382
@@ -22,7 +22,7 @@ module.exports = {
             dispatch(actions.LOGIN());
             history.goBack();
         }).catch(error => {
-            dispatch(actions.ADD_MODAL(false, 'invalid credentials'));
+            dispatch(actions.ADD_MODAL('negative', 'invalid credentials'));
         });
     },        
     
@@ -31,7 +31,7 @@ module.exports = {
         delete localStorage.token
         delete axios.defaults.headers.common['Authorization'];
         dispatch(actions.LOGOUT());
-        dispatch(actions.ADD_MODAL(true, 'successfully logged out'));
+        dispatch(actions.ADD_MODAL('positive', 'successfully logged out'));
     },
 
     register: function(data, dispatch) {
@@ -39,7 +39,7 @@ module.exports = {
         axios.post('/api/users/', data).then(response => {
             this.login(data, dispatch);
         }).catch(error => {
-            dispatch(actions.ADD_MODAL(false, 'unable to register'));
+            dispatch(actions.ADD_MODAL('negative', 'unable to register'));
         });
     }
 };

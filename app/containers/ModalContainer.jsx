@@ -1,9 +1,6 @@
 import React from 'react';
-
 import Modal from '../components/Modal';
-
 import { connect } from 'react-redux';
-
 import * as actions from '../actions';
 
 var mapStateToProps = (state) => {

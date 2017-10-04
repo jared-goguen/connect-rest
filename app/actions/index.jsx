@@ -10,10 +10,10 @@ export const LOGOUT = () => {
     }
 }
 
-export const ADD_MODAL = (success, text) => {
+export const ADD_MODAL = (status, text) => {
     return {
         type: 'ADD_MODAL',
-        success,
+        status,
         text
     }
 }

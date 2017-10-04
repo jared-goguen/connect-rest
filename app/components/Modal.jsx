@@ -1,35 +1,21 @@
 import React from 'react';
+import { Message } from 'semantic-ui-react'
 
-import { Alert } from 'react-bootstrap';
-
-
-class Modal extends React.Component {
+export default class Modal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            alertVisible: true
-        }
-        this.alert_style = this.props.success ? 'success' : 'danger'
-    }
-
-    handleAlertDismiss = () => {
-        this.setState({alertVisible: false});
-        this.props.callback();
+        this.status = {
+            [this.props.status]: true
+        };
     }
 
     render() {
-        if (this.state.alertVisible) {
-            return (
-                <Alert bsStyle={this.alert_style} onDismiss={this.handleAlertDismiss}>
-                    <p>{this.props.text}</p>
-                </Alert>
-            );
-        } else {
-            return null;
-        }
+        return (
+            <Message
+                {...this.status}
+                onDismiss={this.props.callback}
+                content={this.props.text}
+            />
+        )
     }
-
-
 }
-
-export default Modal;

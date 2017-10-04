@@ -10,12 +10,14 @@ import LogoutContainer from './LogoutContainer';
 import ModalContainer from './ModalContainer';
 import GamesRouter from './GamesRouter';
 import RouteChange from './RouteChange';
+import { Container } from 'semantic-ui-react';
 
 import { connect } from 'react-redux';
 
 const appStyle = {
     width: '100vw',
     height: '100vh',
+    padding: 10
 };
 
 const mapStateToProps = (state) => Object();
@@ -28,7 +30,7 @@ class AppContainer extends React.Component {
     render() {
         return (
             <BrowserRouter>              
-                <div style={appStyle}>
+                <Container style={appStyle}>
                     <NavBarContainer />
                     <ModalContainer />
                     <RouteChange actions={this.props.routeActions} />
@@ -40,7 +42,7 @@ class AppContainer extends React.Component {
                         <Route path='/login/' component={LoginContainer} />
                         <Route path='/logout/' component={LogoutContainer} />
                     </Switch>
-                </div>
+                </Container>
             </BrowserRouter>
         );
     }

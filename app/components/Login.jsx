@@ -1,5 +1,7 @@
 import React from 'react'
-import { Form } from 'semantic-ui-react'
+import { Form, Container } from 'semantic-ui-react'
+import { LabeledInput } from './Generics'
+
 
 export default class Login extends React.Component {
     constructor(props) {
@@ -8,11 +10,25 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <Form onSubmit={this.props.submit}>
-                <Form.Input inline required placeholder='username' onChange={this.props.change} />
-                <Form.Input inline required placeholder='username' type='password' onChange={this.props.change} />
-                <Form.Button>Login</Form.Button>
-            </Form>
+            <Container>
+                <h3>enter your credentials</h3>
+                <Form onSubmit={this.props.submit}>
+                    <LabeledInput 
+                        label='username'
+                        name='username'
+                        placeholder='username'
+                        change={this.props.change}
+                    />
+                    <LabeledInput 
+                        label='password'
+                        name='password'
+                        placeholder='password'
+                        type='password'
+                        change={this.props.change}
+                    />
+                    <Form.Button>login</Form.Button>
+                </Form>
+            </Container>
         )
     }
 }
