@@ -1,3 +1,5 @@
+import '../css/Board.css';
+
 import React from 'react';
 
 import Board from '../components/Board';
@@ -30,10 +32,7 @@ class BoardContainer extends React.Component {
 
     render() {
         return (
-            <div className='BoardContainer'>
-                <Board board={this.getBoard(true)}
-                       partialClick={() => {}} />
-            </div>
+            <Board board={this.getBoard(true)} partialClick={() => {}} />
         );
     }
 }

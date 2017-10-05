@@ -1,15 +1,14 @@
+import '../css/Board.css';
 import React from 'react';
-
 import Cell from './Cell';
 
 
-class Board extends React.Component {
+export default class Board extends React.Component {
     /* 
     props
         board: 2D array of {owner: int, playable: bool}
         partialClick: function(row, col) -> function(e) bound to BoardContainer
     */
-
     constructor(props) {
         super(props);
     }
@@ -36,5 +35,3 @@ class Board extends React.Component {
     }
 
 }
-
-export default Board;

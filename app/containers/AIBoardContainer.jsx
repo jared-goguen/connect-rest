@@ -1,13 +1,13 @@
+import '../css/Board.css';
 import React from 'react';
-
 import Board from '../components/Board';
-import { Button } from 'react-bootstrap';
-
+import History from '../components/History';
+import { Grid, Button } from 'semantic-ui-react';
 import ai from '../api/ai';
 import utility from '../js/utility';
 
 
-class AIBoardContainer extends React.Component {
+export default class AIBoardContainer extends React.Component {
     /* 
     props
         rows: int
@@ -20,7 +20,26 @@ class AIBoardContainer extends React.Component {
     */
     constructor(props) {
         super(props);
-        this.state = this.initialState();
+
+        this.state = { 
+            board: [],
+            moves: [],
+            turn: 0,
+            done: false,
+            winner: null,
+            statis: false
+        };
+
+        for (var row=0; row < this.props.rows; row++) {
+            var row_array = [];
+            for (var col=0; col < this.props.cols; col++) {
+                row_array.push({
+                    owner: -1,
+                    playable: row === this.props.rows - 1 ? true : false
+                });
+            }
+            this.state.board.push(row_array);
+        }
     }
 
     partialClick = (row, col) => {
@@ -28,7 +47,7 @@ class AIBoardContainer extends React.Component {
             if (!this.state.done && !this.state.statis) {
                 this.setState({statis: true});
                 var boardCopy = JSON.parse(JSON.stringify(this.state.board));
-                var stateCopy = this.move(boardCopy, row, col);
+                var stateCopy = this.makeMove(boardCopy, row, col);
                 if (stateCopy.done) {
                     this.doneTrigger(stateCopy);
                     return
@@ -36,7 +55,7 @@ class AIBoardContainer extends React.Component {
 
                 ai.getMove(stateCopy, (response) => {
                     var ai_move = response.data;
-                    var stateCopy = this.move(boardCopy, ai_move.row, ai_move.col);
+                    var stateCopy = this.makeMove(boardCopy, ai_move.row, ai_move.col);
                     if (stateCopy.done) {
                         this.doneTrigger(stateCopy);
                     }
@@ -46,7 +65,11 @@ class AIBoardContainer extends React.Component {
         }
     }
 
-    move = (board, row, col) => {
+    makeMove = (board, row, col) => {
+        let move = {player: this.state.turn, position: [row, col]};
+        let movesCopy = JSON.parse(JSON.stringify(this.state.moves));
+        movesCopy.push(move);
+
         board[row][col].owner = this.state.turn;
         board[row][col].playable = false;
         if (row > 0) {
@@ -56,7 +79,8 @@ class AIBoardContainer extends React.Component {
 
         var state = {
             board: board,
-            turn: turn
+            turn: turn,
+            moves: movesCopy
         };
 
         Object.assign(state, this.checkDone(board, row, col));
@@ -131,40 +155,24 @@ class AIBoardContainer extends React.Component {
         setTimeout(function() {alert(message);}, 100);
     }
 
-    initialState() {
-        var state = { 
-            board: [],
-            turn: 0,
-            done: false,
-            winner: null,
-            statis: false
-        };
-
-        for (var row=0; row < this.props.rows; row++) {
-            var row_array = [];
-            for (var col=0; col < this.props.cols; col++) {
-                row_array.push({
-                    owner: -1,
-                    playable: row === this.props.rows - 1 ? true : false
-                });
-            }
-            state.board.push(row_array);
-        }
-
-        return state;
-    }
-
     reset = () => {
         this.setState(this.initialState());
     }
 
     render() {
         return (
-            <div className='BoardContainer'>
-                <Board board={this.state.board} 
-                       partialClick={this.partialClick} />
-                <Button onClick={this.reset}>Reset</Button>
-            </div>
+            <Grid divided='vertically'>
+                <Grid.Row>
+                    <Grid.Column width={9}>
+                        <Board board={this.state.board} 
+                               partialClick={this.partialClick} />
+                    </Grid.Column>
+                    <Grid.Column width={3}>
+                        <History moves={this.state.moves} />
+                        <Button onClick={this.reset}>reset</Button>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         );
     }
 }
@@ -173,5 +181,3 @@ AIBoardContainer.defaultProps = {
     rows: 6,
     cols: 7
 };
-
-export default AIBoardContainer;
