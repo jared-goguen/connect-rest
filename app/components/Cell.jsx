@@ -1,9 +1,9 @@
+import '../css/Board.css';
 import React from 'react';
-
 import utility from '../js/utility';
 
 
-class Cell extends React.Component {
+export default class Cell extends React.Component {
     /*
     props
         owner: int
@@ -34,5 +34,3 @@ class Cell extends React.Component {
         );
     }
 }
-
-export default Cell;
