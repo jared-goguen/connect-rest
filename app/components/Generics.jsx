@@ -15,12 +15,14 @@ export const LabeledInput = (props) => {
     let {label, name, placeholder, type, change} = props;
     return (
         <div style={divStyle}>
-            <Form.Input 
-                name={name} 
-                placeholder={placeholder}
-                onChange={change}
-                type={type}
-                as={() => <Input label={labelMaker(label)} /> }
+            <Form.Input
+                as={() => <Input 
+                    name={name} 
+                    type={type} 
+                    label={labelMaker(label)}
+                    placeholder={placeholder}
+                    onChange={change}
+                /> }
             /> 
         </div>
     );

@@ -8,7 +8,8 @@ module.exports = {
   ],
   output: {
     path: path.resolve(__dirname, 'build'),
-    filename: 'App.bundle.js'
+    filename: 'App.bundle.js',
+    publicPath: 'http://localhost:8000'
   },
   resolve: {
     extensions: ['.js', '.jsx']

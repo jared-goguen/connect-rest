@@ -32,7 +32,6 @@ class AppContainer extends React.Component {
             <BrowserRouter>              
                 <Container style={appStyle}>
                     <NavBarContainer />
-                    <ModalContainer />
                     <RouteChange actions={this.props.routeActions} />
                     <Switch>
                         <Route exact path='/' component={Index} />
@@ -42,6 +41,7 @@ class AppContainer extends React.Component {
                         <Route path='/login/' component={LoginContainer} />
                         <Route path='/logout/' component={LogoutContainer} />
                     </Switch>
+                    <ModalContainer />
                 </Container>
             </BrowserRouter>
         );

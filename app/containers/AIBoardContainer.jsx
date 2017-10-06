@@ -6,6 +6,10 @@ import { Grid, Button } from 'semantic-ui-react';
 import ai from '../api/ai';
 import utility from '../js/utility';
 
+const gridStyle = {
+    position: 'relative',
+    bottom: 0,
+}
 
 export default class AIBoardContainer extends React.Component {
     /* 
@@ -161,7 +165,7 @@ export default class AIBoardContainer extends React.Component {
 
     render() {
         return (
-            <Grid divided='vertically'>
+            <Grid style={gridStyle} divided='vertically'>
                 <Grid.Row>
                     <Grid.Column width={10}>
                         <Board board={this.state.board} 

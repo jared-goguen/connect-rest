@@ -23,6 +23,7 @@ class LoginContainer extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
+        console.log(this.state);
         let response = auth.login(this.state, this.props.dispatch, this.props.history);
         this.setState({response});
     }

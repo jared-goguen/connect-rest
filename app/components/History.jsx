@@ -1,14 +1,38 @@
 import React from 'react';
 import { Table, Menu, Icon } from 'semantic-ui-react';
 
+const emptyStyle = {
+    color: 'white',
+}
+
+const maxRows = 8;
+
 const constructRow = (move, index) => {
     return (
         <Table.Row key={index}>
             <Table.Cell>{move.player}</Table.Cell>
-            <Table.Cell>{move.position}</Table.Cell>
+            <Table.Cell>{`(${move.position[0]},${move.position[0]})`}</Table.Cell>
         </Table.Row>
     )
 };
+
+const padRows = (rows) => {
+    for (let i=rows.length; i < maxRows; i++) {
+        rows.push(
+            <Table.Row key={i}>
+                <Table.Cell style={emptyStyle}>...</Table.Cell>
+                <Table.Cell style={emptyStyle}>...</Table.Cell>
+            </Table.Row>
+        );
+    }
+    return rows;
+};
+
+const spliceRows = (rows, currentIndex) => {
+    let startIndex = Math.max(0, currentIndex - maxRows);
+    return rows.splice(startIndex, currentIndex);
+};
+
 
 export default class History extends React.Component {
     constructor(props) {
@@ -33,7 +57,6 @@ export default class History extends React.Component {
     render() {
         let rows = this.props.moves.map(constructRow);
         let currentIndex = this.props.moves.length;
-        let maxIndex = this.props.moves.length;
         return(
             <Table celled>
                 <Table.Header>
@@ -44,7 +67,7 @@ export default class History extends React.Component {
                 </Table.Header>
 
                 <Table.Body>
-                    {rows.splice(0, currentIndex)}
+                    {padRows(spliceRows(rows, currentIndex))}
                 </Table.Body>
 
                 <Table.Footer>

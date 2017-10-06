@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button } from 'react-bootstrap';
+import { Button } from 'semantic-ui-react';
 import { withRouter } from 'react-router';
 
 import games from '../api/games';
