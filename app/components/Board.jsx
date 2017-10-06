@@ -31,7 +31,13 @@ export default class Board extends React.Component {
             }
             rows.push(<div key={row} className='Row'>{cells}</div>);
         }
-        return <div className='Board'>{rows}</div>;
+        return (
+            <div className='BoardWrapper'>
+                <div className='Board'>
+                    {rows}
+                </div>
+            </div>
+        );
     }
 
 }

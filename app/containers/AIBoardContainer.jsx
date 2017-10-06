@@ -163,11 +163,12 @@ export default class AIBoardContainer extends React.Component {
         return (
             <Grid divided='vertically'>
                 <Grid.Row>
-                    <Grid.Column width={9}>
+                    <Grid.Column width={10}>
                         <Board board={this.state.board} 
                                partialClick={this.partialClick} />
                     </Grid.Column>
-                    <Grid.Column width={3}>
+                    <Grid.Column width={1} />
+                    <Grid.Column width={5}>
                         <History moves={this.state.moves} />
                         <Button onClick={this.reset}>reset</Button>
                     </Grid.Column>
