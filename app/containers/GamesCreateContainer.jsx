@@ -9,7 +9,7 @@ class GamesCreateContainer extends React.Component {
         super(props);
 
         this.state = {
-            title: ''
+            title: '',
         };
     }
 
@@ -21,14 +21,12 @@ class GamesCreateContainer extends React.Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        games.create(this.state, (response) => {
-            console.log(response);
-        });
+        games.create(this.state, this.props.dispatch, this.props.history);
     }
 
     render() {
-        return <GamesCreate submit={this.handleSubmit} change={this.handleChange} />;
+        return <GamesCreate submit={this.handleSubmit} change={this.handleChange} />
     }
 }
 
-export default connect()(withRouter(GamesCreate));
+export default connect()(withRouter(GamesCreateContainer));

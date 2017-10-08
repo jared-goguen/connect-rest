@@ -1,18 +1,11 @@
 import axios from './axios-default';
 
 module.exports = {
-    create: function(state, callback) {
+    create: function(state, dispatch, history) {
         axios.post('/api/games/', state).then(response => {
             console.log(response);
-            callback({
-                success: true,
-                message: 'game created'
-            })
         }).catch(error => {
-            callback({
-                success: false,
-                message: 'unable to create game'
-            });
+            console.log(error);
         });
     },
 
@@ -20,23 +13,23 @@ module.exports = {
         axios.get('/api/games/', state).then(response => {
             callback(response);
         }).catch(error => {
-            callback(error);
+            console.log(error);
         })
     },
 
     retrieveGame: function(id, callback) {
-        axios.get('/api/games/' + id + '/').then(response => {
+        axios.get(`/api/games/${id}/`).then(response => {
             callback(response);
         }).catch(error => {
-            callback(error);
+            console.log(error);
         })
     },
 
-    joinGame: function(id, callback) {
-        axios.post('/api/games/join/' + id + '/').then(response => {
-            callback(response);
+    joinGame: function(id, dispatch, history) {
+        axios.post(`/api/games/join/${id}/`).then(response => {
+            history.push(`/games/${id}/`);
         }).catch(error => {
-            callback(error);
+            console.log(error);
         })
     }
 }

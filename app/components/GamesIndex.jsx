@@ -3,7 +3,11 @@ import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react';
 import GamesContainer from '../containers/GamesContainer';
 
-class GamesIndex extends React.Component {
+const buttonStyle = {
+    marginLeft: 15
+};
+
+export default class GamesIndex extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -12,7 +16,7 @@ class GamesIndex extends React.Component {
         return (
             <div className='Games'>
                 <Link to='/games/create/'>
-                    <Button>
+                    <Button color='red' style={buttonStyle}>
                         create game
                     </Button>
                 </Link>
@@ -21,5 +25,3 @@ class GamesIndex extends React.Component {
         );
     }
 }
-
-export default GamesIndex;

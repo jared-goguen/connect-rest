@@ -25,7 +25,11 @@ export default class AIBoardContainer extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { 
+        this.state = this.getInitialState();
+    }
+
+    getInitialState = () => {
+        let state = { 
             board: [],
             moves: [],
             turn: 0,
@@ -42,8 +46,10 @@ export default class AIBoardContainer extends React.Component {
                     playable: row === this.props.rows - 1 ? true : false
                 });
             }
-            this.state.board.push(row_array);
+            state.board.push(row_array);
         }
+
+        return state;
     }
 
     partialClick = (row, col) => {
@@ -160,7 +166,7 @@ export default class AIBoardContainer extends React.Component {
     }
 
     reset = () => {
-        this.setState(this.initialState());
+        this.setState(this.getInitialState());
     }
 
     render() {

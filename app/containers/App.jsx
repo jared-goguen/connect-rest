@@ -13,9 +13,9 @@ import utility from '../js/utility';
 const store = createStore(connectApp);
 
 const routeActions = [
-    (location, history) => {store.dispatch(actions.CLEAR_MODALS())},
+    (location, { push, replace }) => {store.dispatch(actions.CLEAR_MODALS())},
     (location, history) => {store.dispatch(actions.SET_ACTIVE(utility.basePath(location.pathname)))},
-    (location, history) => {console.log(store.getState())},
+//  (location, history) => {console.log(location)},
 ];
 
 const App = () => (

@@ -1,4 +1,4 @@
 cd app
 call npm run webpack --watch
-cd ..
+cd ../server
 python manage.py runserver

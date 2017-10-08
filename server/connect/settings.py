@@ -73,7 +73,7 @@ ROOT_URLCONF = 'connect.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['app'],
+        'DIRS': ['../app'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -153,6 +153,6 @@ STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    join(SITE_ROOT, 'app/build'),
-    join(SITE_ROOT, 'app/css'),
+    join(SITE_ROOT, '../app/build'),
+    join(SITE_ROOT, '../app/css'),
 )

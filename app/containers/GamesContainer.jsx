@@ -1,10 +1,10 @@
 import React from 'react';
-import GameThumb from './GameThumb';
-
+import { Segment } from 'semantic-ui-react';
+import GameThumbContainer from './GameThumbContainer';
 import games from '../api/games';
 
 
-class GamesContainer extends React.Component {
+export default class GamesContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -14,18 +14,18 @@ class GamesContainer extends React.Component {
     }
 
     getGames = () => {
-        games.retrieveList({}, response => this.setState({'games': response.data}));
+        games.retrieveList({}, response => {
+            this.setState({games: response.data})
+        });
     }
 
     render() {
         return (
-            <div className='GamesContainer'>
+            <Segment>
                 {this.state.games.map((game, index) => 
-                    <GameThumb key={index} {...game} />
+                    <GameThumbContainer key={index} {...game} />
                 )}
-            </div>
+            </Segment>
         );
     }
 }
-
-export default GamesContainer;
