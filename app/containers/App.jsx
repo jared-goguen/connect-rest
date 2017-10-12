@@ -11,6 +11,7 @@ import * as actions from '../actions';
 import utility from '../js/utility';
 
 const store = createStore(connectApp);
+export { store };
 
 const routeActions = [
     (location, { push, replace }) => {store.dispatch(actions.CLEAR_MODALS())},

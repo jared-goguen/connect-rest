@@ -1,5 +1,5 @@
 import axios from './axios-default';
-
+import { store } from '../containers/App';
 import * as actions from '../actions';
 
 module.exports = {
@@ -7,39 +7,31 @@ module.exports = {
         return !!localStorage.token
     },
     
-    login: function(data, dispatch, history) {
-        dispatch(actions.CLEAR_MODALS())
-        if (this.loggedIn()) {
-            dispatch(actions.ADD_MODAL('warning', 'already logged in'));
-        }
-        
+    login: function(data, onSuccess, onError) {      
         // https://github.com/mzabriskie/axios/issues/382
         delete axios.defaults.headers.common['Authorization'];
 
         axios.post('/api/obtain-auth-token/', data).then(response => {
             localStorage.token = response.data.token;
             axios.defaults.headers.common['Authorization'] = 'Token ' + localStorage.token;
-            dispatch(actions.LOGIN());
-            history.goBack();
+            store.dispatch(actions.LOGIN());
+            onSuccess();
         }).catch(error => {
-            dispatch(actions.ADD_MODAL('negative', 'invalid credentials'));
+            onError(error.response.data)
         });
     },        
     
-    logout: function(dispatch) {
-        dispatch(actions.CLEAR_MODALS())
+    logout: function() {
         delete localStorage.token
         delete axios.defaults.headers.common['Authorization'];
-        dispatch(actions.LOGOUT());
-        dispatch(actions.ADD_MODAL('positive', 'successfully logged out'));
+        store.dispatch(actions.LOGOUT());
     },
 
-    register: function(data, dispatch) {
-        dispatch(actions.CLEAR_MODALS())
+    register: function(data, onSuccess, onError) {
         axios.post('/api/users/', data).then(response => {
-            this.login(data, dispatch);
+            this.login(data, onSuccess, onError);
         }).catch(error => {
-            dispatch(actions.ADD_MODAL('negative', 'unable to register'));
+            onError(error.response.data)
         });
     }
 };

@@ -22,8 +22,11 @@ class GameDetail extends React.Component {
             );
         } else {
             return (
-                <div className='GameDetail'>
-                    <BoardContainer board={this.state.board} />
+                <div>
+                    <BoardContainer 
+                        board={this.state.board} 
+                        history={this.state.history} 
+                    />
                 </div>
             );
         }

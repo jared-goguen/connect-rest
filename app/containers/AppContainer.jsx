@@ -4,7 +4,7 @@ import { Container } from 'semantic-ui-react';
 import NavBarContainer from './NavBarContainer';
 import RouteChange from './RouteChange';
 import Routes from './Routes';
-import ModalContainer from './ModalContainer';
+import ModalsContainer from './ModalsContainer';
 import { connect } from 'react-redux';
 
 const appStyle = {
@@ -24,9 +24,9 @@ class AppContainer extends React.Component {
             <BrowserRouter>              
                 <Container style={appStyle}>
                     <NavBarContainer />
+                    <ModalsContainer />
                     <RouteChange actions={this.props.routeActions} />
                     <Routes />
-                    <ModalContainer />
                 </Container>
             </BrowserRouter>
         );

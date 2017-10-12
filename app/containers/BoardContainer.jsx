@@ -1,9 +1,13 @@
 import '../css/Board.css';
-
 import React from 'react';
-
 import Board from '../components/Board';
+import History from '../components/History';
+import { Grid, Button } from 'semantic-ui-react';
 
+const gridStyle = {
+    position: 'relative',
+    bottom: 0,
+}
 
 class BoardContainer extends React.Component {
     /* 
@@ -32,7 +36,17 @@ class BoardContainer extends React.Component {
 
     render() {
         return (
-            <Board board={this.getBoard(true)} partialClick={() => {}} />
+            <Grid style={gridStyle} divided='vertically'>
+                <Grid.Row>
+                    <Grid.Column width={10}>
+                        <Board board={this.getBoard(true)} partialClick={() => {}} />
+                    </Grid.Column>
+                    <Grid.Column width={1} />
+                    <Grid.Column width={5}>
+                        <History moves={this.props.history} />
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
         );
     }
 }

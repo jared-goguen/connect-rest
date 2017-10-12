@@ -1,15 +1,21 @@
 import React from 'react';
-import { Form, Input, Label } from 'semantic-ui-react'
+import { Input, Label } from 'semantic-ui-react'
 
 const divStyle = {
     marginBottom: 10
 }
 
 const labelStyle = {
-    width: 100
+    width: 100,
 }
 
-const labelMaker = (content) => <Label content={content} style={labelStyle} />;
+const errorStyle = {
+    position: 'relative',
+    left: 100
+}
+
+const labelMaker = (name, content) => <Label content={content} style={labelStyle} />;
+const errorMaker = (message) => <Label basic color='pink' pointing='left' style={errorStyle}>{message}</Label>
 
 export class LabeledInput extends React.Component {
     constructor(props) {
@@ -17,26 +23,21 @@ export class LabeledInput extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        /* 
-            this is fine unless at some point state is added or inputs 
-            are reused (seems unlikely) 
-        */
-        return false;
+        return nextProps.error !== this.props.error;
     }
 
     render() {
         let {label, name, placeholder, type, change} = this.props;
         return (
             <div style={divStyle}>
-                <Form.Input
-                    as={() => <Input 
-                        name={name} 
-                        type={type} 
-                        label={labelMaker(label)}
-                        placeholder={placeholder}
-                        onChange={change}
-                    /> }
-                /> 
+                <Input 
+                    name={name}
+                    label={labelMaker(name, label)}
+                    type={type} 
+                    placeholder={placeholder}
+                    onChange={change}
+                />
+                { this.props.error ? errorMaker(this.props.error) : null }
             </div>
         );
     }

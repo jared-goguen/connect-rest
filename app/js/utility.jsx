@@ -41,5 +41,9 @@ module.exports = {
         var m = string.match('/?([^/]*)/?.*');
         var base = m.length > 1 ? m[1] : '';
         return base ? base : 'home'
+    },
+
+    isEmptyObject: function(obj) {
+        return Object.keys(obj).length === 0 && obj.constructor === Object;
     }
 };

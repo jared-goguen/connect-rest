@@ -1,8 +1,8 @@
 import React from 'react';
 import auth from '../api/auth'
 import Register from '../components/Register'
-import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import * as utility from '../js/utility';
 
 class RegisterContainer extends React.Component {
     constructor(props) {
@@ -12,7 +12,8 @@ class RegisterContainer extends React.Component {
             username: '',
             email: '',
             password: '',
-            verify: ''
+            verify: '',
+            errors: {}
         };
     }
 
@@ -22,14 +23,53 @@ class RegisterContainer extends React.Component {
         });
     }
 
+    handleSuccess = () => {
+        this.props.history.goBack();
+    }
+
+    handleError = (errors) => {
+        this.setState({errors});
+    }
+
+    validateForm = () => {
+        let errors = {};
+
+        if (this.state.username.length === 0) {
+            errors.username = 'This field may not be blank.';
+        }
+
+        if (this.state.email.length === 0) {
+            errors.email = 'This field may not be blank.';
+        }
+
+        if (this.state.password.length === 0) {
+            errors.password = 'This field may not be blank.';
+        }
+
+        if (this.state.password !== this.state.verify) {
+            errors.verify = 'Your passwords do not match.';
+        }
+
+        return errors;
+    }
+
     handleSubmit = (event) => {
         event.preventDefault();
-        auth.register(this.state, this.props.dispatch, this.props.history);
+        let errors = this.validateForm();
+        if (utility.isEmptyObject(errors)) {
+            auth.register(this.state, this.handleSuccess, this.handleError);
+        } else {
+            this.setState({errors});
+        }
     }
 
     render() {
-        return <Register submit={this.handleSubmit} change={this.handleChange} />;
+        return <Register 
+            onSubmit={this.handleSubmit} 
+            onChange={this.handleChange} 
+            errors={this.state.errors}
+        />;
     }
 }
 
-export default connect()(withRouter(RegisterContainer));
+export default withRouter(RegisterContainer);

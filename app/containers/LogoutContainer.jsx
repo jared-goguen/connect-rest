@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
 import auth from '../api/auth'
 
 class LogoutContainer extends React.Component {
@@ -10,7 +9,7 @@ class LogoutContainer extends React.Component {
     }
 
     componentWillMount() {
-        auth.logout(this.props.dispatch);
+        auth.logout();
         this.props.history.goBack();
     }
 
@@ -19,4 +18,4 @@ class LogoutContainer extends React.Component {
     }
 }
 
-export default connect()(withRouter(LogoutContainer));
+export default withRouter(LogoutContainer);

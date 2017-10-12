@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../components/Modal';
+import Modals from '../components/Modals';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 
@@ -9,7 +9,7 @@ var mapStateToProps = (state) => {
     }
 }
 
-class ModalContainer extends React.Component {
+class ModalsContainer extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -20,13 +20,12 @@ class ModalContainer extends React.Component {
 
     render() {
         return (
-            <div>
-                {this.props.messages.map((message, index) => 
-                    <Modal key={index} callback={this.partialCallback(message)}  {...message}/>
-                )}
-            </div>
+            <Modals 
+                partialCallback={this.partialCallback}
+                messages={this.props.messages} 
+            />
         );
     }
 }
 
-export default connect(mapStateToProps)(ModalContainer);
+export default connect(mapStateToProps)(ModalsContainer);
