@@ -20509,8 +20509,12 @@ var Board = function (_React$Component) {
                 { style: this.props.style },
                 _react2.default.createElement(
                     'div',
-                    { className: 'Board' },
-                    rows
+                    { className: 'BoardWrapper' },
+                    _react2.default.createElement(
+                        'div',
+                        { className: 'Board' },
+                        rows
+                    )
                 )
             );
         }
@@ -44551,7 +44555,7 @@ exports = module.exports = __webpack_require__(843)(undefined);
 
 
 // module
-exports.push([module.i, ".BoardOuter {\r\n    width: 100%;\r\n    padding-bottom: 85.7143%;\r\n}\r\n\r\n.BoardInner {\r\n    position: relative;\r\n}\r\n\r\n.Board {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n\r\n.Row {\r\n    height: 16.6667%;\r\n    margin: 0px;\r\n}\r\n\r\n.Cell {\r\n    width: 14.2857%;\r\n    height: 100%;\r\n    display: inline-block;\r\n    padding: 0.5%;\r\n}\r\n\r\n.Circle {\r\n    height: 100%;\r\n    width: 100%;\r\n    border-radius: 50%;\r\n    opacity: 0.5;\r\n    border: 2px solid #f44195;\r\n\r\n}\r\n\r\n.Playable {\r\n    background-color: #f4a1c8;\r\n}\r\n\r\n.Playable:hover, \r\n.Playable:focus {\r\n    background-color: #f44195;\r\n    opacity: 0.6;\r\n}\r\n\r\n.color-1 {\r\n    background-color: #ffffff;\r\n}\r\n\r\n.color0 {\r\n    background-color: #f44265;\r\n    opacity: 0.9;\r\n    border: 2px solid #f44265;\r\n}\r\n\r\n.color1 {\r\n    background-color: #41f4c7;\r\n    opacity: 0.9;\r\n    border: 2px solid #41f4c7;\r\n}\r\n\r\n", ""]);
+exports.push([module.i, ".BoardWrapper {\r\n    width: 100%;\r\n    padding-bottom: 85.7143%;\r\n}\r\n\r\n.Board {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n\r\n.Row {\r\n    height: 16.6667%;\r\n    margin: 0px;\r\n}\r\n\r\n.Cell {\r\n    width: 14.2857%;\r\n    height: 100%;\r\n    display: inline-block;\r\n    padding: 0.5%;\r\n}\r\n\r\n.Circle {\r\n    height: 100%;\r\n    width: 100%;\r\n    border-radius: 50%;\r\n    opacity: 0.5;\r\n    border: 2px solid #f44195;\r\n\r\n}\r\n\r\n.Playable {\r\n    background-color: #f4a1c8;\r\n}\r\n\r\n.Playable:hover, \r\n.Playable:focus {\r\n    background-color: #f44195;\r\n    opacity: 0.6;\r\n}\r\n\r\n.color-1 {\r\n    background-color: #ffffff;\r\n}\r\n\r\n.color0 {\r\n    background-color: #f44265;\r\n    opacity: 0.9;\r\n    border: 2px solid #f44265;\r\n}\r\n\r\n.color1 {\r\n    background-color: #41f4c7;\r\n    opacity: 0.9;\r\n    border: 2px solid #41f4c7;\r\n}\r\n\r\n", ""]);
 
 // exports
 
