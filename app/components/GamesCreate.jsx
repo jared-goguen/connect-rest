@@ -1,6 +1,6 @@
-import React from 'react'
-import { Form, Container } from 'semantic-ui-react'
-import { LabeledInput } from './Generics'
+import React from 'react';
+import { Form, Container } from 'semantic-ui-react';
+import { LabeledInput } from './LabeledInput';
 
 
 export default class GamesCreate extends React.Component {

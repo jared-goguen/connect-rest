@@ -1,5 +1,9 @@
 import React from 'react';
 
+import History from './History';
+import { Button } from 'semantic-ui-react';
+
+
 class Index extends React.Component {
     constructor(props) {
         super(props);

@@ -17,7 +17,7 @@ const errorStyle = {
 const labelMaker = (name, content) => <Label content={content} style={labelStyle} />;
 const errorMaker = (message) => <Label basic color='pink' pointing='left' style={errorStyle}>{message}</Label>
 
-export class LabeledInput extends React.Component {
+export default class LabeledInput extends React.Component {
     constructor(props) {
         super(props);
     }

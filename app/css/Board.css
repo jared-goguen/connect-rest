@@ -1,8 +1,10 @@
-.BoardWrapper {
-    position: relative;
+.BoardOuter {
     width: 100%;
     padding-bottom: 85.7143%;
-    display: block;
+}
+
+.BoardInner {
+    position: relative;
 }
 
 .Board {

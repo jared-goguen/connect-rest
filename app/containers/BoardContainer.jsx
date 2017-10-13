@@ -1,13 +1,7 @@
-import '../css/Board.css';
 import React from 'react';
-import Board from '../components/Board';
-import History from '../components/History';
-import { Grid, Button } from 'semantic-ui-react';
+import Game from '../components/Game';
 
-const gridStyle = {
-    position: 'relative',
-    bottom: 0,
-}
+import { Button } from 'semantic-ui-react';
 
 class BoardContainer extends React.Component {
     /* 
@@ -34,19 +28,20 @@ class BoardContainer extends React.Component {
         return rows;
     }
 
+    getButtons = () => {
+        return [
+            <Button>reset</Button>,
+            <Button>left</Button>,
+            <Button>right</Button>
+        ];
+    }
+
     render() {
         return (
-            <Grid style={gridStyle} divided='vertically'>
-                <Grid.Row>
-                    <Grid.Column width={10}>
-                        <Board board={this.getBoard(true)} partialClick={() => {}} />
-                    </Grid.Column>
-                    <Grid.Column width={1} />
-                    <Grid.Column width={5}>
-                        <History moves={this.props.history} />
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            <Game 
+                historyProps={{moves: this.props.history, buttons: this.getButtons()}}
+                boardProps={{board: this.getBoard(true), partialClick: () => null}}
+            />
         );
     }
 }

@@ -1,6 +1,6 @@
-import React from 'react'
-import { Form, Container, Header, Message } from 'semantic-ui-react'
-import { LabeledInput } from './Generics'
+import React from 'react';
+import { Form, Container, Header, Message } from 'semantic-ui-react';
+import { LabeledInput } from './LabeledInput';
 
 export default class Register extends React.Component {
     constructor(props) {
