@@ -33,8 +33,10 @@ export default class Board extends React.Component {
         }
         return (
             <div style={this.props.style}>
-                <div className='Board'>
-                    {rows}
+                <div className='BoardWrapper'>
+                    <div className='Board'>
+                        {rows}
+                    </div>
                 </div>
             </div>
         );
