@@ -3,8 +3,19 @@ import { store } from '../containers/App';
 import * as actions from '../actions';
 
 module.exports = {
+
+    logoutUpkeep: function() {
+        delete localStorage.token;
+        delete localStorage.username;
+        delete axios.defaults.headers.common['Authorization'];
+    },
+
     loggedIn: function() {
         return !!localStorage.token
+    },
+
+    userState: function() {
+        return {loggedIn: this.loggedIn(), username: localStorage.username}
     },
     
     login: function(data, onSuccess, onError) {      
@@ -14,7 +25,8 @@ module.exports = {
         axios.post('/api/obtain-auth-token/', data).then(response => {
             localStorage.token = response.data.token;
             axios.defaults.headers.common['Authorization'] = 'Token ' + localStorage.token;
-            store.dispatch(actions.LOGIN());
+            localStorage.username = data['username']
+            store.dispatch(actions.LOGIN(data['username']));
             onSuccess();
         }).catch(error => {
             onError(error.response.data)
@@ -22,8 +34,7 @@ module.exports = {
     },        
     
     logout: function() {
-        delete localStorage.token
-        delete axios.defaults.headers.common['Authorization'];
+        this.logoutUpkeep();
         store.dispatch(actions.LOGOUT());
     },
 

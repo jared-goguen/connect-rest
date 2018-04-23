@@ -1,3 +1,7 @@
+import React from 'react';
+import { Table } from 'semantic-ui-react';
+
+
 const maxRows = 8;
 
 const constructRow = (move, index) => {

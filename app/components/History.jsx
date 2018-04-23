@@ -46,6 +46,7 @@ export default class History extends React.Component {
     }
 
     render() {
+        console.log(this.props)
         return(
             <div style={this.props.style}>
                 <div style={headerStyle}>
@@ -56,7 +57,7 @@ export default class History extends React.Component {
                     {this.props.moves.map((move, index) => (
                         <Segment.Group horizontal key={index} style={getStyle(index)}>
                             <Segment>{`${index}.`}</Segment>
-                            <Segment>{`(${move[0]}, ${move[1]})`}</Segment>
+                            <Segment>{`(${move.position[0]}, ${move.position[1]})`}</Segment>
                         </Segment.Group>
                     ))}
                     </Segment.Group>
