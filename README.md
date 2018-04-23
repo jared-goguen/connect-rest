@@ -2,6 +2,19 @@
 
 An in-progress project for a website where users can play Connect Four with each other. 
 
+Things that are working:
+* Authentication
+* Creating games
+* Playing with computer (albeit no AI)
+* Joining games (albeit terrible interface)
+
+Next things to do:
+* Improve the game thumbnail interface
+* Add warning for joining game when not logged in
+* Implement decent AI for computer
+* Redesign history for both appearance and functionality
+
+
 The front end is in React (with react-router and redux). The back end uses the Django REST framework and only provides an API for AJAX requests from the frontend.
 
 The entry-point for the front end is [/app/containers/App.jsx](/app/containers/App.jsx). All of the style-based React components are in [/app/components](/app/components) and all of the logic-based Reacat components are in [/app/containers/](/app/containers/). All front end dependencies are detailed in [/app/package.json](/app/package.json).
