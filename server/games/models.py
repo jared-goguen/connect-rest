@@ -43,19 +43,6 @@ class Game(models.Model):
     owner = models.ForeignKey(Player, related_name='owner')
 
 
-    @property
-    def status(self):
-        if self.done:
-            return 'Complete'
-        elif self.started:
-            return 'In progress'
-        return 'Waiting for players'
-
-    @property
-    def in_game(self, player):
-        return player in self.players
-
-
     def add_player(self, player):
 
         if player in self.players.all():
@@ -76,6 +63,7 @@ class Game(models.Model):
 
     def start_game(self):
         self.started = True
+        self.order = [p.pk for p in self.players.all()]
         shuffle(self.order)
         self.advance_turn()
         self.save()

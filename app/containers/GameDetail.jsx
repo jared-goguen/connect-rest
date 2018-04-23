@@ -1,5 +1,6 @@
 import React from 'react';
 import BoardContainer from './BoardContainer';
+import { Label } from 'semantic-ui-react';
 
 import games from '../api/games';
 
@@ -23,6 +24,7 @@ class GameDetail extends React.Component {
         } else {
             return (
                 <div>
+                    <Label size='large'>{this.state.status}</Label>
                     <BoardContainer 
                         board={this.state.board} 
                         history={this.state.history} 
