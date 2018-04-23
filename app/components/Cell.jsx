@@ -18,7 +18,9 @@ export default class Cell extends React.Component {
         var circle_classes = ['Circle'];
         var circle_options = {};
         
-        if (this.props.playable) {
+        if (this.props.selected) {
+            circle_classes.push('Selected');
+        } else if (this.props.playable) {
             circle_classes.push('Playable');
             circle_options.onClick = this.props.partialClick(this.props.row, this.props.col);
         } else {

@@ -41,6 +41,8 @@ class Game(models.Model):
     next_player = models.ForeignKey(Player, related_name='next_player', null=True)
     connect = models.IntegerField(default=4)
     owner = models.ForeignKey(Player, related_name='owner')
+    rows = models.IntegerField(default=6)
+    cols = models.IntegerField(default=7)
 
 
     def add_player(self, player):
@@ -81,7 +83,7 @@ class Game(models.Model):
             return False
         if self.board[row][col] != -1:
             return False
-        if row != 0 and self.board[row-1][col] == -1:
+        if row != self.rows - 1 and self.board[row+1][col] == -1:
             return False
         return True
 
@@ -93,6 +95,9 @@ class Game(models.Model):
                     positions.append((row, col))
                     break
         return positions
+
+    def is_turn(self, user):
+        return user.player.pk == self.next_player.pk
 
     def make_move(self, user, row, col):
         if not self.is_turn(user):

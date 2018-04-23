@@ -18,8 +18,8 @@ class GameViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         player = request.user.player
         serialized_player = PlayerSerializer(player, context={'request': request})
-        request.data['owner'] = serialized_player.data['url']
-        request.data['players'] = [serialized_player.data['url']]
+        request.data['owner'] = player.pk
+        request.data['players'] = [player.pk]
         return super(GameViewSet, self).create(request, *args, **kwargs)
 
 
@@ -29,5 +29,19 @@ def join_game(request, id):
     game = Game.objects.get(pk=id)
     message_type, message = game.add_player(player)
     return JsonResponse({'success': message_type, 'message': message})
+
+
+@api_view(['POST'])
+def move(request, id):
+    game = Game.objects.get(pk=id)
+    user = request.user
+    row = request.data['row']
+    col = request.data['col']
+    message_type, message = game.make_move(user, row, col)
+    return JsonResponse({
+        'success': message_type, 
+        'message': message, 
+        'game': GameSerializer(game, context={'request': request}).data
+    })
 
 

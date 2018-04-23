@@ -40,6 +40,17 @@ module.exports = {
         }).catch(error => {
             console.log(error);
         })  
-    }
+    },
+
+    submitMove: function(id, row, col, callback) {
+        axios.post(`/api/games/move/${id}/`, {row, col}).then(response => {
+            console.log(response);
+            callback(response);
+        }).catch(error => {
+            console.log(error);
+        })
+    },
+
+
 
 }

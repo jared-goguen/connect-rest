@@ -37,6 +37,10 @@
     background-color: #f4a1c8;
 }
 
+.Selected {
+    background-color: #4286f4;
+}
+
 .Playable:hover, 
 .Playable:focus {
     background-color: #f44195;

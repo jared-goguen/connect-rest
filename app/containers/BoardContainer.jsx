@@ -12,7 +12,12 @@ class BoardContainer extends React.Component {
         super(props);
     }
 
-    getBoard = (canPlay) => {
+    partialClick = (row, col) => () => {
+        this.props.handleMove(row, col);
+    }
+
+    getBoard = () => {
+        console.log(this.props);
         var row_count = this.props.board.length;
         var col_count = this.props.board[0].length;
         var rows = [];
@@ -20,8 +25,9 @@ class BoardContainer extends React.Component {
             var cells = [];
             for (var col=0; col < col_count; col++) {
                 var owner = this.props.board[row][col];
-                var playable = canPlay && (owner === -1 && (row === row_count - 1 || this.props.board[row + 1][col] !== -1));
-                cells.push({owner, playable});
+                var playable = this.props.isTurn && (owner === -1 && (row === row_count - 1 || this.props.board[row + 1][col] !== -1));
+                var selected = (row == this.props.moveRow) && (col == this.props.moveCol);
+                cells.push({owner, playable, selected});
             }
             rows.push(cells);
         }
@@ -40,7 +46,7 @@ class BoardContainer extends React.Component {
         return (
             <Game 
                 historyProps={{moves: this.props.history, buttons: this.getButtons()}}
-                boardProps={{board: this.getBoard(true), partialClick: () => null}}
+                boardProps={{board: this.getBoard(), partialClick: this.partialClick}}
             />
         );
     }
