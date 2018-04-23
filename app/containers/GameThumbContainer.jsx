@@ -8,6 +8,7 @@ import GameThumb from '../components/GameThumb';
 class GameThumbContainer extends React.Component {
     constructor(props) {
         super(props);
+        console.log(this.props);
     }
 
     joinClick = () => {
@@ -22,6 +23,7 @@ class GameThumbContainer extends React.Component {
         return (
             <GameThumb 
                 title={this.props.title} 
+                inGame={this.props.in_game}
                 viewClick={this.viewClick} 
                 joinClick={this.joinClick} 
             />

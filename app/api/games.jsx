@@ -4,6 +4,7 @@ module.exports = {
     create: function(state, dispatch, history) {
         axios.post('/api/games/', state).then(response => {
             console.log(response);
+            history.push(`/games/${response.data.id}/`);
         }).catch(error => {
             console.log(error);
         });
@@ -31,5 +32,6 @@ module.exports = {
         }).catch(error => {
             console.log(error);
         })
-    }
+    },
+
 }

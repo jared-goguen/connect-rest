@@ -51,6 +51,10 @@ class Game(models.Model):
             return 'In progress'
         return 'Waiting for players'
 
+    @property
+    def in_game(self, player):
+        return player in self.players
+
 
     def add_player(self, player):
 

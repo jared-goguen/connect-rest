@@ -22,9 +22,15 @@ export default class GameThumb extends React.Component {
         return (
             <Segment color='yellow'>
                 <Label size='big' horizontal>{title}</Label>
-                <Button primary onClick={joinClick} style={buttonStyle}>
-                    join game
-                </Button>
+                {this.props.inGame ? 
+                    <Button disabled onClick={joinClick} style={buttonStyle}>
+                        in game
+                    </Button>
+                :
+                    <Button primary onClick={joinClick} style={buttonStyle}>
+                        join game
+                    </Button>
+                }
                 <Button secondary onClick={viewClick} style={buttonStyle}>
                     view game
                 </Button>

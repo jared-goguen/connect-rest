@@ -8513,6 +8513,7 @@ module.exports = {
     create: function create(state, dispatch, history) {
         _axiosDefault2.default.post('/api/games/', state).then(function (response) {
             console.log(response);
+            history.push('/games/' + response.data.id + '/');
         }).catch(function (error) {
             console.log(error);
         });
@@ -8541,6 +8542,7 @@ module.exports = {
             console.log(error);
         });
     }
+
 };
 
 /***/ }),
@@ -38243,7 +38245,11 @@ var GameThumb = function (_React$Component) {
                     { size: 'big', horizontal: true },
                     title
                 ),
-                _react2.default.createElement(
+                this.props.inGame ? _react2.default.createElement(
+                    _semanticUiReact.Button,
+                    { disabled: true, onClick: joinClick, style: buttonStyle },
+                    'in game'
+                ) : _react2.default.createElement(
                     _semanticUiReact.Button,
                     { primary: true, onClick: joinClick, style: buttonStyle },
                     'join game'
@@ -39477,6 +39483,7 @@ var GameThumbContainer = function (_React$Component) {
             _this.props.history.push('/games/' + _this.props.id + '/');
         };
 
+        console.log(_this.props);
         return _this;
     }
 
@@ -39485,6 +39492,7 @@ var GameThumbContainer = function (_React$Component) {
         value: function render() {
             return _react2.default.createElement(_GameThumb2.default, {
                 title: this.props.title,
+                inGame: this.props.in_game,
                 viewClick: this.viewClick,
                 joinClick: this.joinClick
             });

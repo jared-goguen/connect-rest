@@ -29,3 +29,5 @@ def join_game(request, id):
     game = Game.objects.get(pk=id)
     message_type, message = game.add_player(player)
     return JsonResponse({'success': message_type, 'message': message})
+
+
