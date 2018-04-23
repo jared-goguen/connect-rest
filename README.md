@@ -9,6 +9,7 @@ Things that are working:
 * Joining games (albeit terrible interface)
 
 Next things to do:
+* Let people make moves
 * Improve the game thumbnail interface
 * Add warning for joining game when not logged in
 * Implement decent AI for computer
