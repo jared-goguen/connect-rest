@@ -10,6 +10,7 @@ class PlayerViewSet(viewsets.ModelViewSet):
     serializer_class = PlayerSerializer
 
     def retrieve(self, request, pk=None):
+        print('pk')
         if pk == 'i':
             return response.Response(PlayerSerializer(request.user.player,
                 context={'request': request}).data)

@@ -34,4 +34,12 @@ module.exports = {
         })
     },
 
+    retrievePlayer: function(callback) {
+        axios.get(`/api/players/i/`).then(response => {
+            callback(response);
+        }).catch(error => {
+            console.log(error);
+        })  
+    }
+
 }

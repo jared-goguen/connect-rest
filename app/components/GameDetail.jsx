@@ -8,12 +8,12 @@ export default class GameDetail extends React.Component {
     constructor(props) {
         super(props);
         games.retrieveGame(this.props.match.params.id, response => 
-        	this.setState(response.data)
+            this.setState(response.data)
         );
     }
 
     render() {
-    	console.log(this.state);
+        console.log(this.state);
         if (this.state === null) {
             return (
                 <div>

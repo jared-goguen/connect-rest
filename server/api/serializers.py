@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from players.models import Player
 from players.serializers import PlayerSerializer
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
     class Meta:

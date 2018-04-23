@@ -3,7 +3,7 @@ from rest_framework import serializers
 from .models import Game
 from players.views import PlayerViewSet
 
-class GameSerializer(serializers.HyperlinkedModelSerializer):
+class GameSerializer(serializers.ModelSerializer):
     in_game = serializers.SerializerMethodField(method_name='is_in_game')
     is_turn = serializers.SerializerMethodField(method_name='is_player_turn')
     status = serializers.SerializerMethodField()

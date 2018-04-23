@@ -2,7 +2,7 @@ from rest_framework import serializers
 
 from .models import Player
 
-class PlayerSerializer(serializers.HyperlinkedModelSerializer):
+class PlayerSerializer(serializers.ModelSerializer):
     name = serializers.CharField(source='user.username', read_only=True)
 
     class Meta:

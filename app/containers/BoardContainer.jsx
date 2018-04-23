@@ -30,9 +30,9 @@ class BoardContainer extends React.Component {
 
     getButtons = () => {
         return [
-            <Button>reset</Button>,
-            <Button>left</Button>,
-            <Button>right</Button>
+            <Button key={0}>reset</Button>,
+            <Button key={1}>left</Button>,
+            <Button key={2}>right</Button>
         ];
     }
 
