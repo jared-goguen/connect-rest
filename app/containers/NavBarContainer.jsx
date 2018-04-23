@@ -7,6 +7,7 @@ import * as actions from '../actions';
 const mapStateToProps = (state) => {
     return {
         login: state.user.loggedIn,
+        username: state.user.username,
         active: state.navbar.active,
         open: state.navbar.open
     };
@@ -45,7 +46,7 @@ class NavBarContainer extends React.Component {
         let loginItems;
         if (this.props.login) {
             loginItems = [
-                {path: '/profile/', name: 'profile'},
+                {path: '/profile/', name: this.props.username},
                 {path: '/logout/', name: 'logout'}
             ];
         } else {

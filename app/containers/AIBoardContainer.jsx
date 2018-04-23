@@ -11,6 +11,12 @@ const gridStyle = {
     bottom: 0,
 }
 
+const historyStyle = {
+    height: '100% !important',
+    width: 300,
+    float: 'right',
+}
+
 export default class AIBoardContainer extends React.Component {
     /* 
     props
@@ -179,7 +185,7 @@ export default class AIBoardContainer extends React.Component {
                     </Grid.Column>
                     <Grid.Column width={1} />
                     <Grid.Column width={5}>
-                        <History moves={this.state.moves} />
+                        <History moves={this.state.moves} style={historyStyle} />
                         <Button onClick={this.reset}>reset</Button>
                     </Grid.Column>
                 </Grid.Row>

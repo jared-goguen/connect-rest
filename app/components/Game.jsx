@@ -18,7 +18,7 @@ const boardStyle = {
 }
 
 const historyStyle = {
-    height: '100%',
+    height: '100% !important',
     width: 300,
     float: 'right',
 }

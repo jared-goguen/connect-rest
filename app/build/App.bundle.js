@@ -19629,7 +19629,7 @@ var headerStyle = {
 };
 
 var tableStyle = {
-    position: 'absolute',
+    position: 'absolute !important',
     top: 50,
     bottom: 50,
     overflowY: 'scroll',
@@ -19637,13 +19637,13 @@ var tableStyle = {
 };
 
 var buttonsStyle = {
-    position: 'absolute',
+    position: 'absolute !important',
     bottom: 0,
     marginTop: 10
 };
 
 var innerStyle = {
-    position: 'relative',
+    position: 'relative !important',
     display: 'flex',
     justifyContent: 'center'
 };
@@ -19665,7 +19665,6 @@ var History = function (_React$Component) {
     _createClass(History, [{
         key: 'render',
         value: function render() {
-            console.log(this.props);
             return _react2.default.createElement(
                 'div',
                 { style: this.props.style },
@@ -19691,7 +19690,7 @@ var History = function (_React$Component) {
                                 _react2.default.createElement(
                                     _semanticUiReact.Segment,
                                     null,
-                                    index + '.'
+                                    index + 1 + '.'
                                 ),
                                 _react2.default.createElement(
                                     _semanticUiReact.Segment,
@@ -38285,7 +38284,7 @@ var boardStyle = {
 };
 
 var historyStyle = {
-    height: '100%',
+    height: '100% !important',
     width: 300,
     float: 'right'
 };
@@ -38976,6 +38975,12 @@ var gridStyle = {
     bottom: 0
 };
 
+var historyStyle = {
+    height: '100% !important',
+    width: 300,
+    float: 'right'
+};
+
 var AIBoardContainer = function (_React$Component) {
     _inherits(AIBoardContainer, _React$Component);
 
@@ -39160,7 +39165,7 @@ var AIBoardContainer = function (_React$Component) {
                     _react2.default.createElement(
                         _semanticUiReact.Grid.Column,
                         { width: 5 },
-                        _react2.default.createElement(_History2.default, { moves: this.state.moves }),
+                        _react2.default.createElement(_History2.default, { moves: this.state.moves, style: historyStyle }),
                         _react2.default.createElement(
                             _semanticUiReact.Button,
                             { onClick: this.reset },
@@ -39957,6 +39962,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var mapStateToProps = function mapStateToProps(state) {
     return {
         login: state.user.loggedIn,
+        username: state.user.username,
         active: state.navbar.active,
         open: state.navbar.open
     };
@@ -40000,7 +40006,7 @@ var NavBarContainer = function (_React$Component) {
 
             var loginItems = void 0;
             if (this.props.login) {
-                loginItems = [{ path: '/profile/', name: 'profile' }, { path: '/logout/', name: 'logout' }];
+                loginItems = [{ path: '/profile/', name: this.props.username }, { path: '/logout/', name: 'logout' }];
             } else {
                 loginItems = [{ path: '/login/', name: 'login' }, { path: '/register/', name: 'register' }];
             }

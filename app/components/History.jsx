@@ -16,7 +16,7 @@ const headerStyle = {
 }
 
 const tableStyle = {
-    position: 'absolute',
+    position: 'absolute !important',
     top: 50,
     bottom: 50,
     overflowY: 'scroll',
@@ -24,13 +24,13 @@ const tableStyle = {
 }
 
 const buttonsStyle = {
-    position: 'absolute',
+    position: 'absolute !important',
     bottom: 0,
-    marginTop: 10,
+    marginTop: 10
 }
 
 const innerStyle = {
-    position: 'relative',
+    position: 'relative !important',
     display: 'flex',
     justifyContent: 'center',
 }
@@ -46,7 +46,6 @@ export default class History extends React.Component {
     }
 
     render() {
-        console.log(this.props)
         return(
             <div style={this.props.style}>
                 <div style={headerStyle}>
@@ -56,7 +55,7 @@ export default class History extends React.Component {
                     <Segment.Group>
                     {this.props.moves.map((move, index) => (
                         <Segment.Group horizontal key={index} style={getStyle(index)}>
-                            <Segment>{`${index}.`}</Segment>
+                            <Segment>{`${index + 1}.`}</Segment>
                             <Segment>{`(${move.position[0]}, ${move.position[1]})`}</Segment>
                         </Segment.Group>
                     ))}
