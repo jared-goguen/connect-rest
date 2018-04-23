@@ -1,21 +1,11 @@
 import '../css/Board.css';
 import React from 'react';
-import Board from '../components/Board';
-import History from '../components/History';
+import Game from '../components/Game';
 import { Grid, Button } from 'semantic-ui-react';
 import ai from '../api/ai';
 import utility from '../js/utility';
 
-const gridStyle = {
-    position: 'relative',
-    bottom: 0,
-}
 
-const historyStyle = {
-    height: '100% !important',
-    width: 300,
-    float: 'right',
-}
 
 export default class AIBoardContainer extends React.Component {
     /* 
@@ -175,23 +165,21 @@ export default class AIBoardContainer extends React.Component {
         this.setState(this.getInitialState());
     }
 
+    getButtons = () => {
+        return [
+            <Button onClick={this.reset}>reset</Button>
+        ];
+    }
+
     render() {
         return (
-            <Grid style={gridStyle} divided='vertically'>
-                <Grid.Row>
-                    <Grid.Column width={10}>
-                        <Board board={this.state.board} 
-                               partialClick={this.partialClick} />
-                    </Grid.Column>
-                    <Grid.Column width={1} />
-                    <Grid.Column width={5}>
-                        <History moves={this.state.moves} style={historyStyle} />
-                        <Button onClick={this.reset}>reset</Button>
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            <Game 
+                historyProps={{moves: this.state.moves, buttons: this.getButtons()}}
+                boardProps={{board: this.state.board, partialClick: this.partialClick}}
+            />
         );
     }
+
 }
 
 AIBoardContainer.defaultProps = {

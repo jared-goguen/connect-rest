@@ -16,7 +16,7 @@ const headerStyle = {
 }
 
 const tableStyle = {
-    position: 'absolute !important',
+    position: 'absolute',
     top: 50,
     bottom: 50,
     overflowY: 'scroll',
@@ -24,13 +24,13 @@ const tableStyle = {
 }
 
 const buttonsStyle = {
-    position: 'absolute !important',
+    position: 'absolute',
     bottom: 0,
     marginTop: 10
 }
 
 const innerStyle = {
-    position: 'relative !important',
+    position: 'relative',
     display: 'flex',
     justifyContent: 'center',
 }
