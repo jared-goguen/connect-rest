@@ -8,4 +8,4 @@ The entry-point for the front end is [/app/containers/App.jsx](/app/containers/A
 
 The entry-point for the backend is effectively [/server/connect/urls.py](/server/connect/urls.py). All back end dependencies are detailed in [/server/requirements.txt](/server/requirements.txt).
 
-To build the front end, run the command `call npm run webpack` in [/app]](/app) (although, a built file is included in the repository). To run the back end, run the command `python manage.py runserver` in [/server](/server).
+To build the front end, run the command `call npm run webpack` in [/app](/app) (although, a built file is included in the repository). To run the back end, run the command `python manage.py runserver` in [/server](/server).
