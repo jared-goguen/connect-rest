@@ -6,7 +6,7 @@ Things that are working:
 * Authentication
 * Creating games
 * Playing with computer (albeit no AI)
-* Joining games (albeit terrible interface)
+* Joining games
 * Playing games
 
 Next things to do:
@@ -15,10 +15,14 @@ Next things to do:
 * Redesign History for both appearance and functionality
 * Add error handling on most requests
 
+Technical notes:
+* Restructure/decouple Board/Game components/containers
+* Write methods to better find abnd filter games
+
 
 The front end is in React (with react-router and redux). The back end uses the Django REST framework and only provides an API for AJAX requests from the frontend.
 
-The entry-point for the front end is [/app/containers/App.jsx](/app/containers/App.jsx). All of the style-based React components are in [/app/components](/app/components) and all of the logic-based Reacat components are in [/app/containers/](/app/containers/). All front end dependencies are detailed in [/app/package.json](/app/package.json).
+The entry-point for the front end is [/app/containers/App.jsx](/app/containers/App.jsx). All of the style-based React components are in [/app/components](/app/components) and all of the logic-based React components are in [/app/containers/](/app/containers/). All front end dependencies are detailed in [/app/package.json](/app/package.json).
 
 The entry-point for the back end is effectively [/server/connect/urls.py](/server/connect/urls.py). The site will then be hosted by default at [localhost:8000](http://localhost:8000). All back end dependencies are detailed in [/server/requirements.txt](/server/requirements.txt).
 
