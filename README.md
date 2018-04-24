@@ -7,9 +7,10 @@ Things that are working:
 * Creating games
 * Playing with computer (albeit no AI)
 * Joining games (albeit terrible interface)
+* People can make moves (albeit the styles are messed up)
 
 Next things to do:
-* Let people make moves
+* Fix styles on moves
 * Improve the game thumbnail interface
 * Add warning for joining game when not logged in
 * Implement decent AI for computer
