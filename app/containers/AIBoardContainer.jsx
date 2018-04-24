@@ -40,7 +40,7 @@ export default class AIBoardContainer extends React.Component {
                 row_array.push({
                     owner: -1,
                     playable: row === this.props.rows - 1 ? true : false,
-                    turn: this.props.turn
+                    currentTurn: state.turn
                 });
             }
             state.board.push(row_array);
@@ -168,7 +168,7 @@ export default class AIBoardContainer extends React.Component {
 
     getButtons = () => {
         return [
-            <Button onClick={this.reset}>reset</Button>
+            <Button key={0} onClick={this.reset}>reset</Button>
         ];
     }
 

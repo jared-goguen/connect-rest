@@ -26,8 +26,11 @@ module.exports = {
         })
     },
 
-    joinGame: function(id, dispatch, history) {
+    joinGame: function(id, dispatch, history, callback) {
         axios.post(`/api/games/join/${id}/`).then(response => {
+            if (callback) {
+                callback();
+            }
             history.push(`/games/${id}/`);
         }).catch(error => {
             console.log(error);

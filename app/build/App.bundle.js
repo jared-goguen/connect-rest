@@ -7331,8 +7331,11 @@ module.exports = {
         });
     },
 
-    joinGame: function joinGame(id, dispatch, history) {
+    joinGame: function joinGame(id, dispatch, history, callback) {
         _axiosDefault2.default.post('/api/games/join/' + id + '/').then(function (response) {
+            if (callback) {
+                callback();
+            }
             history.push('/games/' + id + '/');
         }).catch(function (error) {
             console.log(error);
@@ -39097,7 +39100,7 @@ var AIBoardContainer = function (_React$Component) {
                     row_array.push({
                         owner: -1,
                         playable: row === _this.props.rows - 1 ? true : false,
-                        turn: _this.props.turn
+                        currentTurn: state.turn
                     });
                 }
                 state.board.push(row_array);
@@ -39225,7 +39228,7 @@ var AIBoardContainer = function (_React$Component) {
         _this.getButtons = function () {
             return [_react2.default.createElement(
                 _semanticUiReact.Button,
-                { onClick: _this.reset },
+                { key: 0, onClick: _this.reset },
                 'reset'
             )];
         };
@@ -39494,7 +39497,7 @@ var labelStyle = {
 };
 
 var mapStateToProps = function mapStateToProps(state) {
-    return { loggedIn: state.loggedIn };
+    return { loggedIn: state.user.loggedIn };
 };
 
 var GameDetail = function (_React$Component) {
@@ -39523,7 +39526,11 @@ var GameDetail = function (_React$Component) {
         };
 
         _this.handleJoin = function () {
-            _games2.default.joinGame(_this.state.id, _this.props.dispatch, _this.props.history);
+            _games2.default.joinGame(_this.state.id, _this.props.dispatch, _this.props.history, function () {
+                _games2.default.retrieveGame(_this.props.match.params.id, function (response) {
+                    return _this.setState(response.data);
+                });
+            });
         };
 
         _games2.default.retrieveGame(_this.props.match.params.id, function (response) {
@@ -39532,6 +39539,8 @@ var GameDetail = function (_React$Component) {
         _this.state = {};
         _this.state.moveRow = undefined;
         _this.state.moveCol = undefined;
+
+        console.log(_this.props);
         return _this;
     }
 

@@ -13,7 +13,7 @@ const labelStyle = {
 
 
 const mapStateToProps = (state) => {
-    return {loggedIn : state.loggedIn}
+    return {loggedIn : state.user.loggedIn}
 }
 
 
@@ -26,6 +26,8 @@ class GameDetail extends React.Component {
         this.state = {};
         this.state.moveRow = undefined;
         this.state.moveCol = undefined;
+
+        console.log(this.props)
     }
 
     handleMove = (row, col) => {
@@ -46,7 +48,11 @@ class GameDetail extends React.Component {
     }
 
     handleJoin = () => {
-        games.joinGame(this.state.id, this.props.dispatch, this.props.history)
+        games.joinGame(this.state.id, this.props.dispatch, this.props.history, () => {
+            games.retrieveGame(this.props.match.params.id, response => 
+                this.setState(response.data)
+            );
+        })
     }
 
     render() {
