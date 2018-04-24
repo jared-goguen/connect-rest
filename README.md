@@ -14,6 +14,7 @@ Next things to do:
 * Implement decent AI for computer
 * Redesign History for both appearance and functionality
 * Add error handling on most requests
+* Section off profile into active/inactive games, indicate which are playable
 
 Technical notes:
 * Restructure/decouple Board/Game components/containers
