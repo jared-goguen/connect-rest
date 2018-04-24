@@ -38259,7 +38259,43 @@ var GameThumb = function (_React$Component) {
             var _props = this.props,
                 title = _props.title,
                 viewClick = _props.viewClick,
-                joinClick = _props.joinClick;
+                joinClick = _props.joinClick,
+                inGame = _props.inGame,
+                loggedIn = _props.loggedIn,
+                full = _props.full,
+                redirectClick = _props.redirectClick;
+
+
+            console.log(this.props);
+            if (inGame) {
+                var lastButton = _react2.default.createElement(
+                    _semanticUiReact.Button,
+                    { disabled: true, style: buttonStyle },
+                    'in game'
+                );
+            } else {
+                if (loggedIn && !full) {
+                    var lastButton = _react2.default.createElement(
+                        _semanticUiReact.Button,
+                        { primary: true, onClick: joinClick, style: buttonStyle },
+                        'join game'
+                    );
+                } else {
+                    if (full) {
+                        var lastButton = _react2.default.createElement(
+                            _semanticUiReact.Button,
+                            { disabled: true, style: buttonStyle },
+                            'game full'
+                        );
+                    } else {
+                        var lastButton = _react2.default.createElement(
+                            _semanticUiReact.Button,
+                            { color: 'red', onClick: redirectClick, style: buttonStyle },
+                            'log in'
+                        );
+                    }
+                }
+            }
 
             return _react2.default.createElement(
                 _semanticUiReact.Segment,
@@ -38269,20 +38305,12 @@ var GameThumb = function (_React$Component) {
                     { size: 'big', horizontal: true },
                     title
                 ),
-                this.props.inGame ? _react2.default.createElement(
-                    _semanticUiReact.Button,
-                    { disabled: true, onClick: joinClick, style: buttonStyle },
-                    'in game'
-                ) : _react2.default.createElement(
-                    _semanticUiReact.Button,
-                    { primary: true, onClick: joinClick, style: buttonStyle },
-                    'join game'
-                ),
                 _react2.default.createElement(
                     _semanticUiReact.Button,
                     { secondary: true, onClick: viewClick, style: buttonStyle },
                     'view game'
-                )
+                ),
+                lastButton
             );
         }
     }]);
@@ -39632,6 +39660,10 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var mapStateToProps = function mapStateToProps(state) {
+    return { loggedIn: state.user.loggedIn };
+};
+
 var GameThumbContainer = function (_React$Component) {
     _inherits(GameThumbContainer, _React$Component);
 
@@ -39648,6 +39680,10 @@ var GameThumbContainer = function (_React$Component) {
             _this.props.history.push('/games/' + _this.props.id + '/');
         };
 
+        _this.redirectClick = function () {
+            _this.props.history.push('/login/');
+        };
+
         console.log(_this.props);
         return _this;
     }
@@ -39659,7 +39695,10 @@ var GameThumbContainer = function (_React$Component) {
                 title: this.props.title,
                 inGame: this.props.in_game,
                 viewClick: this.viewClick,
-                joinClick: this.joinClick
+                joinClick: this.joinClick,
+                redirectClick: this.redirectClick,
+                loggedIn: this.props.loggedIn,
+                full: this.props.full
             });
         }
     }]);
@@ -39667,7 +39706,7 @@ var GameThumbContainer = function (_React$Component) {
     return GameThumbContainer;
 }(_react2.default.Component);
 
-exports.default = (0, _reactRedux.connect)()((0, _reactRouter.withRouter)(GameThumbContainer));
+exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactRouter.withRouter)(GameThumbContainer));
 
 /***/ }),
 /* 660 */

@@ -18,22 +18,24 @@ export default class GameThumb extends React.Component {
     }
 
     render() {
-        let { title, viewClick, joinClick } = this.props;
+        let { title, viewClick, joinClick, inGame, loggedIn, full, redirectClick } = this.props;
+
+        console.log(this.props)
+        if (inGame) {
+            var lastButton = <Button disabled style={buttonStyle}>in game</Button>
+        } else { if (loggedIn && !full) {
+            var lastButton = <Button primary onClick={joinClick} style={buttonStyle}>join game</Button>
+        } else { if (full) { 
+            var lastButton = <Button disabled style={buttonStyle}>game full</Button>
+        } else {
+            var lastButton = <Button color='red' onClick={redirectClick} style={buttonStyle}>log in</Button>
+        }}}
+
         return (
             <Segment color='yellow'>
                 <Label size='big' horizontal>{title}</Label>
-                {this.props.inGame ? 
-                    <Button disabled onClick={joinClick} style={buttonStyle}>
-                        in game
-                    </Button>
-                :
-                    <Button primary onClick={joinClick} style={buttonStyle}>
-                        join game
-                    </Button>
-                }
-                <Button secondary onClick={viewClick} style={buttonStyle}>
-                    view game
-                </Button>
+                <Button secondary onClick={viewClick} style={buttonStyle}>view game</Button>
+                {lastButton}
             </Segment>
         );
     }
