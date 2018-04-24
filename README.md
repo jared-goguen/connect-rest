@@ -7,14 +7,13 @@ Things that are working:
 * Creating games
 * Playing with computer (albeit no AI)
 * Joining games (albeit terrible interface)
-* People can make moves (albeit the styles are messed up)
+* People can make moves
 
 Next things to do:
-* Fix styles on moves
 * Improve the game thumbnail interface
-* Add warning for joining game when not logged in
 * Implement decent AI for computer
 * Redesign History for both appearance and functionality
+* Add error handling on most requests
 
 
 The front end is in React (with react-router and redux). The back end uses the Django REST framework and only provides an API for AJAX requests from the frontend.
