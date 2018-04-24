@@ -39,7 +39,8 @@ export default class AIBoardContainer extends React.Component {
             for (var col=0; col < this.props.cols; col++) {
                 row_array.push({
                     owner: -1,
-                    playable: row === this.props.rows - 1 ? true : false
+                    playable: row === this.props.rows - 1 ? true : false,
+                    turn: this.props.turn
                 });
             }
             state.board.push(row_array);

@@ -27,7 +27,8 @@ class BoardContainer extends React.Component {
                 var owner = this.props.board[row][col];
                 var playable = this.props.isTurn && (owner === -1 && (row === row_count - 1 || this.props.board[row + 1][col] !== -1));
                 var selected = (row == this.props.moveRow) && (col == this.props.moveCol);
-                cells.push({owner, playable, selected});
+                var currentTurn = this.props.currentTurn;
+                cells.push({owner, playable, selected, currentTurn});
             }
             rows.push(cells);
         }

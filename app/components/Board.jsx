@@ -28,6 +28,7 @@ export default class Board extends React.Component {
                 cell_options.owner = this.props.board[row][col].owner;
                 cell_options.playable = this.props.board[row][col].playable;
                 cell_options.selected = this.props.board[row][col].selected;
+                cell_options.currentTurn = this.props.board[row][col].currentTurn;
                 cells.push(<Cell {...cell_options} />)
             }
             rows.push(<div key={row} className='Row'>{cells}</div>);

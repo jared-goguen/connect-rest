@@ -12,8 +12,8 @@ const labelStyle = {
 }
 
 
-mapStateToProps = (state) => {
-    loggedIn : state.loggedIn
+const mapStateToProps = (state) => {
+    return {loggedIn : state.loggedIn}
 }
 
 
@@ -37,8 +37,11 @@ class GameDetail extends React.Component {
 
     submitMove = () => {
         games.submitMove(this.state.id, this.state.moveRow, this.state.moveCol, response => {
-            console.log(response.data);
             this.setState(response.data.game);
+            this.setState({
+                moveRow: undefined,
+                moveCol: undefined
+            });
         });
     }
 
@@ -74,6 +77,7 @@ class GameDetail extends React.Component {
                         moveCol={this.state.moveCol}
                         isTurn={this.state.is_turn}
                         handleMove={this.handleMove}
+                        currentTurn={this.state.turn}
                     />
                 </div>
             );

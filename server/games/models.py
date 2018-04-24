@@ -97,7 +97,11 @@ class Game(models.Model):
         return positions
 
     def is_turn(self, user):
-        return user.player.pk == self.next_player.pk
+        return self.in_progress and user.player.pk == self.next_player.pk
+
+    @property
+    def in_progress(self):
+        return self.started and not self.done
 
     def make_move(self, user, row, col):
         if not self.is_turn(user):

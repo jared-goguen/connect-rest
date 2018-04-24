@@ -29,37 +29,51 @@
     width: 100%;
     border-radius: 50%;
     opacity: 0.5;
-    border: 2px solid #f44195;
-
+    border: 2px solid #222222;
 }
 
-.Playable {
-    background-color: #f4a1c8;
+.color0 {
+    background-color: #ff308d;
+    opacity: 0.9;
 }
 
-.Selected {
-    background-color: #4286f4;
+.Playable0 {
+    background-color: #f9bdd8;
 }
 
-.Playable:hover, 
-.Playable:focus {
-    background-color: #f44195;
+.Playable0:hover, 
+.Playable0:focus {
+    background-color: #f99dc7;
     opacity: 0.6;
+}
+
+.Selected0 {
+    background-color: #ff6bad;
+    opacity: 0.8;
+}
+
+.color1 {
+    background-color: #1bfcb5;
+    opacity: 0.9;
+}
+
+.Playable1 {
+    background-color: #b7ffe8;
+}
+
+.Playable1:hover, 
+.Playable1:focus {
+    background-color: #93ffdd;
+    opacity: 0.6;
+}
+
+.Selected1 {
+    background-color: #4fffc7;
+    opacity: 0.8;
 }
 
 .color-1 {
     background-color: #ffffff;
 }
 
-.color0 {
-    background-color: #f44265;
-    opacity: 0.9;
-    border: 2px solid #f44265;
-}
-
-.color1 {
-    background-color: #41f4c7;
-    opacity: 0.9;
-    border: 2px solid #41f4c7;
-}
 

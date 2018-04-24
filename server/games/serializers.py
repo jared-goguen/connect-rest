@@ -39,15 +39,17 @@ class GameSerializer(serializers.ModelSerializer):
 
     def is_player_turn(self, obj):
         user = self.context['request'].user
-        return not user.is_anonymous() and obj.started and user.player.pk == obj.next_player.pk
+        return not user.is_anonymous() and obj.in_progress and user.player.pk == obj.next_player.pk
 
     def get_status(self, obj):
         if obj.done:
             return 'Complete'
-        elif obj.started and not self.is_in_game(obj):
+        elif obj.in_progress and not self.is_in_game(obj):
             return 'In progress'
-        elif obj.started and self.is_in_game(obj) and self.is_player_turn(obj):
+        elif obj.in_progress and self.is_in_game(obj) and self.is_player_turn(obj):
             return 'Your turn'
-        elif obj.started and self.is_in_game(obj) and not self.is_player_turn(obj):
+        elif obj.in_progress and self.is_in_game(obj) and not self.is_player_turn(obj):
             return 'Not your turn'
+        elif obj.done:
+            return 'Game is complete'
         return 'Waiting for players'

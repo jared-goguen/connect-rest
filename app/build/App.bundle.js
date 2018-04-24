@@ -38098,6 +38098,7 @@ var Board = function (_React$Component) {
                     cell_options.owner = this.props.board[row][col].owner;
                     cell_options.playable = this.props.board[row][col].playable;
                     cell_options.selected = this.props.board[row][col].selected;
+                    cell_options.currentTurn = this.props.board[row][col].currentTurn;
                     cells.push(_react2.default.createElement(_Cell2.default, cell_options));
                 }
                 rows.push(_react2.default.createElement(
@@ -38180,9 +38181,9 @@ var Cell = function (_React$Component) {
             var circle_options = {};
 
             if (this.props.selected) {
-                circle_classes.push('Selected');
+                circle_classes.push('Selected' + this.props.currentTurn.toString());
             } else if (this.props.playable) {
-                circle_classes.push('Playable');
+                circle_classes.push('Playable' + this.props.currentTurn.toString());
                 circle_options.onClick = this.props.partialClick(this.props.row, this.props.col);
             } else {
                 circle_classes.push('color' + String(this.props.owner));
@@ -39095,7 +39096,8 @@ var AIBoardContainer = function (_React$Component) {
                 for (var col = 0; col < _this.props.cols; col++) {
                     row_array.push({
                         owner: -1,
-                        playable: row === _this.props.rows - 1 ? true : false
+                        playable: row === _this.props.rows - 1 ? true : false,
+                        turn: _this.props.turn
                     });
                 }
                 state.board.push(row_array);
@@ -39406,7 +39408,8 @@ var BoardContainer = function (_React$Component) {
                     var owner = _this.props.board[row][col];
                     var playable = _this.props.isTurn && owner === -1 && (row === row_count - 1 || _this.props.board[row + 1][col] !== -1);
                     var selected = row == _this.props.moveRow && col == _this.props.moveCol;
-                    cells.push({ owner: owner, playable: playable, selected: selected });
+                    var currentTurn = _this.props.currentTurn;
+                    cells.push({ owner: owner, playable: playable, selected: selected, currentTurn: currentTurn });
                 }
                 rows.push(cells);
             }
@@ -39490,6 +39493,10 @@ var labelStyle = {
     height: 30
 };
 
+var mapStateToProps = function mapStateToProps(state) {
+    return { loggedIn: state.loggedIn };
+};
+
 var GameDetail = function (_React$Component) {
     _inherits(GameDetail, _React$Component);
 
@@ -39507,8 +39514,11 @@ var GameDetail = function (_React$Component) {
 
         _this.submitMove = function () {
             _games2.default.submitMove(_this.state.id, _this.state.moveRow, _this.state.moveCol, function (response) {
-                console.log(response.data);
                 _this.setState(response.data.game);
+                _this.setState({
+                    moveRow: undefined,
+                    moveCol: undefined
+                });
             });
         };
 
@@ -39552,7 +39562,7 @@ var GameDetail = function (_React$Component) {
                         { color: 'blue', style: labelStyle, onClick: this.submitMove },
                         'Submit Move'
                     ) : null,
-                    !this.state.in_game ? _react2.default.createElement(
+                    !this.state.in_game && this.props.loggedIn ? _react2.default.createElement(
                         _semanticUiReact.Button,
                         { color: 'green', style: labelStyle, onClick: this.handleJoin },
                         'Join Game'
@@ -39563,7 +39573,8 @@ var GameDetail = function (_React$Component) {
                         moveRow: this.state.moveRow,
                         moveCol: this.state.moveCol,
                         isTurn: this.state.is_turn,
-                        handleMove: this.handleMove
+                        handleMove: this.handleMove,
+                        currentTurn: this.state.turn
                     })
                 );
             }
@@ -39573,7 +39584,7 @@ var GameDetail = function (_React$Component) {
     return GameDetail;
 }(_react2.default.Component);
 
-exports.default = (0, _reactRedux.connect)()((0, _reactRouter.withRouter)(GameDetail));
+exports.default = (0, _reactRedux.connect)(mapStateToProps)((0, _reactRouter.withRouter)(GameDetail));
 
 /***/ }),
 /* 659 */
@@ -47964,7 +47975,7 @@ exports = module.exports = __webpack_require__(932)(false);
 
 
 // module
-exports.push([module.i, ".BoardWrapper {\r\n    width: 100%;\r\n    padding-bottom: 85.7143%;\r\n    position: relative;\r\n}\r\n\r\n.Board {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n\r\n.Row {\r\n    height: 16.6667%;\r\n    margin: 0px;\r\n}\r\n\r\n.Cell {\r\n    width: 14.2857%;\r\n    height: 100%;\r\n    display: inline-block;\r\n    padding: 0.5%;\r\n}\r\n\r\n.Circle {\r\n    height: 100%;\r\n    width: 100%;\r\n    border-radius: 50%;\r\n    opacity: 0.5;\r\n    border: 2px solid #f44195;\r\n\r\n}\r\n\r\n.Playable {\r\n    background-color: #f4a1c8;\r\n}\r\n\r\n.Selected {\r\n    background-color: #4286f4;\r\n}\r\n\r\n.Playable:hover, \r\n.Playable:focus {\r\n    background-color: #f44195;\r\n    opacity: 0.6;\r\n}\r\n\r\n.color-1 {\r\n    background-color: #ffffff;\r\n}\r\n\r\n.color0 {\r\n    background-color: #f44265;\r\n    opacity: 0.9;\r\n    border: 2px solid #f44265;\r\n}\r\n\r\n.color1 {\r\n    background-color: #41f4c7;\r\n    opacity: 0.9;\r\n    border: 2px solid #41f4c7;\r\n}\r\n\r\n", ""]);
+exports.push([module.i, ".BoardWrapper {\r\n    width: 100%;\r\n    padding-bottom: 85.7143%;\r\n    position: relative;\r\n}\r\n\r\n.Board {\r\n    position: absolute;\r\n    top: 0;\r\n    bottom: 0;\r\n    left: 0;\r\n    right: 0;\r\n}\r\n\r\n.Row {\r\n    height: 16.6667%;\r\n    margin: 0px;\r\n}\r\n\r\n.Cell {\r\n    width: 14.2857%;\r\n    height: 100%;\r\n    display: inline-block;\r\n    padding: 0.5%;\r\n}\r\n\r\n.Circle {\r\n    height: 100%;\r\n    width: 100%;\r\n    border-radius: 50%;\r\n    opacity: 0.5;\r\n    border: 2px solid #222222;\r\n}\r\n\r\n.color0 {\r\n    background-color: #ff308d;\r\n    opacity: 0.9;\r\n}\r\n\r\n.Playable0 {\r\n    background-color: #f9bdd8;\r\n}\r\n\r\n.Playable0:hover, \r\n.Playable0:focus {\r\n    background-color: #f99dc7;\r\n    opacity: 0.6;\r\n}\r\n\r\n.Selected0 {\r\n    background-color: #ff6bad;\r\n    opacity: 0.8;\r\n}\r\n\r\n.color1 {\r\n    background-color: #1bfcb5;\r\n    opacity: 0.9;\r\n}\r\n\r\n.Playable1 {\r\n    background-color: #b7ffe8;\r\n}\r\n\r\n.Playable1:hover, \r\n.Playable1:focus {\r\n    background-color: #93ffdd;\r\n    opacity: 0.6;\r\n}\r\n\r\n.Selected1 {\r\n    background-color: #4fffc7;\r\n    opacity: 0.8;\r\n}\r\n\r\n.color-1 {\r\n    background-color: #ffffff;\r\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
