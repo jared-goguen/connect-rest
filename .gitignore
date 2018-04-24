@@ -24,6 +24,7 @@ venv/
 .installed.cfg
 *.egg
 *.pyc
+app/build/
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
