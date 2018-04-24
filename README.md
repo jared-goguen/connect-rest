@@ -7,7 +7,7 @@ Things that are working:
 * Creating games
 * Playing with computer (albeit no AI)
 * Joining games (albeit terrible interface)
-* People can make moves
+* Playing games
 
 Next things to do:
 * Improve the game thumbnail interface
