@@ -58,3 +58,4 @@ export default class History extends React.Component {
             maxIndex: nextProps.moves.length
         });
     }
+}

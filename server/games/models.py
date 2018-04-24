@@ -65,8 +65,9 @@ class Game(models.Model):
 
     def start_game(self):
         self.started = True
-        self.order = [p.pk for p in self.players.all()]
-        shuffle(self.order)
+        order = [p.pk for p in self.players.all()]
+        shuffle(order)
+        self.order = order
         self.advance_turn()
         self.save()
 
@@ -111,6 +112,7 @@ class Game(models.Model):
             return messages.ERROR, 'That is not a valid move...'
 
         self.board[row][col] = self.turn
+        self.history.append({'player': self.turn, 'position': [row, col]})
         
         if self.check_victory():
             self.assign_victor(self.next_player)
