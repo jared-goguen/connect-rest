@@ -18,7 +18,7 @@ Next things to do:
 
 Technical notes:
 * Restructure/decouple Board/Game components/containers
-* Write methods to better find abnd filter games
+* Write methods to better find and filter games
 
 
 The front end is in React (with react-router and redux). The back end uses the Django REST framework and only provides an API for AJAX requests from the frontend.
