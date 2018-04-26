@@ -18,7 +18,7 @@ Next things to do:
 
 Technical notes:
 * Restructure/decouple Board/Game components/containers
-* Write methods to better find abnd filter games
+* Write methods to better find and filter games
 
 
 The front end is in React (with react-router and redux). The back end uses the Django REST framework and only provides an API for AJAX requests from the frontend.
@@ -27,4 +27,4 @@ The entry-point for the front end is [/app/containers/App.jsx](/app/containers/A
 
 The entry-point for the back end is effectively [/server/connect/urls.py](/server/connect/urls.py). The site will then be hosted by default at [localhost:8000](http://localhost:8000). All back end dependencies are detailed in [/server/requirements.txt](/server/requirements.txt).
 
-To build the front end, run the command `call npm run webpack` in [/app](/app) - calling `npm install` in that folder will install the dependencies. To run the back end, run the command `python manage.py runserver` in [/server](/server) - calling `pip install -r requirements.txt` will install the dependencies.
+To build the front end, run the command `call npm run webpack` in [/app](/app) - calling `npm install` in that folder will install the dependencies. To run the back end, run the command `python manage.py runserver` in [/server](/server) - calling `pip install -r requirements.txt` will install the dependencies. The back end also employs a PostgreSQL database that needs to be running as specified in `server/connect/settings.py`.
