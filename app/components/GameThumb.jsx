@@ -2,8 +2,8 @@ import React from 'react';
 import { Segment, Label } from 'semantic-ui-react'
 import { Button } from 'semantic-ui-react';
 
-const labelStyle = {
-    float: 'left'
+const titleLabelStyle = {
+    marginRight: 30,
 };
 
 const buttonStyle = {
@@ -18,9 +18,8 @@ export default class GameThumb extends React.Component {
     }
 
     render() {
-        let { title, viewClick, joinClick, inGame, loggedIn, full, redirectClick } = this.props;
+        let { title, viewClick, joinClick, inGame, loggedIn, full, redirectClick, players } = this.props;
 
-        console.log(this.props)
         if (inGame) {
             var lastButton = <Button disabled style={buttonStyle}>in game</Button>
         } else { if (loggedIn && !full) {
@@ -32,8 +31,11 @@ export default class GameThumb extends React.Component {
         }}}
 
         return (
-            <Segment color='yellow'>
-                <Label size='big' horizontal>{title}</Label>
+            <Segment color='blue'>
+                <Label size='big' color="teal" style={titleLabelStyle} horizontal>{title}</Label>
+                { players.map((player, i) => 
+                    <Label size='big' key={i} horizontal>{player}</Label>
+                ) }
                 <Button secondary onClick={viewClick} style={buttonStyle}>view game</Button>
                 {lastButton}
             </Segment>

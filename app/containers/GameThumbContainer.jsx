@@ -37,6 +37,7 @@ class GameThumbContainer extends React.Component {
                 redirectClick={this.redirectClick} 
                 loggedIn={this.props.loggedIn}
                 full={this.props.full}
+                players={this.props.player_names}
             />
         );
     }

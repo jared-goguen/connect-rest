@@ -16,7 +16,7 @@ export default class GamesIndex extends React.Component {
         return (
             <div className='Games'>
                 <Link to='/games/create/'>
-                    <Button color='red' style={buttonStyle}>
+                    <Button color='blue' style={buttonStyle}>
                         create game
                     </Button>
                 </Link>

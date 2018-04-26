@@ -44,7 +44,6 @@ class Game(models.Model):
     rows = models.IntegerField(default=6)
     cols = models.IntegerField(default=7)
 
-
     def add_player(self, player):
 
         if player in self.players.all():

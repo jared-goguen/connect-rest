@@ -2,7 +2,7 @@ import React from 'react';
 import { Header, Button } from 'semantic-ui-react';
 
 const profileStyle = {
-
+    marginLeft: 15,
 };
 
 export default class Profile extends React.Component {

@@ -7,6 +7,7 @@ class GameSerializer(serializers.ModelSerializer):
     in_game = serializers.SerializerMethodField(method_name='is_in_game')
     is_turn = serializers.SerializerMethodField(method_name='is_player_turn')
     status = serializers.SerializerMethodField()
+    player_names = serializers.SerializerMethodField()
 
     class Meta:
         model = Game
@@ -30,7 +31,9 @@ class GameSerializer(serializers.ModelSerializer):
             'owner',
             'in_game',
             'is_turn',
-            'status'
+            'status',
+            'player_names'
+
         )
 
     def is_in_game(self, obj):
@@ -53,3 +56,6 @@ class GameSerializer(serializers.ModelSerializer):
         elif obj.done:
             return 'Game is complete'
         return 'Waiting for players'
+
+    def get_player_names(self, obj):
+        return [player.user.username for player in obj.players.all()]
