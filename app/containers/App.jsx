@@ -1,4 +1,5 @@
 import React from 'react';
+import { hot } from 'react-hot-loader';
 import ReactDOM  from 'react-dom';
 
 import AppContainer from './AppContainer';
@@ -19,10 +20,12 @@ const routeActions = [
 //  (location, history) => {console.log(location)},
 ];
 
-const App = () => (
+let App = () => (
     <Provider store={store}>
         <AppContainer routeActions={routeActions}/>
     </Provider>
 );
+
+App = hot(module)(App)
 
 ReactDOM.render(<App />, document.getElementById('app'));

@@ -2,14 +2,14 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
-  entry: [
-    'babel-polyfill',
-    './containers/App.jsx'
-  ],
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'App.bundle.js',
-    publicPath: 'http://localhost:8000'
+  entry: {
+    app: './containers/App.jsx'
+  },
+  devtool: 'inline-source-map',
+    devServer: {
+      contentBase: '.',
+      hot: true,
+      port: 8080
   },
   resolve: {
     extensions: ['.js', '.jsx']
@@ -24,7 +24,8 @@ module.exports = {
           presets: ['es2015', 'react'],
           plugins: [
             'transform-class-properties', 
-            'transform-object-rest-spread'
+            'transform-object-rest-spread',
+            'react-hot-loader/babel'
           ]
         }
       }, {
@@ -38,5 +39,10 @@ module.exports = {
         loader: 'file-loader'
       }
     ]
+  },
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'App.bundle.js',
+    publicPath: 'http://localhost:8080'
   }
 };

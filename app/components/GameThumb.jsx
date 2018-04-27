@@ -31,7 +31,7 @@ export default class GameThumb extends React.Component {
         }}}
 
         return (
-            <Segment color='blue'>
+            <Segment color='pink'>
                 <Label size='big' color="teal" style={titleLabelStyle} horizontal>{title}</Label>
                 { players.map((player, i) => 
                     <Label size='big' key={i} horizontal>{player}</Label>
