@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
+  mode: 'development',
   entry: {
     app: './containers/App.jsx'
   },
@@ -15,28 +16,37 @@ module.exports = {
     extensions: ['.js', '.jsx']
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel-loader',
         exclude: /node_modules/,
-        query: {
-          presets: ['es2015', 'react'],
-          plugins: [
-            'transform-class-properties', 
-            'transform-object-rest-spread',
-            'react-hot-loader/babel'
-          ]
+        use: { 
+          loader: 'babel-loader',
+          options: {
+            presets: ['env', 'es2015', 'react'],
+            plugins: [
+              'transform-class-properties', 
+              'transform-object-rest-spread',
+              'react-hot-loader/babel'
+            ]
+          }
         }
       }, {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'css-loader'}
+        ]
       }, {
         test: /\.(jpg|png|svg)$/,
-        loader: 'url-loader'
+        use: {
+          loader: 'url-loader'
+        }
       }, {
         test: /\.(eot|svg|ttf|woff|woff2)$/,
-        loader: 'file-loader'
+        use: {
+          loader: 'file-loader'
+        }
       }
     ]
   },
@@ -44,5 +54,10 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'App.bundle.js',
     publicPath: 'http://localhost:8080'
+  },
+  watch: true,
+  watchOptions: {
+      aggregateTimeout: 300,
+      poll: 1000
   }
 };

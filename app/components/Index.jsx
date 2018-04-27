@@ -13,6 +13,7 @@ export default class Index extends React.Component {
         return (
             <div style={indexStyle}>
                 <h2>A place for humans to play with other humans (or a mediocre AI).</h2>
+                <p>Get ready!</p>
             </div>
         );
     }
