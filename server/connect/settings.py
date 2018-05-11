@@ -141,7 +141,6 @@ USE_L10N = True
 USE_TZ = True
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
@@ -156,3 +155,14 @@ STATICFILES_DIRS = (
     join(SITE_ROOT, '../app/build'),
     join(SITE_ROOT, '../app/css'),
 )
+
+
+# Celery settings
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost//'
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_BACKEND = 'db+postgresql+psycopg2://postgres:postgres@localhost:5432/postgres'
+CELERY_TASK_SERIALIZER = 'json'
