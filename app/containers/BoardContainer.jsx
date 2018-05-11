@@ -1,7 +1,6 @@
 import React from 'react';
 import Game from '../components/Game';
 
-import { Button } from 'semantic-ui-react';
 
 class BoardContainer extends React.Component {
     /* 
@@ -37,9 +36,9 @@ class BoardContainer extends React.Component {
 
     getButtons = () => {
         return [
-            <Button key={0}>reset</Button>,
-            <Button key={1}>left</Button>,
-            <Button key={2}>right</Button>
+            {name: reset, click: ()=>{}},
+            {name: left, click: ()=>{}},
+            {name: right, click: ()=>{}}
         ];
     }
 

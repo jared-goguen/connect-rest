@@ -1,5 +1,5 @@
 import React from 'react';
-import { Segment, Header } from 'semantic-ui-react';
+import { Segment, Header, Button } from 'semantic-ui-react';
 
 const oddStyle = {
     backgroundColor: '#ffffff'
@@ -63,7 +63,9 @@ export default class History extends React.Component {
                 </div>
                 <div style={buttonsStyle}>
                     <div style={innerStyle}>
-                        {this.props.buttons}
+                        {this.props.buttons.map(({name, click}, i) => {
+                            <Button onClick={click}>{name}</Button>
+                        })}
                     </div>
                 </div>
             </div>
