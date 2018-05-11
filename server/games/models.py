@@ -3,7 +3,6 @@ from __future__ import unicode_literals
 import json
 
 from django.db import models
-from django.contrib.auth.models import User
 from django.contrib import admin, messages
 from django.contrib.postgres.fields import JSONField
 
@@ -36,6 +35,7 @@ class Game(models.Model):
     done = models.BooleanField(default=False)
     full = models.BooleanField(default=False)
     started = models.BooleanField(default=False)
+    in_progress = models.BooleanField(default=False)
     max_players = models.IntegerField(default=2)
     order = JSONField(default=default_order)
     next_player = models.ForeignKey(Player, related_name='next_player', null=True)
@@ -43,6 +43,15 @@ class Game(models.Model):
     owner = models.ForeignKey(Player, related_name='owner')
     rows = models.IntegerField(default=6)
     cols = models.IntegerField(default=7)
+
+    @classmethod
+    def create(cls, player, title):
+        game = cls()
+        game.owner = player
+        game.title = title
+        game.save()
+        player.games.add(game)
+        return game
 
     def add_player(self, player):
 
@@ -63,7 +72,7 @@ class Game(models.Model):
             return (messages.ERROR, 'Game is full')
 
     def start_game(self):
-        self.started = True
+        self.started = self.in_progress = True
         order = [p.pk for p in self.players.all()]
         shuffle(order)
         self.order = order
@@ -90,21 +99,17 @@ class Game(models.Model):
     def get_valid_moves(self):
         positions = []
         for col in range(self.cols):
-            for row in range(self.rows):
+            for row in reversed(range(self.rows)):
                 if self.board[row][col] == -1:
                     positions.append((row, col))
                     break
         return positions
 
-    def is_turn(self, user):
-        return self.in_progress and user.player.pk == self.next_player.pk
+    def is_turn(self, player):
+        return self.in_progress and player.pk == self.next_player.pk
 
-    @property
-    def in_progress(self):
-        return self.started and not self.done
-
-    def make_move(self, user, row, col):
-        if not self.is_turn(user):
+    def make_move(self, player, row, col):
+        if not self.is_turn(player):
             return messages.ERROR, 'It is not your turn...'
         
         if not self.check_valid_position(row, col):
@@ -128,6 +133,7 @@ class Game(models.Model):
 
     def assign_victor(self, winner):
         self.done = True
+        self.in_progress = False
         self.turn = -1
         self.winner = winner
         self.next_player = None

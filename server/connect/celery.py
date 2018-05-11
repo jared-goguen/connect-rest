@@ -17,9 +17,9 @@ app.autodiscover_tasks()
 
 
 app.conf.beat_schedule = {
-    'add 1 second': {
-        'task': 'ai.tasks.add',
-        'schedule': 10.0,
-        'args': ()
-    },
+	'run bots every 10 seconds': {
+		'task': 'ai.tasks.run_bots',
+		'schedule': 10.0,
+		'args': ()
+	},
 }

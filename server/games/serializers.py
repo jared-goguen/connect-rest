@@ -32,7 +32,8 @@ class GameSerializer(serializers.ModelSerializer):
             'in_game',
             'is_turn',
             'status',
-            'player_names'
+            'player_names',
+            'in_progress'
 
         )
 
