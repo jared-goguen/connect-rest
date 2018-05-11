@@ -18,6 +18,22 @@ module.exports = {
         })
     },
 
+    retrieveOpen: function(state, callback) {
+        axios.get('/api/games/open', state).then(response => {
+            callback(response);
+        }).catch(error => {
+            console.log(error);
+        })
+    },
+
+    retrieveCurrent: function(state, callback) {
+        axios.get('/api/games/current', state).then(response => {
+            callback(response);
+        }).catch(error => {
+            console.log(error);
+        })
+    },
+
     retrieveGame: function(id, callback) {
         axios.get(`/api/games/${id}/`).then(response => {
             callback(response);

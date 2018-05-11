@@ -71,7 +71,7 @@ class GameDetail extends React.Component {
                     :
                         null
                     }
-                    { !this.state.in_game && this.props.loggedIn ? 
+                    { !this.state.full && !this.state.in_game && this.props.loggedIn ? 
                         <Button color='green' style={labelStyle} onClick={this.handleJoin}>Join Game</Button>
                     :
                         null

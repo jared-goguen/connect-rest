@@ -4,7 +4,7 @@ import Board from './Board';
 
 const containerStyle = {
     position: 'absolute',
-    top: '10vh',
+    top: 100,
     bottom: '5vh',
     left: '5vw',
     right: '5vw'
@@ -13,15 +13,17 @@ const containerStyle = {
 const boardStyle = {
     height: '100%',
     position: 'absolute',
-    left: 0,
-    right: 350,
+    left: 15,
+    right: 15,
 }
 
+/*
 const historyStyle = {
     height: '100%',
     width: 300,
     float: 'right',
 }
+*/
 
 export default class Game extends React.Component {
     constructor(props) {
@@ -31,7 +33,7 @@ export default class Game extends React.Component {
     render() {
         return (
             <div style={containerStyle}>
-                <History {...this.props.historyProps} style={historyStyle}/>
+                {/* <History {...this.props.historyProps} style={historyStyle}/> */}
                 <Board {...this.props.boardProps} style={boardStyle}/>
             </div>
         );

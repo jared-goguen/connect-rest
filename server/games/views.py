@@ -23,6 +23,20 @@ class GameViewSet(viewsets.ModelViewSet):
         return super(GameViewSet, self).create(request, *args, **kwargs)
 
 
+@api_view(['GET', 'POST'])
+def open_games(request):
+    games = Game.objects.filter(full=False)
+    serialized_games = [GameSerializer(g, context={'request': request}).data for g in games]
+    return JsonResponse({'games': serialized_games})
+
+
+@api_view(['GET', 'POST'])
+def current_games(request):
+    games = Game.objects.filter(in_progress=True)
+    serialized_games = [GameSerializer(g, context={'request': request}).data for g in games]
+    return JsonResponse({'games': serialized_games})
+
+
 @api_view(['POST'])
 def join_game(request, id):
     player = request.user.player

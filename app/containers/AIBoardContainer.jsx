@@ -99,7 +99,7 @@ export default class AIBoardContainer extends React.Component {
     // last move must have caused win
     checkDone = (board, row, col) => {
         var owner = board[row][col].owner;
-        console.log(owner);
+        // console.log(owner);
 
         var horizontal = [];
         for (var j=Math.max(0, col-3); j <= Math.min(this.props.cols-1, col+3); j++) {

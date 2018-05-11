@@ -31,12 +31,12 @@ export default class GameThumb extends React.Component {
         }}}
 
         return (
-            <Segment color='pink'>
-                <Label size='big' color="teal" style={titleLabelStyle} horizontal>{title}</Label>
+            <Segment color='gray'>
+                <Label size='large' color="teal" style={titleLabelStyle} horizontal>{title}</Label>
                 { players.map((player, i) => 
-                    <Label size='big' key={i} horizontal>{player}</Label>
+                    <Label size='large' key={i} horizontal>{player}</Label>
                 ) }
-                <Button secondary onClick={viewClick} style={buttonStyle}>view game</Button>
+                <Button secondary size='small' onClick={viewClick} style={buttonStyle}>view game</Button>
                 {lastButton}
             </Segment>
         );

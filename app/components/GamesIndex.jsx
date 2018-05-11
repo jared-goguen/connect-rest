@@ -4,7 +4,8 @@ import { Button } from 'semantic-ui-react';
 import GamesContainer from '../containers/GamesContainer';
 
 const buttonStyle = {
-    marginLeft: 15
+    marginLeft: 15,
+    marginBottom: 15
 };
 
 export default class GamesIndex extends React.Component {

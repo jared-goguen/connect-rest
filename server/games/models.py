@@ -139,7 +139,7 @@ class Game(models.Model):
         self.next_player = None
 
     def is_full(self):
-        for col in self.board[-1]:
+        for col in self.board[0]:
             if col == -1:
                 return False
         return True
