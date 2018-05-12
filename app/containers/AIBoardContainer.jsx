@@ -168,7 +168,7 @@ export default class AIBoardContainer extends React.Component {
 
     getButtons = () => {
         return [
-            <Button key={0} onClick={this.reset}>reset</Button>
+            {name: 'reset', click: this.reset}
         ];
     }
 

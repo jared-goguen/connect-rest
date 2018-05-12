@@ -10,24 +10,24 @@ module.exports = {
         });
     },
 
-    retrieveList: function(state, callback) {
-        axios.get('/api/games/', state).then(response => {
+    retrieveList: function(callback) {
+        axios.get('/api/games/').then(response => {
             callback(response);
         }).catch(error => {
             console.log(error);
         })
     },
 
-    retrieveOpen: function(state, callback) {
-        axios.get('/api/games/open', state).then(response => {
+    retrieveOpen: function(callback) {
+        axios.get('/api/games/open').then(response => {
             callback(response);
         }).catch(error => {
             console.log(error);
         })
     },
 
-    retrieveCurrent: function(state, callback) {
-        axios.get('/api/games/current', state).then(response => {
+    retrieveCurrent: function(callback) {
+        axios.get('/api/games/current').then(response => {
             callback(response);
         }).catch(error => {
             console.log(error);
@@ -59,6 +59,28 @@ module.exports = {
         }).catch(error => {
             console.log(error);
         })  
+    },
+
+    retrievePlayerOpen: function(callback) {
+        axios.get(`/api/players/open`).then(response => {
+            console.log(response)
+            if (callback) {
+                callback(response);
+            }
+        }).catch(error => {
+            console.log(error);
+        })
+    },
+
+    retrievePlayerCurrent: function(callback) {
+        axios.get(`/api/players/current`).then(response => {
+            console.log(response)
+            if (callback) {
+                callback(response);
+            }
+        }).catch(error => {
+            console.log(error);
+        })
     },
 
     submitMove: function(id, row, col, callback) {

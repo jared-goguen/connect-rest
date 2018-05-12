@@ -13,13 +13,13 @@ export default class GamesContainer extends React.Component {
     }
 
     getOpenGames = () => {
-        games.retrieveOpen({}, response => {
+        games.retrieveOpen(response => {
             this.setState({open: response.data.games})
         });
     }
 
     getCurrentGames = () => {
-        games.retrieveCurrent({}, response => {
+        games.retrieveCurrent(response => {
             this.setState({current: response.data.games})
         });
     }

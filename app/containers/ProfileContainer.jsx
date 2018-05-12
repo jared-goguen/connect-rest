@@ -1,57 +1,38 @@
 import React from 'react';
-import { withRouter } from 'react-router';
-import Profile from '../components/Profile'
+import Profile from '../components/Profile';
+import GameList from '../components/GameList';
 
 import games from '../api/games';
 
 
 
-class ProfileContainer extends React.Component {
+export default class ProfileContainer extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {gamesData: []};
+        this.state = {};
+        this.getOpenGames();
+        this.getCurrentGames();
+    }
 
-        games.retrievePlayer(response => {
-            console.log(response.data);
-            let player = response.data;
-            this.setState({
-                username: player.name
-            });
+    getOpenGames = () => {
+        games.retrievePlayerOpen(response => {
+            this.setState({open: response.data.games})
+        });
+    }
 
-            for (let id of player.games) {
-                games.retrieveGame(id, response => {
-                    let game = response.data;
-                    let onClick = () => this.props.history.push(`/games/${game.id}/`);
-                    let gameData = {
-                        onClick,
-                        title: game.title
-                    }
-                    let gamesData = this.state.gamesData.slice();
-                    gamesData.push(gameData)
-                    this.setState({
-                        gamesData
-                    });
-                })
-            }
+    getCurrentGames = () => {
+        games.retrievePlayerCurrent(response => {
+            this.setState({current: response.data.games})
         });
     }
 
 
     render() {
-        if (this.state === null) {
-            return (
-                <div>
-                    <p>Loading...</p>
-                </div>
-            );
-        } else {
-            console.log(this.state);
-            return (
-                <Profile {...this.state} />
-            );
-        }
+        return (
+            <div>
+                <GameList title='open games' games={this.state.open} />
+                <GameList title='current games' games={this.state.current} />
+            </div>
+        );
     }
 }
-
-
-export default withRouter(ProfileContainer);

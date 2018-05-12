@@ -36,9 +36,9 @@ class BoardContainer extends React.Component {
 
     getButtons = () => {
         return [
-            {name: reset, click: ()=>{}},
-            {name: left, click: ()=>{}},
-            {name: right, click: ()=>{}}
+            {name: 'reset', click: ()=>{}},
+            {name: 'left', click: ()=>{}},
+            {name: 'right', click: ()=>{}}
         ];
     }
 
