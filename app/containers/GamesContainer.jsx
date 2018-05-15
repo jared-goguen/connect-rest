@@ -8,8 +8,19 @@ export default class GamesContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {};
+    }
+
+    dataFetch = () => {
         this.getOpenGames();
         this.getCurrentGames();
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(this.dataFetch, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     getOpenGames = () => {

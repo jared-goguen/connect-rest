@@ -41,5 +41,5 @@ class Bot:
 			self.join_game()
 
 
-bot_names = ['Bob', 'Pete', 'Carl', 'Adam', 'Jess', 'Anna', 'Betsy', 'Pam']
+bot_names = ['Bob'] #, 'Pete', 'Carl', 'Adam', 'Jess', 'Anna', 'Betsy', 'Pam']
 bots = [Bot(name) for name in bot_names]

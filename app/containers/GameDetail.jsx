@@ -20,14 +20,23 @@ const mapStateToProps = (state) => {
 class GameDetail extends React.Component {
     constructor(props) {
         super(props);
-        games.retrieveGame(this.props.match.params.id, response => 
-            this.setState(response.data)
-        );
         this.state = {};
         this.state.moveRow = undefined;
         this.state.moveCol = undefined;
+    }
 
-        console.log(this.props)
+    dataFetch = () => {
+        games.retrieveGame(this.props.match.params.id, response => 
+            this.setState(response.data)
+        );
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(this.dataFetch, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.interval);
     }
 
     handleMove = (row, col) => {
