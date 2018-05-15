@@ -63,7 +63,6 @@ module.exports = {
 
     retrievePlayerOpen: function(callback) {
         axios.get(`/api/players/open`).then(response => {
-            console.log(response)
             if (callback) {
                 callback(response);
             }
@@ -74,7 +73,6 @@ module.exports = {
 
     retrievePlayerCurrent: function(callback) {
         axios.get(`/api/players/current`).then(response => {
-            console.log(response)
             if (callback) {
                 callback(response);
             }
