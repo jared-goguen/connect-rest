@@ -8,7 +8,8 @@ import games from '../api/games';
 
 
 const labelStyle = {
-    height: 30
+    height: 30,
+    marginLeft: 15
 }
 
 
@@ -74,7 +75,11 @@ class GameDetail extends React.Component {
         } else {
             return (
                 <div>
-                    <Button disabled style={labelStyle} >{this.state.status}</Button>
+                    { this.state.is_turn ? 
+                        <Button style={labelStyle} >{this.state.status}</Button>
+                    :
+                        <Button disabled style={labelStyle} >{this.state.status}</Button>
+                    }
                     { this.state.is_turn ? 
                         <Button color='blue' style={labelStyle} onClick={this.submitMove}>Submit Move</Button>
                     :

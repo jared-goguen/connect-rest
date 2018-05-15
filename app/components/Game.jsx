@@ -11,10 +11,6 @@ const containerStyle = {
 }
 
 const boardStyle = {
-    height: '100%',
-    position: 'absolute',
-    left: 15,
-    right: 15,
 }
 
 /*
