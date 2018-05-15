@@ -15,9 +15,6 @@ export default class Profile extends React.Component {
         return (
             <div style={profileStyle}>
                 <Header as='h3'>{username}'s profile</Header>
-                {gamesData.map((gameData, i) => 
-                    <Button onClick={gameData.onClick} key={i}>{gameData.title}</Button>
-                )}
             </div>
         );
     }
