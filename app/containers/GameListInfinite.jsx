@@ -1,13 +1,8 @@
 import React from 'react';
-import { Segment, Label } from 'semantic-ui-react';
-import GameThumbContainer from './GameThumbContainer';
+import GameList from '../components/GameList';
 
-const groupStyle = {
-    marginLeft: 15,
-    marginRight: 15,
-}
 
-export default class GameList extends React.Component {
+export default class GameListInfinite extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -48,7 +43,6 @@ export default class GameList extends React.Component {
         }
     }
 
-
     componentDidMount() {
         let fillWindow = () => {
             if (document.body.scrollHeight <= document.body.clientHeight) {
@@ -65,16 +59,7 @@ export default class GameList extends React.Component {
     }
 
     render() {
-        return (
-            this.state.games && this.state.games.length ? 
-                <Segment.Group style={groupStyle}>
-                    <Label size='large'>{this.props.title}</Label>
-                    {this.state.games.map((game, index) => 
-                        <GameThumbContainer key={index} {...game} />
-                    )}
-                </Segment.Group>
-            : null
-        );
+        return <GameList games={this.state.games} title={this.props.title} />
     }
 }
 
