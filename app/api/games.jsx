@@ -34,6 +34,14 @@ module.exports = {
         })
     },
 
+    retrieveCurrentSlice: function(start, stop, callback) {
+        axios.get(`/api/games/current_${start}_${stop}`).then(response => {
+            callback(response);
+        }).catch(error => {
+            console.log(error);
+        })
+    },
+
     retrieveGame: function(id, callback) {
         axios.get(`/api/games/${id}/`).then(response => {
             callback(response);

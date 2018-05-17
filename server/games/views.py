@@ -31,8 +31,13 @@ def open_games(request):
 
 
 @api_view(['GET', 'POST'])
-def current_games(request):
-    games = Game.objects.filter(in_progress=True)
+def current_games(request, start=0, stop=-1):
+    start, stop = int(start), int(stop)
+    if stop == -1:
+        games = Game.objects.filter(in_progress=True)[start:]
+    else:
+        games = Game.objects.filter(in_progress=True)[start:stop]
+
     serialized_games = [GameSerializer(g, context={'request': request}).data for g in games]
     return JsonResponse({'games': serialized_games})
 

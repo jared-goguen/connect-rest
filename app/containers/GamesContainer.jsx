@@ -1,6 +1,7 @@
 import React from 'react';
 import { Segment, Label } from 'semantic-ui-react';
 import GameList from '../components/GameList';
+import GameListInfinite from './GameListInfinite';
 import games from '../api/games';
 
 
@@ -12,7 +13,6 @@ export default class GamesContainer extends React.Component {
 
     dataFetch = () => {
         this.getOpenGames();
-        this.getCurrentGames();
     }
 
     componentDidMount() {
@@ -29,17 +29,12 @@ export default class GamesContainer extends React.Component {
         });
     }
 
-    getCurrentGames = () => {
-        games.retrieveCurrent(response => {
-            this.setState({current: response.data.games})
-        });
-    }
 
     render() {
         return (
             <div>
                 <GameList title='open games' games={this.state.open} />
-                <GameList title='current games' games={this.state.current} />
+                <GameListInfinite title='current games' getGames={games.retrieveCurrentSlice} />
             </div>
         );
     }

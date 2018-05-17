@@ -28,6 +28,7 @@ urlpatterns = [
     url(r'^api/ai/get_move/$', get_move),
     url(r'^api/games/open$', open_games),
     url(r'^api/games/current$', current_games),
+    url(r'^api/games/current_([0-9]+)_([0-9]+)$', current_games),
     url(r'^api/games/join/([0-9]+)/$', join_game),
     url(r'^api/games/move/([0-9]+)/$', move),
     url(r'^api/players/open$', player_open_games),
